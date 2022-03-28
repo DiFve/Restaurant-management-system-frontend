@@ -4,7 +4,7 @@ import Test from "./component/Test";
 function App() {
   return (
     <div className="App">
-      <Test text="ไอควายแก้ด้วยไอพวกโง่" />
+      <Test text="ลองแก้ No.1" />
     </div>
   );
 }
