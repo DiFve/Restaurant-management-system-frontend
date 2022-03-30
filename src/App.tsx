@@ -1,11 +1,21 @@
 import React from "react";
 import "./App.css";
-import Test from "./component/Test";
+import Test from "./Pages/Test";
+import LoginPage from "./Pages/LoginPage";
+import {
+  BrowserRouter as BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 function App() {
   return (
-    <div className="App">
-      <Test text="ลองแก้ No.1" />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Test text="เย็ดแม่" />} />
+        <Route path="/login" element={<LoginPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
