@@ -7,9 +7,7 @@ export const home = async () => {
     const TOKEN = localStorage.getItem("token") || "";
     //console.log("HOME  ", TOKEN);
     const result = await api(`${homeAPI}`, {
-      headers: {
-        // "x-access-token": TOKEN,
-      },
+      headers: {},
       data: {},
       method: "POST",
     });

@@ -10,7 +10,7 @@ const HomeTest: React.FC = () => {
     const getData = async () => {
       const res = await home();
       const decoded: Object = jwtDecode(res?.data);
-      //console.log();
+
       setUserData(Object.values(decoded)[1]);
     };
     getData();
