@@ -3,6 +3,7 @@ import {
   Routes,
   Route,
   useNavigate,
+  Navigate,
 } from "react-router-dom";
 interface Example {
   text: string;
