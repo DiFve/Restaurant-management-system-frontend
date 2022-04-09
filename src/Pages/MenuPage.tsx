@@ -1,10 +1,11 @@
 import HeaderBar from "../components/HeaderBar"
+import MenuPageBody from "../components/MenuPageBody"
 
 const MenuPage : React.FC = () => {
     return (
-        <div>
+        <div className="flex flex-col h-screen">
             <HeaderBar/>
-            MenuPage
+            <MenuPageBody/>
         </div>
     )
 }
