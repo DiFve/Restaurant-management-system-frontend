@@ -5,6 +5,10 @@ module.exports = {
       fontFamily: {
         sans: ["Kanit", "sans-serif"],
       },
+      colors:{
+        'headerRed' : '#dd1c1c',
+        'textWhite' : '#ffffff',
+      }
     },
   },
   plugins: [],

@@ -2,14 +2,16 @@ import React from "react";
 import "./App.css";
 import Test from "./Pages/Test";
 import LoginPage from "./Pages/LoginPage";
-import HomeTest from "./Pages/้HomeTest";
+import HomeTest from "./Pages/HomePage"
 import {
   BrowserRouter as BrowserRouter,
   Routes,
   Route,
   Navigate,
+  useParams,
 } from "react-router-dom";
 import ProtectedRoutes from "./components/ProtectedRoutes";
+import MenuPage from "./Pages/MenuPage";
 function App() {
   return (
     <BrowserRouter>
@@ -23,6 +25,12 @@ function App() {
               authenticationPath="/login"
               outlet={<HomeTest />}
             />
+          }
+        />
+        <Route 
+          path = "/menu/:type" 
+          element={
+            <MenuPage/>
           }
         />
       </Routes>

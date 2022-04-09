@@ -16,5 +16,5 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "src/api"]
+  "include": ["src", "src/api", "src/Pages/HomePage.tsx"]
 }
