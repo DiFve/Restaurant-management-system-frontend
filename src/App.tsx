@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import Test from "./Pages/Test";
 import LoginPage from "./Pages/LoginPage";
-import HomeTest from "./Pages/HomePage"
+import HomeTest from "./Pages/HomePage";
 import {
   BrowserRouter as BrowserRouter,
   Routes,
@@ -10,6 +10,7 @@ import {
   Navigate,
   useParams,
 } from "react-router-dom";
+//
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import MenuPage from "./Pages/MenuPage";
 function App() {
@@ -27,12 +28,7 @@ function App() {
             />
           }
         />
-        <Route 
-          path = "/menu/:type" 
-          element={
-            <MenuPage/>
-          }
-        />
+        <Route path="/menu/:type" element={<MenuPage />} />
       </Routes>
     </BrowserRouter>
   );

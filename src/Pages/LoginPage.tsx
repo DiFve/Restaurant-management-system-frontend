@@ -18,7 +18,6 @@ const LoginPage: React.FC = () => {
     event.preventDefault();
     if (username != "" && password != "") {
       const res = await login(username, password);
-      //console.log(localStorage.getItem("token"));
       try {
         const jwtDecoded: Object = jwtDecode(res);
         const user_ID = Object.values(jwtDecoded)[0];

@@ -8,7 +8,7 @@ const loginAPI = config.apiURL + "login";
 export const login = async (email: string, password: string) => {
   const enc = new TextEncoder();
   const hashPW = sha256(enc.encode(password));
-
+  console.log(hashPW);
   try {
     const { data: res } = await axios.post(loginAPI, {
       email: email,
@@ -27,7 +27,6 @@ export const getCurrentUser = () => {
     const jwt = localStorage.getItem("token") || "";
 
     return jwtDecode(jwt);
-    //return "";
   } catch (err) {
     return null;
   }
