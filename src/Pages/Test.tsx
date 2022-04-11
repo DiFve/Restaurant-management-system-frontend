@@ -22,6 +22,7 @@ const Test: React.FC<Example> = (props) => {
         อ่านหาพ่อมึงหรอ {props.text}
       </h1>
       <button onClick={onClickLoginHandle}>แน่จริงก็กดมาไอควาย</button>
+      <img src="http://localhost:4000/images/1649685255452-cvydl5f7idb31.jpg" />
     </div>
   );
 };

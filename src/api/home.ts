@@ -4,7 +4,7 @@ import config from "../config.json";
 const homeAPI = config.apiURL + "auth";
 export const home = async () => {
   try {
-    const TOKEN = localStorage.getItem("token") || "";
+    //const TOKEN = localStorage.getItem("token") || "";
     //console.log("HOME  ", TOKEN);
     const result = await api(`${homeAPI}`, {
       headers: {},

@@ -16,7 +16,11 @@ const HomeTest: React.FC = () => {
     getData();
   }, []);
   //const params = useParams();
-  return <div> ควย เข้ามาได้ไงวะงง หวัดดีละกันไอเปรต {userData} </div>;
+  return (
+    <div>
+      <div>ควย เข้ามาได้ไงวะงง หวัดดีละกันไอเปรต {userData} </div>
+    </div>
+  );
 };
 
 export default HomeTest;
