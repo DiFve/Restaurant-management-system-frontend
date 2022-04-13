@@ -1,3 +1,4 @@
 {
-  "apiURL": "http://localhost:4000/api/"
+  "apiURL": "https://api.manhermak.com/api/",
+  "imageURL": "https://api.manhermak.com/"
 }

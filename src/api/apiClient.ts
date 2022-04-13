@@ -9,8 +9,6 @@ const buildAuthHeader = (config: AxiosRequestConfig<any>) => {
 
 axios.interceptors.request.use(
   function (config) {
-    //config.headers["x-access-token"] = localStorage.getItem("token") || "";
-    //console.log(config);
     const nHeader = buildAuthHeader(config);
     config = {
       ...config,
