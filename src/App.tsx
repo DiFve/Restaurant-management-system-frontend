@@ -28,7 +28,7 @@ function App() {
             />
           }
         />
-        <Route path="/menu/:type" element={<MenuPage />} />
+        <Route path="/menu" element={<MenuPage />} />
       </Routes>
     </BrowserRouter>
   );
