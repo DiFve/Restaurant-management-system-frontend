@@ -1,7 +1,7 @@
 import menu_placeholder from './img/menu_placeholder.jpg'
 import plus_icon from './img/plus_icon.png'
 interface Menu{
-    name:string,
+    name: string,
     pic : string,
 }
 const MenuComponent : React.FC<Menu> = (props) =>{
