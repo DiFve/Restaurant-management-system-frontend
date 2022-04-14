@@ -1,5 +1,5 @@
 import { MouseEventHandler, useEffect, useState } from "react"
-import { getFoodInfo,getFoodPic } from "../api/food"
+import { getFoodInfo } from "../api/food"
 import config from "../config.json";
 interface idProps{
     id:string | undefined

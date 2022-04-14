@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom"
 import HeaderBar from "../components/HeaderBar"
 import FoodForm from "../components/FoodForm"
 import placeholder from '../components/img/menu_placeholder.jpg'
-import { getFoodInfo, getFoodPic } from "../api/food"
+import { getFoodInfo } from "../api/food"
 import { useEffect, useState } from "react"
 
 const FoodPage : React.FC = () =>{
