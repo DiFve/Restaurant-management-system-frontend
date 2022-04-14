@@ -13,6 +13,7 @@ import {
 //
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import MenuPage from "./Pages/MenuPage";
+import FoodPage from "./Pages/FoodPage";
 function App() {
   return (
     <BrowserRouter>
@@ -28,7 +29,24 @@ function App() {
             />
           }
         />
-        <Route path="/menu/:type" element={<MenuPage />} />
+        <Route 
+          path="/menu" 
+          element={
+            <ProtectedRoutes 
+              authenticationPath="/login"
+              outlet={<MenuPage />}
+            />
+          } 
+        />
+        <Route 
+          path="/food/:id" 
+          element={
+            <ProtectedRoutes 
+              authenticationPath="/login"
+              outlet={<FoodPage/>}
+            />
+          } 
+        />
       </Routes>
     </BrowserRouter>
   );

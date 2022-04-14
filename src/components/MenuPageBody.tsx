@@ -1,42 +1,23 @@
 import search_icon from './img/search_icon.png'
 import menu_placeholder from './img/menu_placeholder.jpg'
 import MenuComponent from './MenuComponent'
+import { useEffect, useState } from 'react'
+import { allMenu } from '../api/menu'
 interface Menu{
     name:string,
     pic : string,
 }
 const MenuPageBody : React.FC = () => {
     var options:Array<string> = ['Hello','Mother','Father','Kwai']
-    var menu:Array<Menu> = [
-        {
-            'name' : 'หมูแดดเดียวมากๆ',
-            'pic' : 'Daddy' ,
-        },
-        {
-            'name' : 'หมูสองแดดมากๆ',
-            'pic' : 'Daddy',
-        },
-        {
-            'name' : 'หมูสามแดดมากๆ',
-            'pic' : 'Daddy',
-        },
-        {
-            'name' : 'หมูสี่แดดมากๆ',
-            'pic' : 'Daddy',
-        },
-        {
-            'name': 'หมูห้าแดดมากๆ',
-            'pic' : 'Daddy',
-        },
-        {
-            'name' : 'หมูหกแดดมากๆ',
-            'pic' : 'Daddy',
-        },
-        {
-            'name' : 'หมูเก้าแดดมากๆ',
-            'pic' : 'Daddy',
-        },
-    ]
+    const [menu,setMenu] = useState([])
+    useEffect(() => {
+        const getMenu = async () => {
+            var res = await allMenu()
+            var menuAll = res?.data
+            setMenu(menuAll)
+        }
+        getMenu()
+      }, []);
     return(
         <div className="flex flex-col w-full h-full">
             <div className="flex flex-row h-[55px] w-full mt-[3%]">
@@ -48,7 +29,6 @@ const MenuPageBody : React.FC = () => {
                     <select className='h-[60%] w-[80%]'>
                         {
                             options.map((element)=>{
-                                console.log(element)
                                 return (
                                     <option value={element} key={element}> {element}</option>
                                 )
@@ -61,8 +41,9 @@ const MenuPageBody : React.FC = () => {
                 <div className='flex flex-col bg-gray-100 h-[90%] w-[90%] items-center'>
                     <div className='overflow-y-scroll w-full h-full border-[2px] border-black'>
                         {menu.map((element)=>{
+                            console.log(element)
                             return(
-                                <MenuComponent name={element['name']} pic={element.pic}/>
+                                <MenuComponent id={element['_id']} name={element['foodName']} pic={element['image']}/>
                             )
                         })}
                     </div>
