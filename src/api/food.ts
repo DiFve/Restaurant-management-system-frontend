@@ -8,6 +8,7 @@ export const getFoodInfo = async (id:string | undefined) =>{
             data: {},
             method: "GET",
           });
+        console.log(res)
         return res
     }
     catch(error){

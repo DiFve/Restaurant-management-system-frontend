@@ -49,9 +49,9 @@ const FoodForm : React.FC<idProps> = (props) =>{
         }
     }
     return(
-        <div>
+        <div className="flex flex-col h-full">
             <div className='flex w-[100%] h-[25%] justify-center items-center'>
-                <img src={foodPic} alt="menu_thumbnail" className='w-[90%] h-[80%]'/>
+                <img src={foodPic} alt="menu_thumbnail" className='w-[90%] h-[80%] max-h-[170px] min-h-[170px]'/>
             </div>
             <div className="h-[70%] w-[100%]">
                 <div className="h-[10%] w-[100%] pl-[3%] pr-[4%] break-words border-b-2 text-center text-4xl">
@@ -61,35 +61,44 @@ const FoodForm : React.FC<idProps> = (props) =>{
                     <label className="text-2xl">Details : </label>
                     <p className="text-2xl">{foodInfo.description}</p>
                 </div>
-                <div className="flex flex-col h-[40%] w-[100%] mt-[2%] pl-[3%] pr-[4%] overflow-y-scroll border-b-2 ">
+                <div className="flex flex-col h-[53%] w-[100%] mt-[2%] pl-[3%] pr-[4%] overflow-y-scroll border-b-2 bg-red-200 min-h-[200px]">
                     <form className="text-2xl w-[100%]">
                         {  
                             topicName.map((val:any,index:number)=>{
-                                return(
-                                    <fieldset id={'group ' + index}>
-                                        <label>{val}</label>
-                                        {
-                                            option[index].map((val:any)=>{
-                                                if(require[index]==="true"){
-                                                    return(
-                                                        <div className="ml-[10%]">
-                                                            <input className='indent-3' type="radio" value={val} name={topicName[index]} required/>
-                                                            <label>{val}</label>
-                                                        </div>
-                                                    )
-                                                }
-                                                else if(require[index]==='false'){
-                                                    return(
-                                                        <div className="ml-[10%]">
-                                                            <input className='indent-3' type="radio" value={val} name={topicName[index]}/>
-                                                            <label>{val}</label>
-                                                        </div>
-                                                    )
-                                                }
-                                            })
-                                        }
-                                    </fieldset>
-                                )
+                                if(val !== ''){
+                                    return(
+                                        <fieldset id={'group ' + index}>
+                                            <label>{val}</label>
+                                            {
+                                                option[index].map((val:any)=>{
+                                                    if(require[index]==="true"){
+                                                        return(
+                                                            <div className="ml-[10%]">
+                                                                <input className='' type="radio" value={val} name={topicName[index]} required/>
+                                                                <label>{val}</label>
+                                                            </div>
+                                                        )
+                                                    }
+                                                    else if(require[index]==='false'){
+                                                        return(
+                                                            <div className="ml-[10%]">
+                                                                <input className='' type="radio" value={val} name={topicName[index]}/>
+                                                                <label>{val}</label>
+                                                            </div>
+                                                        )
+                                                    }
+                                                })
+                                            }
+                                        </fieldset>
+                                    )
+                                }
+                                else{
+                                    return(
+                                        <div>
+                                            
+                                        </div>
+                                    )
+                                }
                             })
                         }
                         <label>Additional : </label>
