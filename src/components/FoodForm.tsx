@@ -61,7 +61,7 @@ const FoodForm : React.FC<idProps> = (props) =>{
                     <label className="text-2xl">Details : </label>
                     <p className="text-2xl">{foodInfo.description}</p>
                 </div>
-                <div className="flex flex-col h-[53%] w-[100%] mt-[2%] pl-[3%] pr-[4%] overflow-y-scroll border-b-2 bg-red-200 min-h-[200px]">
+                <div className="flex flex-col h-[53%] w-[100%] mt-[2%] pl-[3%] pr-[4%] overflow-y-scroll border-b-2 min-h-[200px]">
                     <form className="text-2xl w-[100%]">
                         {  
                             topicName.map((val:any,index:number)=>{
