@@ -49,9 +49,9 @@ const FoodForm : React.FC<idProps> = (props) =>{
         }
     }
     return(
-        <div>
+        <div className="flex flex-col h-full">
             <div className='flex w-[100%] h-[25%] justify-center items-center'>
-                <img src={foodPic} alt="menu_thumbnail" className='w-[90%] h-[80%]'/>
+                <img src={foodPic} alt="menu_thumbnail" className='w-[90%] h-[80%] max-h-[170px] min-h-[170px]'/>
             </div>
             <div className="h-[70%] w-[100%]">
                 <div className="h-[10%] w-[100%] pl-[3%] pr-[4%] break-words border-b-2 text-center text-4xl">
@@ -61,7 +61,7 @@ const FoodForm : React.FC<idProps> = (props) =>{
                     <label className="text-2xl">Details : </label>
                     <p className="text-2xl">{foodInfo.description}</p>
                 </div>
-                <div className="flex flex-col h-[40%] w-[100%] mt-[2%] pl-[3%] pr-[4%] overflow-y-scroll border-b-2 ">
+                <div className="flex flex-col h-[53%] w-[100%] mt-[2%] pl-[3%] pr-[4%] overflow-y-scroll border-b-2 bg-red-200 min-h-[200px]">
                     <form className="text-2xl w-[100%]">
                         {  
                             topicName.map((val:any,index:number)=>{
