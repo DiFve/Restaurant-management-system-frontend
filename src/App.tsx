@@ -15,6 +15,7 @@ import ProtectedRoutes from "./components/ProtectedRoutes";
 import MenuPage from "./Pages/MenuPage";
 import ManagerMenuPage from "./Pages/ManagerMenuPage";
 import AddMenuPage from "./Pages/AddMenuPage";
+import FoodPage from "./Pages/FoodPage";
 function App() {
   return (
     <BrowserRouter>
@@ -32,7 +33,24 @@ function App() {
         />
         <Route path="/ManagerMenu" element={<ManagerMenuPage/>} />
         <Route path="/ManagerMenu/addMenu" element={<AddMenuPage/>} />
-        <Route path="/menu/:type" element={<MenuPage />} />
+        <Route 
+          path="/menu" 
+          element={
+            <ProtectedRoutes 
+              authenticationPath="/login"
+              outlet={<MenuPage />}
+            />
+          } 
+        />
+        <Route 
+          path="/food/:id" 
+          element={
+            <ProtectedRoutes 
+              authenticationPath="/login"
+              outlet={<FoodPage/>}
+            />
+          } 
+        />
       </Routes>
     </BrowserRouter>
   );

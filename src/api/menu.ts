@@ -40,3 +40,16 @@ export const alacarteMenu = async () => {
     console.error(error);
   }
 };
+
+export const getMenuById = async (id:string) => {
+  try {
+    const result = await api(`${apiURL}getMenuById/${id}`, {
+      headers: {},
+      data: {},
+      method: "GET",
+    });
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
