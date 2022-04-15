@@ -65,31 +65,40 @@ const FoodForm : React.FC<idProps> = (props) =>{
                     <form className="text-2xl w-[100%]">
                         {  
                             topicName.map((val:any,index:number)=>{
-                                return(
-                                    <fieldset id={'group ' + index}>
-                                        <label>{val}</label>
-                                        {
-                                            option[index].map((val:any)=>{
-                                                if(require[index]==="true"){
-                                                    return(
-                                                        <div className="ml-[10%]">
-                                                            <input className='indent-3' type="radio" value={val} name={topicName[index]} required/>
-                                                            <label>{val}</label>
-                                                        </div>
-                                                    )
-                                                }
-                                                else if(require[index]==='false'){
-                                                    return(
-                                                        <div className="ml-[10%]">
-                                                            <input className='indent-3' type="radio" value={val} name={topicName[index]}/>
-                                                            <label>{val}</label>
-                                                        </div>
-                                                    )
-                                                }
-                                            })
-                                        }
-                                    </fieldset>
-                                )
+                                if(val !== ''){
+                                    return(
+                                        <fieldset id={'group ' + index}>
+                                            <label>{val}</label>
+                                            {
+                                                option[index].map((val:any)=>{
+                                                    if(require[index]==="true"){
+                                                        return(
+                                                            <div className="ml-[10%]">
+                                                                <input className='' type="radio" value={val} name={topicName[index]} required/>
+                                                                <label>{val}</label>
+                                                            </div>
+                                                        )
+                                                    }
+                                                    else if(require[index]==='false'){
+                                                        return(
+                                                            <div className="ml-[10%]">
+                                                                <input className='' type="radio" value={val} name={topicName[index]}/>
+                                                                <label>{val}</label>
+                                                            </div>
+                                                        )
+                                                    }
+                                                })
+                                            }
+                                        </fieldset>
+                                    )
+                                }
+                                else{
+                                    return(
+                                        <div>
+                                            
+                                        </div>
+                                    )
+                                }
                             })
                         }
                         <label>Additional : </label>
