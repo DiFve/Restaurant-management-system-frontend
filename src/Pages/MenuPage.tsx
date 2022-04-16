@@ -14,4 +14,4 @@ const MenuPage : React.FC = () => {
     )
 }
 
-export default MenuPage
+export default MenuPage;
