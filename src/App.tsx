@@ -30,7 +30,7 @@ function App() {
           }
         />
         <Route 
-          path="/menu" 
+          path="/menu/:type" 
           element={
             <ProtectedRoutes 
               authenticationPath="/login"
