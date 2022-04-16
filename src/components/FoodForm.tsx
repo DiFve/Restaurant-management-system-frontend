@@ -62,7 +62,7 @@ const FoodForm : React.FC<idProps> = (props) =>{
                 <img src={foodPic} alt="menu_thumbnail" className='w-[90%] h-[80%] max-h-[170px] min-h-[170px]'/>
             </div>
             <div className="h-[70%] w-[100%]">
-                <div className="flex flex-row w-full bg-red-200 border-b-2 items-center justify-center">
+                <div className="flex flex-row w-full border-b-2 items-center justify-center">
                     <div className="h-[100%] w-[22.5%] break-words text-center text-4xl">
                         
                     </div>
