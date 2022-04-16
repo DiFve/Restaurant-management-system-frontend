@@ -2,17 +2,25 @@ import search_icon from './img/search_icon.png'
 import menu_placeholder from './img/menu_placeholder.jpg'
 import MenuComponent from './MenuComponent'
 import { useEffect, useState } from 'react'
-import { allMenu } from '../api/menu'
-interface Menu{
-    name:string,
-    pic : string,
+import { alacarteMenu, allMenu, buffetMenu } from '../api/menu'
+interface menuType{
+    menuType:string | undefined
 }
-const MenuPageBody : React.FC = () => {
+const MenuPageBody : React.FC<menuType> = (props) => {
     var options:Array<string> = ['Hello','Mother','Father','Kwai']
+    var menuType = props.menuType
     const [menu,setMenu] = useState([])
     useEffect(() => {
         const getMenu = async () => {
-            var res = await allMenu()
+            if(menuType === 'buffet'){
+                var res = await buffetMenu()
+            }
+            else if(menuType === 'all'){
+                var res = await allMenu()
+            }
+            else{
+                var res = await alacarteMenu()
+            }
             var menuAll = res?.data
             setMenu(menuAll)
         }
