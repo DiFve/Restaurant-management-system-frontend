@@ -66,7 +66,7 @@ const FoodForm : React.FC<idProps> = (props) =>{
                     <div className="h-[100%] w-[22.5%] break-words text-center text-4xl">
                         
                     </div>
-                    <div className="h-[100%] w-[55%] break-words text-center text-3xl">
+                    <div className="h-[100%] w-[55%] break-words text-center text-3xl font-bold">
                         <label>{foodInfo.foodName}</label>
                     </div>
                     <div className="flex h-[100%] w-[22.5%] break-words text-center text-2xl justify-center items-center">
@@ -124,10 +124,10 @@ const FoodForm : React.FC<idProps> = (props) =>{
                         
                 </div>
                 <div className="flex flex-col h-[24%] w-[100%] overflow-y-scroll">
-                    <div className="flex h-[50%] w-[100%] justify-center items-center text-4xl">
-                        <button className="flex bg-headerRed h-[85%] w-[15%] rounded-[50%]" id='minus' onClick={onNumberClickHandler}>-</button>
+                    <div className="flex h-[50%] w-[100%] justify-center items-center text-4xl text-center">
+                        <button className="flex bg-headerRed h-[85%] w-[15%] rounded-[50%] text-white text-center text-5xl pl-[4%]" id='minus' onClick={onNumberClickHandler}>-</button>
                         <label className="ml-[20px] mr-[20px] w-[32px] text-center">{number}</label>
-                        <button className="flex bg-headerRed h-[85%] w-[15%] rounded-[50%]" id='plus' onClick={onNumberClickHandler}>+</button>
+                        <button className="flex bg-headerRed h-[85%] w-[15%] rounded-[50%] text-white text-center text-5xl pl-[4%]" id='plus' onClick={onNumberClickHandler}>+</button>
                     </div>
                     <div className="flex h-[50%] w-[100%] justify-center items-center text-center">
                         <button className="flex bg-headerRed h-[75%] w-[50%] text-center text-3xl text-white justify-center items-center border-[2px]">
