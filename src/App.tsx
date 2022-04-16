@@ -16,6 +16,7 @@ import MenuPage from "./Pages/MenuPage";
 import ManagerMenuPage from "./Pages/ManagerMenuPage";
 import AddMenuPage from "./Pages/AddMenuPage";
 import FoodPage from "./Pages/FoodPage";
+import AuthPage from "./Pages/AuthPage";
 function App() {
   return (
     <BrowserRouter>
@@ -28,29 +29,33 @@ function App() {
             <ProtectedRoutes
               authenticationPath="/login"
               outlet={<HomeTest />}
+              role="employee"
             />
           }
         />
-        <Route path="/ManagerMenu" element={<ManagerMenuPage/>} />
-        <Route path="/ManagerMenu/addMenu" element={<AddMenuPage/>} />
-        <Route 
-          path="/menu/:type" 
+        <Route path="/ManagerMenu" element={<ManagerMenuPage />} />
+        <Route path="/ManagerMenu/addMenu" element={<AddMenuPage />} />
+        <Route
+          path="/menu/:type"
           element={
-            <ProtectedRoutes 
+            <ProtectedRoutes
               authenticationPath="/login"
               outlet={<MenuPage />}
+              role="customer"
             />
-          } 
+          }
         />
-        <Route 
-          path="/food/:id" 
+        <Route
+          path="/food/:id"
           element={
-            <ProtectedRoutes 
+            <ProtectedRoutes
               authenticationPath="/login"
-              outlet={<FoodPage/>}
+              outlet={<FoodPage />}
+              role="customer"
             />
-          } 
+          }
         />
+        <Route path="/auth/:token" element={<AuthPage />} />
       </Routes>
     </BrowserRouter>
   );
