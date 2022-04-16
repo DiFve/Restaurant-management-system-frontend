@@ -18,13 +18,13 @@ const MenuComponent: React.FC<Menu> = (props) => {
     navigate(`/food/${id}`)
   }
   return (
-    <div className="flex flex-row mt-[1%] ml-[2.5%] h-[16%] w-[95%] bg-yellow-200">
+    <div className="flex flex-row mt-[1%] ml-[2.5%] h-[16%] w-[95%] bg-lightYellow">
       <div className="flex flex-row w-full">
         <div className="flex h-full max-w-[120px] w-[100%] shrink justify-center items-center">
           <img
             src={config.imageURL+pic}
             alt=""
-            className="h-[90%] w-[90%] border border-black"
+            className="h-[90%] w-[90%] border border-black bg-white"
           />
         </div>
         <div className="h-full w-[60%] text-center">
