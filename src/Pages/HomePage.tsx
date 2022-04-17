@@ -53,20 +53,20 @@ const HomeTest: React.FC = () => {
         <div className="flex flex-col min-h-[80vh] justify-between align-center">
           <button
             onClick={onClickMenuPage}
-            className="flex flex-row bg-slate-50 w-10/12 h=10/12 mx-auto my-auto py-10 border-t border-gray-300 rounded-lg shadow-md justify-center hover:border-4 hover:border-red-200 hover:bg-white"
+            className="flex flex-row bg-white w-10/12 h=10/12 mx-auto my-auto py-10 border-2 border-gray-300 rounded-lg shadow-md justify-center hover:border-4 hover:bg-gray-200"
           >
             <img className="h-10 w-10 inline align-center" src={MenuIcon} />
             <span className="pl-10 font-semibold text-3xl text-green-600">
               Menu
             </span>
           </button>
-          <button className="flex flex-row bg-slate-50 w-10/12 h=10/12 mx-auto my-auto py-10 border-t border-gray-300 rounded-lg shadow-md justify-center hover:border-4 hover:border-red-200 hover:bg-white">
+          <button className="flex flex-row bg-white w-10/12 h=10/12 mx-auto my-auto py-10 border-2 border-gray-300 rounded-lg shadow-md justify-center hover:border-4 hover:bg-gray-200">
             <img className="h-10 w-10 inline align-center" src={EmployeeIcon} />
             <span className="pl-10 font-semibold text-3xl text-green-600">
               Employee
             </span>
           </button>
-          <button className="flex flex-row bg-slate-50 w-10/12 h=10/12 mx-auto my-auto py-10 border-t border-gray-300 rounded-lg shadow-md justify-center hover:border-4 hover:border-red-200 hover:bg-white">
+          <button className="flex flex-row bg-white w-10/12 h=10/12 mx-auto my-auto py-10 border-2 border-gray-300 rounded-lg shadow-md justify-center hover:border-4 hover:bg-gray-200">
             <img className="h-10 w-10 inline align-center" src={SettingIcon} />
             <span className="pl-10 font-semibold text-3xl text-green-600">
               Setting
@@ -74,7 +74,7 @@ const HomeTest: React.FC = () => {
           </button>
           <button
             onClick={onClickQRCodeHandle}
-            className="flex flex-row bg-slate-50 w-10/12 h=10/12 mx-auto my-auto py-10 border-t border-gray-300 rounded-lg shadow-md justify-center hover:border-4 hover:border-red-200 hover:bg-white"
+            className="flex flex-row bg-white w-10/12 h=10/12 mx-auto my-auto py-10 border-2 border-gray-300 rounded-lg shadow-md justify-center hover:border-4 hover:bg-gray-200"
           >
             <img className="h-10 w-10 inline align-center" src={SettingIcon} />
             <span className="pl-10 font-semibold text-3xl text-green-600">
