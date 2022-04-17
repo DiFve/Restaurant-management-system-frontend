@@ -61,7 +61,7 @@ const LoginPage: React.FC = () => {
   return (
     <div className="h-screen w-screen">
       <div className="flex flex-col items-center">
-        <div className="flex flex-col bg-[#DD1C1C] w-screen h-[150px]">
+        <div className="flex flex-col bg-[#DD1C1C] w-screen h-[165px]">
           <label className=" text-center text-white text-4xl font-normal pt-[60px]">
             Manager Menu
           </label>
@@ -96,7 +96,7 @@ const LoginPage: React.FC = () => {
               value={password}
             ></input>
           </div>
-          <button type="submit" className="mt-[41px] flex flex-row">
+          <button type="submit" className="mt-[41px] flex flex-row border-2">
             <div className="flex flex-row">
               <img src={loginIcon} className="w-[90px] h-[90px] mr-2" />
               <label className="text-normal text-4xl pt-6">Login</label>

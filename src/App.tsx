@@ -13,10 +13,8 @@ import {
 //
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import MenuPage from "./Pages/MenuPage";
-import ManagerMenuPage from "./Pages/ManagerMenuPage";
-import AddMenuPage from "./Pages/AddMenuPage";
 import FoodPage from "./Pages/FoodPage";
-import AuthPage from "./Pages/AuthPage";
+import CartPage from "./Pages/CartPage";
 function App() {
   return (
     <BrowserRouter>
@@ -29,33 +27,36 @@ function App() {
             <ProtectedRoutes
               authenticationPath="/login"
               outlet={<HomeTest />}
-              role="employee"
             />
           }
         />
-        <Route path="/ManagerMenu" element={<ManagerMenuPage />} />
-        <Route path="/ManagerMenu/addMenu" element={<AddMenuPage />} />
-        <Route
-          path="/menu/:type"
+        <Route 
+          path="/menu" 
           element={
-            <ProtectedRoutes
+            <ProtectedRoutes 
               authenticationPath="/login"
               outlet={<MenuPage />}
-              role="customer"
             />
-          }
+          } 
         />
-        <Route
-          path="/food/:id"
+        <Route 
+          path="/food/:id" 
           element={
-            <ProtectedRoutes
+            <ProtectedRoutes 
               authenticationPath="/login"
-              outlet={<FoodPage />}
-              role="customer"
+              outlet={<FoodPage/>}
             />
-          }
+          } 
         />
-        <Route path="/auth/:token" element={<AuthPage />} />
+        <Route 
+          path="/cart" 
+          element={
+            <ProtectedRoutes 
+              authenticationPath="/login"
+              outlet={<CartPage />}
+            />
+          } 
+        />
       </Routes>
     </BrowserRouter>
   );

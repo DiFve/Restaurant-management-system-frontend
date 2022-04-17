@@ -25,8 +25,8 @@ export const login = async (email: string, password: string) => {
 export const getCurrentUser = () => {
   try {
     const jwt = localStorage.getItem("token") || "";
-    const data: Object = jwtDecode(jwt);
-    return jwt;
+
+    return jwtDecode(jwt);
   } catch (err) {
     return null;
   }

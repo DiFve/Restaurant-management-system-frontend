@@ -2,41 +2,33 @@ import search_icon from './img/search_icon.png'
 import menu_placeholder from './img/menu_placeholder.jpg'
 import MenuComponent from './MenuComponent'
 import { useEffect, useState } from 'react'
-import { alacarteMenu, allMenu, buffetMenu } from '../api/menu'
-interface menuType{
-    menuType:string | undefined
+import { allMenu } from '../api/menu'
+interface Menu {
+    name: string,
+    pic: string,
 }
-const MenuPageBody : React.FC<menuType> = (props) => {
-    var options:Array<string> = ['Hello','Mother','Father','Kwai']
-    var menuType = props.menuType
-    const [menu,setMenu] = useState([])
+const MenuPageBody: React.FC = () => {
+    var options: Array<string> = ['Hello', 'Mother', 'Father', 'Kwai']
+    const [menu, setMenu] = useState([])
     useEffect(() => {
         const getMenu = async () => {
-            if(menuType === 'buffet'){
-                var res = await buffetMenu()
-            }
-            else if(menuType === 'all'){
-                var res = await allMenu()
-            }
-            else{
-                var res = await alacarteMenu()
-            }
+            var res = await allMenu()
             var menuAll = res?.data
             setMenu(menuAll)
         }
         getMenu()
-      }, []);
-    return(
+    }, []);
+    return (
         <div className="flex flex-col w-full h-full">
             <div className="flex flex-row h-[55px] w-full mt-[3%]">
                 <div className="flex basis-3/4 h-full items-center justify-center">
-                    <img src={search_icon} alt="search_icon" className='h-[65%]'/>
-                    <input type="text" className="h-[70%] w-[70%] indent-2.5 focus:outline-none" placeholder='Search...'/>
+                    <img src={search_icon} alt="search_icon" className='h-[65%]' />
+                    <input type="text" className="h-[70%] w-[70%] indent-2.5 focus:outline-none" placeholder='Search...' />
                 </div>
                 <div className="flex basis-1/4 justify-center items-center">
-                    <select className='h-[60%] w-[80%]'>
+                    <select className='h-[60%] w-[80%] '>
                         {
-                            options.map((element)=>{
+                            options.map((element) => {
                                 return (
                                     <option value={element} key={element}> {element}</option>
                                 )
@@ -48,10 +40,10 @@ const MenuPageBody : React.FC<menuType> = (props) => {
             <div className='flex h-[100%] w-[100%] justify-center items-center'>
                 <div className='flex flex-col bg-gray-100 h-[90%] w-[90%] items-center'>
                     <div className='overflow-y-scroll w-full h-full border-[2px] border-black'>
-                        {menu.map((element)=>{
+                        {menu.map((element) => {
                             console.log(element)
-                            return(
-                                <MenuComponent id={element['_id']} name={element['foodName']} pic={element['image']}/>
+                            return (
+                                <MenuComponent id={element['_id']} name={element['foodName']} pic={element['image']} />
                             )
                         })}
                     </div>
