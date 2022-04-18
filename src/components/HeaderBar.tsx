@@ -2,10 +2,20 @@ import res_icon from "./img/res_icon_placeholder.jpg";
 import bell_icon from "./img/bell_icon.png";
 import cart_icon from "./img/cart_icon.png";
 import config from "../config.json";
+import { useNavigate } from "react-router-dom";
 interface HeaderName {
   name: string;
 }
 const HeaderBar: React.FC<HeaderName> = (props) => {
+  const navigate = useNavigate()
+  const bellClickHandler=(event:any)=>{
+    var idvar = event.target.id
+    navigate('/call-staff')
+  }
+  const cartClickHandler=(event:any)=>{
+    var idvar = event.target.id
+    navigate('/go-cart')
+  }
   return (
     <div className="flex flex-row bg-headerRed h-[92px] w-full">
       <div className="flex w-[25%] h-full justify-center items-center">
@@ -22,10 +32,14 @@ const HeaderBar: React.FC<HeaderName> = (props) => {
         <div className="w-[100%] h-[50%]">Change Lang</div>
         <div className="flex flex-row h-[50%] justify-center">
           <div className="flex justify-center w-[50%]">
-            <img src={bell_icon} alt="" className="max-w-[46px] w-[90%]" />
+            <button className="max-w-[46px] w-[90%]" onClick={bellClickHandler}>
+              <img src={bell_icon} alt="" className="" />
+            </button>
           </div>
           <div className="flex justify-center w-[50%]">
-            <img src={cart_icon} alt="" className="max-w-[46px] w-[90%]" />
+            <button className="max-w-[46px] w-[90%]" onClick={cartClickHandler}>
+              <img src={cart_icon} alt="" className="" />
+            </button>
           </div>
         </div>
       </div>
