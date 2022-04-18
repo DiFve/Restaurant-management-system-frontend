@@ -12,8 +12,6 @@ const MenuComponent: React.FC<Menu> = (props) => {
   var name = props.name;
   var pic = props.pic;
   var navigate = useNavigate()
-  console.log('name :' + name)
-  console.log('pic : '+pic)
   const gotoFood = () =>{
     navigate(`/food/${id}`)
   }

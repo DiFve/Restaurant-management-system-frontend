@@ -7,9 +7,14 @@ interface menuType{
     menuType:string | undefined
 }
 const MenuPageBody : React.FC<menuType> = (props) => {
-    var options:Array<string> = ['Hello','Mother','Father','Kwai']
     var menuType = props.menuType
     const [menu,setMenu] = useState([])
+    const [options,setoptions] = useState<Array<string>>([])
+    const [filter,setFilter] = useState('all')
+    const [filMenu,setFilMenu] = useState<any>([])
+    const optionHandler = (event:any) =>{
+        setFilter(event.target.value)
+    }
     useEffect(() => {
         const getMenu = async () => {
             if(menuType === 'buffet'){
@@ -23,9 +28,38 @@ const MenuPageBody : React.FC<menuType> = (props) => {
             }
             var menuAll = res?.data
             setMenu(menuAll)
+            setFilMenu(menuAll)
+            var optionArr:Array<string> = ['all']
+            menuAll.forEach((element:any) => {
+                element.type.map((val:string)=>{
+                    if(!(optionArr.includes(val))){
+                        optionArr.push(val)
+                    }
+                })
+            });
+            setoptions(optionArr)
+
         }
         getMenu()
-      }, []);
+    }, []);
+    useEffect(()=>{
+        const filterChange=()=>{
+            var newMenu:any = []
+            console.log(filter)
+            if(filter != 'all'){
+                menu.filter((element:any,index)=>{
+                    if(element.type.includes(filter)){
+                        newMenu.push(element)
+                    }
+                })
+                setFilMenu(newMenu)
+            }
+            else{
+                setFilMenu(menu)
+            }
+        }
+        filterChange()
+    },[filter])
     return(
         <div className="flex flex-col w-full h-full">
             <div className="flex flex-row h-[55px] w-full mt-[3%]">
@@ -34,7 +68,7 @@ const MenuPageBody : React.FC<menuType> = (props) => {
                     <input type="text" className="h-[70%] w-[70%] indent-2.5 focus:outline-none" placeholder='Search...'/>
                 </div>
                 <div className="flex basis-1/4 justify-center items-center">
-                    <select className='h-[60%] w-[80%]'>
+                    <select className='h-[60%] w-[80%]' onChange={optionHandler} >
                         {
                             options.map((element)=>{
                                 return (
@@ -48,8 +82,7 @@ const MenuPageBody : React.FC<menuType> = (props) => {
             <div className='flex h-[100%] w-[100%] justify-center items-center'>
                 <div className='flex flex-col bg-gray-100 h-[90%] w-[90%] items-center'>
                     <div className='overflow-y-scroll w-full h-full border-[2px] border-black'>
-                        {menu.map((element)=>{
-                            console.log(element)
+                        {filMenu.map((element:any)=>{
                             return(
                                 <MenuComponent id={element['_id']} name={element['foodName']} pic={element['image']}/>
                             )
