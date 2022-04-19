@@ -12,8 +12,13 @@ const MenuPageBody : React.FC<menuType> = (props) => {
     const [options,setoptions] = useState<Array<string>>([])
     const [filter,setFilter] = useState('all')
     const [filMenu,setFilMenu] = useState<any>([])
+    const [search,setSearch] = useState<string>('')
     const optionHandler = (event:any) =>{
         setFilter(event.target.value)
+    }
+    const searchHandler = (event:any) =>{
+        console.log(event.target.value)
+        setSearch(event.target.value)
     }
     useEffect(() => {
         const getMenu = async () => {
@@ -45,7 +50,6 @@ const MenuPageBody : React.FC<menuType> = (props) => {
     useEffect(()=>{
         const filterChange=()=>{
             var newMenu:any = []
-            console.log(filter)
             if(filter != 'all'){
                 menu.filter((element:any,index)=>{
                     if(element.type.includes(filter)){
@@ -55,17 +59,32 @@ const MenuPageBody : React.FC<menuType> = (props) => {
                 setFilMenu(newMenu)
             }
             else{
-                setFilMenu(menu)
+                newMenu=menu
+                setFilMenu(newMenu)
+            }
+            console.log(newMenu)
+            var searchMenu:any = []
+            console.log(searchMenu)
+            if(search != ''){
+                newMenu.filter((element:any)=>{
+                    if(element.foodName.includes(search)){
+                        searchMenu.push(element)
+                    }
+                })
+                setFilMenu(searchMenu)
+            }else{
+                searchMenu=newMenu
+                setFilMenu(searchMenu)
             }
         }
         filterChange()
-    },[filter])
+    },[filter,search])
     return(
         <div className="flex flex-col w-full h-full">
             <div className="flex flex-row h-[55px] w-full mt-[3%]">
                 <div className="flex basis-3/4 h-full items-center justify-center">
                     <img src={search_icon} alt="search_icon" className='h-[65%]'/>
-                    <input type="text" className="h-[70%] w-[70%] indent-2.5 focus:outline-none" placeholder='Search...'/>
+                    <input type="text" className="h-[70%] w-[70%] indent-2.5 focus:outline-none" placeholder='Search...' onChange={searchHandler}/>
                 </div>
                 <div className="flex basis-1/4 justify-center items-center">
                     <select className='h-[60%] w-[80%]' onChange={optionHandler} >
