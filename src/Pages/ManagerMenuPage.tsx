@@ -16,9 +16,13 @@ const ManagerMenuPage: React.FC = () => {
     { name: "เหี้ย", price: "0", pic: "https://media.komchadluek.net/uploads/images/md/2021/09/UWTmNq2oOoaOOArz5qfp.jpg?x-image-process=style/LG" },
   ];
   const navigate = useNavigate();
+
   const onClickAddMenu = () => {
     navigate("/ManagerMenu/addMenu");
   };
+
+  
+
   return (
     <div>
       <div className="bg-white">
