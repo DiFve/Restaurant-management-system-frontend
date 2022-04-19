@@ -18,6 +18,7 @@ import ManagerMenuPage from "./Pages/ManagerMenuPage";
 import AddMenuPage from "./Pages/AddMenuPage";
 import FoodPage from "./Pages/FoodPage";
 import AuthPage from "./Pages/AuthPage";
+import CartPage from "./Pages/CartPage";
 function App() {
   return (
     <BrowserRouter>
@@ -48,6 +49,16 @@ function App() {
           }
         />
         <Route
+          path="/cart"
+          element={
+            <ProtectedRoutes
+              authenticationPath="/login"
+              outlet={<CartPage />}
+              role="customer"
+            />
+          }
+        />
+        <Route
           path="/food/:id"
           element={
             <ProtectedRoutes
@@ -58,8 +69,10 @@ function App() {
           }
         />
         <Route path="/auth/:token" element={<AuthPage />} />
+
       </Routes>
-    </BrowserRouter>
+
+    </BrowserRouter >
   );
 }
 
