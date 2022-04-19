@@ -3,6 +3,7 @@ import MenuComponent from "../components/ManagerMenuComponent";
 import AddIcon from "../components/img/add_icon.jpg";
 import { useNavigate } from "react-router-dom";
 const ManagerMenuPage: React.FC = () => {
+  
   let Menus = [
     {
       name: "hua moo",
