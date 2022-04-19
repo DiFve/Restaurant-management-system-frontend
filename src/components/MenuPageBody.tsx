@@ -62,9 +62,7 @@ const MenuPageBody : React.FC<menuType> = (props) => {
                 newMenu=menu
                 setFilMenu(newMenu)
             }
-            console.log(newMenu)
             var searchMenu:any = []
-            console.log(searchMenu)
             if(search != ''){
                 newMenu.filter((element:any)=>{
                     if(element.foodName.includes(search)){
@@ -98,12 +96,19 @@ const MenuPageBody : React.FC<menuType> = (props) => {
                     </select>
                 </div>
             </div>
-            <div className='flex h-[100%] w-[100%] justify-center items-center'>
+            <div className='flex h-[70%] w-[100%] justify-center items-center'>
                 <div className='flex flex-col bg-gray-100 h-[90%] w-[90%] items-center'>
                     <div className='overflow-y-scroll w-full h-full border-[2px] border-black'>
                         {filMenu.map((element:any)=>{
+                            var thePrice
+                            if(menuType=='buffet'){
+                                thePrice=0
+                            }
+                            else{
+                                thePrice=element['price']
+                            }
                             return(
-                                <MenuComponent id={element['_id']} name={element['foodName']} pic={element['image']}/>
+                                <MenuComponent id={element['_id']} name={element['foodName']} pic={element['image']} price={thePrice}/>
                             )
                         })}
                     </div>
