@@ -23,6 +23,10 @@ const HomeTest: React.FC = () => {
     navigate("/ManagerMenu");
   };
 
+  const onClickEmployeeMainPage = () => {
+    navigate("/EmployeeMain");
+  };
+
   const onClickQRCodeHandle = async () => {
     const res = await makeQR();
     console.log(res?.data.qrImage);
@@ -58,6 +62,15 @@ const HomeTest: React.FC = () => {
             <img className="h-10 w-10 inline align-center" src={MenuIcon} />
             <span className="pl-10 font-semibold text-3xl text-green-600">
               Menu
+            </span>
+          </button>
+          <button
+            onClick={onClickEmployeeMainPage}
+            className="flex flex-row bg-white w-10/12 h=10/12 mx-auto my-auto py-10 border-2 border-gray-300 rounded-lg shadow-md justify-center hover:border-4 hover:bg-gray-200"
+          >
+            <img className="h-10 w-10 inline align-center" src={MenuIcon} />
+            <span className="pl-10 font-semibold text-3xl text-green-600">
+              EmployeeMainPage
             </span>
           </button>
           <button className="flex flex-row bg-white w-10/12 h=10/12 mx-auto my-auto py-10 border-2 border-gray-300 rounded-lg shadow-md justify-center hover:border-4 hover:bg-gray-200">

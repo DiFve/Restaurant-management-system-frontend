@@ -6,19 +6,19 @@ interface Menu {
   id : string;
   name: string;
   pic: string;
+  price: number;
 }
 const MenuComponent: React.FC<Menu> = (props) => {
   var id = props.id;
   var name = props.name;
   var pic = props.pic;
+  var price = props.price;
   var navigate = useNavigate()
-  console.log('name :' + name)
-  console.log('pic : '+pic)
   const gotoFood = () =>{
     navigate(`/food/${id}`)
   }
   return (
-    <div className="flex flex-row mt-[1%] ml-[2.5%] h-[16%] w-[95%] bg-lightYellow">
+    <div className="flex flex-row mt-[1%] ml-[2.5%] h-[18%] w-[95%] bg-lightYellow">
       <div className="flex flex-row w-full">
         <div className="flex h-full max-w-[120px] w-[100%] shrink justify-center items-center">
           <img
@@ -28,15 +28,20 @@ const MenuComponent: React.FC<Menu> = (props) => {
           />
         </div>
         <div className="h-full w-[60%] text-center">
-          <div className="mt-[2%]">
-            <label className="text-xl">{name}</label>
+          <div className="flex flex-col">
+            <div className="flex w-full h-[56px] items-center justify-center mt-[2%]">
+              <p className="text-xl h-full w-full">{name}</p>
+            </div>
+            <div className="w-full h-auto text-right pr-[3%]">
+              <p className="text-xl">{price + '฿'}</p>
+            </div>
           </div>
         </div>
       </div>
       <div className="bg-headerRed h-full w-[40px] shrink-0">
         <button className="h-full w-full" onClick={gotoFood}>
             <div className="flex justify-center items-center h-full w-full">
-                <img src={plus_icon} alt="" className="w-[70%] " />
+                <img src={plus_icon} alt="" className="w-[70%] bg-white rounded-[50%]" />
             </div>
         </button>
       </div>
