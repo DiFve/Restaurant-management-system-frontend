@@ -31,6 +31,18 @@ const FoodForm : React.FC<idProps> = (props) =>{
         const getFood = async () => {
             const res = await getFoodInfo(props.id)
             const foodData = res?.data
+            foodData.menu.detail[0].choice.forEach((element:any,index:number) => {
+                if(element=='single'){
+                    foodData.menu.detail[0].choice[index]='radio'
+                }
+                else if( element =='multiple'){
+                    foodData.menu.detail[0].choice[index]='checkbox'
+                }
+                else{
+                    element=element
+                }
+            });
+            console.log(foodData.menu)
             setFoodInfo(foodData.menu)
             setFoodDetail(foodData.menu.detail[0])
             setFoodPic(`${config.imageURL}${foodData.menu.image}`)
@@ -44,7 +56,7 @@ const FoodForm : React.FC<idProps> = (props) =>{
         getFood()
       }, []);
     const [number,setNumber] = useState(0)
-    var {topicName,choice,option,require,_id} = foodDetail
+    var {topicName,choice,option,require,_id,additionalPrice} = foodDetail
     const onNumberClickHandler=(event:any)=>{
         var action = event.target.id
         if(action == 'plus'){
@@ -75,31 +87,34 @@ const FoodForm : React.FC<idProps> = (props) =>{
                 </div>
                 <div className="h-[15%] w-[100%] pl-[3%] pr-[4%] break-words overflow-y-scroll border-b-2">
                     <label className="text-2xl">Details : </label>
-                    <p className="text-2xl">{foodInfo.description}</p>
+                    <p className="text-xl">{foodInfo.description}</p>
                 </div>
                 <div className="flex flex-col h-[53%] w-[100%] mt-[2%] pl-[3%] pr-[4%] overflow-y-scroll border-b-2 min-h-[200px]">
                     <form className="text-2xl w-[100%]">
                         {  
                             topicName.map((val:any,index:number)=>{
+                                var indexUP = index
                                 if(val !== ''){
                                     return(
                                         <fieldset id={'group ' + index}>
                                             <label>{val}</label>
                                             {
-                                                option[index].map((val:any)=>{
-                                                    if(require[index]==="true"){
+                                                option[index].map((val:any,index:number)=>{
+                                                    if(require[indexUP]==="true"){
                                                         return(
-                                                            <div className="ml-[10%]">
-                                                                <input className='' type="radio" value={val} name={topicName[index]} required/>
-                                                                <label>{val}</label>
+                                                            <div className="ml-[10%] text-xl">
+                                                                <input className='' type={choice[indexUP]} value={val} name={topicName[indexUP]} required/>
+                                                                <label className="pl-[2%]">{val}</label>
+                                                                <label className="pl-[5%] text-base text-hardYellow">{'+ ' + additionalPrice[indexUP][index] + ' ฿'}</label>
                                                             </div>
                                                         )
                                                     }
-                                                    else if(require[index]==='false'){
+                                                    else if(require[indexUP]==='false'){
                                                         return(
-                                                            <div className="ml-[10%]">
-                                                                <input className='' type="radio" value={val} name={topicName[index]}/>
-                                                                <label>{val}</label>
+                                                            <div className="ml-[10%] text-xl">
+                                                                <input className='' type={choice[indexUP]} value={val} name={topicName[indexUP]}/>
+                                                                <label className="pl-[2%]">{val}</label>
+                                                                <label className="pl-[5%] text-base text-hardYellow">{'+ ' + additionalPrice[indexUP][index] + ' ฿'}</label>
                                                             </div>
                                                         )
                                                     }
