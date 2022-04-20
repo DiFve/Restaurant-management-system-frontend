@@ -31,14 +31,14 @@ const HeaderBar: React.FC<HeaderName> = (props) => {
       <div className="flex flex-col w-[25%] h-full item-center text-center">
         <div className="w-[100%] h-[50%]">Change Lang</div>
         <div className="flex flex-row h-[50%] justify-center">
-          <div className="flex justify-center w-[50%]">
-            <button className="max-w-[46px] w-[90%]" onClick={bellClickHandler}>
-              <img src={bell_icon} alt="" className="" />
+          <div className="flex justify-center w-[50%] mb-[3%] bg-red-200">
+            <button className="max-w-[46px] max-h-[46px] h-[90%] " onClick={bellClickHandler}>
+              <img src={bell_icon} alt="" className="bg-red-200 h-[100%]" />
             </button>
           </div>
-          <div className="flex justify-center w-[50%]">
-            <button className="max-w-[46px] w-[90%]" onClick={cartClickHandler}>
-              <img src={cart_icon} alt="" className="" />
+          <div className="flex justify-center w-[50%] mb-[3%] bg-red-200">
+            <button className="max-w-[46px] max-h-[46px] h-[90%]" onClick={cartClickHandler}>
+              <img src={cart_icon} alt="" className="bg-red-200 h-[100%]" />
             </button>
           </div>
         </div>
