@@ -26,6 +26,7 @@ const FoodForm : React.FC<idProps> = (props) =>{
     const [foodDetail,setFoodDetail] = useState<any>(obj.detail[0])
     const [foodPic,setFoodPic] = useState('')
     const [foodPrice,setFoodPrice] = useState(0)
+    const [foodOption,setFoodOption] = useState([])
     const userFoodType:string = 'buffet'
     useEffect(() => {
         const getFood = async () => {
@@ -68,6 +69,10 @@ const FoodForm : React.FC<idProps> = (props) =>{
             }
         }
     }
+
+    const optionChangeHandler = (event:any)=>{
+        console.log(event.target.value)
+    }
     return(
         <div className="flex flex-col h-full">
             <div className='flex w-[100%] h-[25%] justify-center items-center'>
@@ -102,7 +107,7 @@ const FoodForm : React.FC<idProps> = (props) =>{
                                                 option[index].map((val:any,index:number)=>{
                                                     if(require[indexUP]==="true"){
                                                         return(
-                                                            <div className="ml-[10%] text-xl">
+                                                            <div className="ml-[10%] text-xl" onChange={optionChangeHandler}>
                                                                 <input className='' type={choice[indexUP]} value={val} name={topicName[indexUP]} required/>
                                                                 <label className="pl-[2%]">{val}</label>
                                                                 <label className="pl-[5%] text-base text-hardYellow">{'+ ' + additionalPrice[indexUP][index] + ' ฿'}</label>
@@ -111,7 +116,7 @@ const FoodForm : React.FC<idProps> = (props) =>{
                                                     }
                                                     else if(require[indexUP]==='false'){
                                                         return(
-                                                            <div className="ml-[10%] text-xl">
+                                                            <div className="ml-[10%] text-xl" onChange={optionChangeHandler}>
                                                                 <input className='' type={choice[indexUP]} value={val} name={topicName[indexUP]}/>
                                                                 <label className="pl-[2%]">{val}</label>
                                                                 <label className="pl-[5%] text-base text-hardYellow">{'+ ' + additionalPrice[indexUP][index] + ' ฿'}</label>
