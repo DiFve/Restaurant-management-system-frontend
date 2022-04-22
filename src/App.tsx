@@ -11,6 +11,7 @@ import {
   useParams,
 } from "react-router-dom";
 //
+import OrderListPage from "./Pages/OrderListPage"
 import EmployeeMainPage from "./Pages/EmployeeMainPage"
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import MenuPage from "./Pages/MenuPage";
@@ -40,6 +41,7 @@ function App() {
         <Route path="/EmployeeList" element={<EmployeeListPage />} />
         <Route path="/ManagerMenu/addMenu" element={<AddMenuPage />} />
         <Route path="/EmployeeMain" element={<EmployeeMainPage/>} />
+        <Route path="/EmployeeMain/OrderList/:id" element={<OrderListPage/>} />
         <Route
           path="/menu/:type"
           element={

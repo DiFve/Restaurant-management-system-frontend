@@ -4,7 +4,7 @@ import cart_icon from "./img/cart_icon.png";
 import config from "../config.json";
 import { useNavigate } from "react-router-dom";
 interface HeaderName {
-  name: string;
+  name: string 
 }
 const HeaderBar: React.FC<HeaderName> = (props) => {
   const navigate = useNavigate()
