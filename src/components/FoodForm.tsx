@@ -26,7 +26,7 @@ const FoodForm : React.FC<idProps> = (props) =>{
     const [foodDetail,setFoodDetail] = useState<any>(obj.detail[0])
     const [foodPic,setFoodPic] = useState('')
     const [foodPrice,setFoodPrice] = useState(0)
-    const [foodOption,setFoodOption] = useState([])
+    const [foodOption,setFoodOption] = useState<Array<any>>([])
     const userFoodType:string = 'buffet'
     useEffect(() => {
         const getFood = async () => {
@@ -71,7 +71,31 @@ const FoodForm : React.FC<idProps> = (props) =>{
     }
 
     const optionChangeHandler = (event:any)=>{
-        console.log(event.target.value)
+        let newOption = [...foodOption]
+            console.log(event.target.id)
+        if(event.target.type == 'radio'){
+            if (event.target.checked){
+                newOption[Number(event.target.id)] = [event.target.value]
+            }
+            else if(!event.target.checked){
+                newOption[Number(event.target.id)] = ['']
+            }
+        }
+        else if(event.target.type == 'checkbox'){
+            let newCheckBox:Array<any> = foodOption[Number(event.target.id)] || []
+            console.log(newCheckBox)
+            if (event.target.checked){
+                newCheckBox.push(event.target.value)
+            }
+            else{
+                newCheckBox=newCheckBox.filter((element:any)=>{
+                    return element != event.target.value    
+                })
+            }
+            newOption[Number(event.target.id)]=newCheckBox
+            console.log(newCheckBox)
+        } 
+        setFoodOption(newOption)
     }
     return(
         <div className="flex flex-col h-full">
@@ -101,14 +125,14 @@ const FoodForm : React.FC<idProps> = (props) =>{
                                 var indexUP = index
                                 if(val !== ''){
                                     return(
-                                        <fieldset id={'group ' + index}>
+                                        <fieldset id={index.toString()} onChange={optionChangeHandler}>
                                             <label>{val}</label>
                                             {
                                                 option[index].map((val:any,index:number)=>{
                                                     if(require[indexUP]==="true"){
                                                         return(
-                                                            <div className="ml-[10%] text-xl" onChange={optionChangeHandler}>
-                                                                <input className='' type={choice[indexUP]} value={val} name={topicName[indexUP]} required/>
+                                                            <div className="ml-[10%] text-xl" >
+                                                                <input className='' id={indexUP.toString()} type={choice[indexUP]} value={val} name={topicName[indexUP]} required/>
                                                                 <label className="pl-[2%]">{val}</label>
                                                                 <label className="pl-[5%] text-base text-hardYellow">{'+ ' + additionalPrice[indexUP][index] + ' ฿'}</label>
                                                             </div>
@@ -116,8 +140,8 @@ const FoodForm : React.FC<idProps> = (props) =>{
                                                     }
                                                     else if(require[indexUP]==='false'){
                                                         return(
-                                                            <div className="ml-[10%] text-xl" onChange={optionChangeHandler}>
-                                                                <input className='' type={choice[indexUP]} value={val} name={topicName[indexUP]}/>
+                                                            <div className="ml-[10%] text-xl" >
+                                                                <input className='' id={indexUP.toString()} type={choice[indexUP]} value={val} name={topicName[indexUP]}/>
                                                                 <label className="pl-[2%]">{val}</label>
                                                                 <label className="pl-[5%] text-base text-hardYellow">{'+ ' + additionalPrice[indexUP][index] + ' ฿'}</label>
                                                             </div>
