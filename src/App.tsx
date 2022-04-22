@@ -19,7 +19,7 @@ import AddMenuPage from "./Pages/AddMenuPage";
 import FoodPage from "./Pages/FoodPage";
 import AuthPage from "./Pages/AuthPage";
 import CartPage from "./Pages/CartPage";
-import OrderListPage from "./Pages/OrderListPage";
+import OrderPage from "./Pages/OrderPage";
 import OrderReceiptOld from "./Pages/OrderReceiptOld";
 function App() {
   return (
@@ -39,7 +39,7 @@ function App() {
         />
         <Route path="/ManagerMenu" element={<ManagerMenuPage />} />
         <Route path="/ManagerMenu/addMenu" element={<AddMenuPage />} />
-        <Route path="/EmployeeMain" element={<EmployeeMainPage/>} />
+        <Route path="/EmployeeMain" element={<EmployeeMainPage />} />
         <Route
           path="/menu/:type"
           element={
@@ -61,11 +61,11 @@ function App() {
           }
         />
         <Route
-          path="/orderlist/cart"
+          path="/orderlist"
           element={
             <ProtectedRoutes
               authenticationPath="/login"
-              outlet={<OrderListPage />}
+              outlet={<OrderPage />}
               role="customer"
             />
           }

@@ -1,6 +1,6 @@
 import HeaderBar from "../components/HeaderBar"
-import MenuPageBody from "../components/MenuPageBody"
 import CartComponents from "../components/CartComponents"
+import OrderListComponents from "../components/OrderListComponents"
 
 const CartPage: React.FC = () => {
     return (

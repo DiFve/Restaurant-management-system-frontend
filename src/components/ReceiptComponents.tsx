@@ -1,9 +1,11 @@
 import OrderReceipt from "./OrderReceipt"
-
+import { alacarteMenu, allMenu, buffetMenu } from '../api/menu'
+import { useEffect, useState } from 'react'
 
 const ReceiptComponents: React.FC = () => {
     var totalPrice = 1000
     const menuType = "buffet"
+
     const data = [
         { orderName: "ผัดกระเพรากุ้งรุ้งๆ", detail: [""], price: 1000 },
         { orderName: "ข้าวผัดกุ้งมุ่งใส่กระเทียม", detail: ["พิเศษ", "ใส่ไข่", "ใส่ตูด"], price: 100, quantity: 2 },
@@ -14,6 +16,7 @@ const ReceiptComponents: React.FC = () => {
         { orderName: "ผัดกระเพรากุ้งไม่ใส่ใบกระเพรา", detail: ["พิเศษ", "ใส่ไข่", "ใส่ตูด"], price: 1000, quantity: 5 },
         { orderName: "ผัดกระเพรากุ้ง", detail: [""], price: 0, quantity: 0 },
     ]
+
 
     return (
         <div className="flex h-screen w-full items-center overflow-y-hidden justify-center bg-white">

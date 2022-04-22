@@ -6,7 +6,7 @@ interface Receipt {
   menuType: string | undefined;
 }
 const OrderReceipt: React.FC<Receipt> = (props) => {
-  console.log({ props })
+  //console.log({ props })
   const { orderName, detail, price, quantity, menuType } = props
   var statusOrder = true
   var editButton = ""

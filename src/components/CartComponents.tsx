@@ -1,15 +1,37 @@
-import { useParams } from "react-router-dom"
-import HeaderBar from "../components/HeaderBar"
-import FoodForm from "../components/FoodForm"
+
 import OrderReceipt from "./OrderReceipt"
 import DontHaveOrder from './img/DontHaveOrder.png'
+import { useEffect, useState } from 'react'
+import { alacarteMenu, allMenu, buffetMenu } from '../api/menu'
 
+interface item {
+    detail: Array<object>;
+    foodName: string;
+    foodType: string;
+    pricce: Number;
+}
 
 const CartPage: React.FC = () => {
-    const menuType = "buffet"
-    //const menuType = "alacarte"
+    //const menuType = "buffet"
+    const menuType = "alacarte"
     var totalPrice = 1000
     var check = 0
+
+    const [menu, setMenu] = useState('')
+
+
+    useEffect(() => {
+        const getMenu = async () => {
+            var res = await alacarteMenu()
+
+            setMenu(res?.data)
+
+        }
+        getMenu()
+
+    }, []);
+
+
     const data = [
         { orderName: "ผัดกระเพรากุ้งรุ้งๆ", detail: [""], price: 1000 },
         { orderName: "ข้าวผัดกุ้งมุ่งใส่กระเทียม", detail: ["พิเศษ", "ใส่ไข่", "ใส่ตูด"], price: 100, quantity: 2 },

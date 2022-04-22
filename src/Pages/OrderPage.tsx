@@ -1,7 +1,7 @@
 import HeaderBar from "../components/HeaderBar"
 import OrderListComponents from "../components/OrderListComponents"
 
-const OrderListPage: React.FC = () => {
+const OrderPage: React.FC = () => {
     const dataOrder = [
         { order: "ออเดอร์", timeOrder: "10:25:16", status: "Cancelled" },
         { order: "ออเดอร์", timeOrder: "10:25:16", status: "Complete" },
@@ -37,4 +37,4 @@ const OrderListPage: React.FC = () => {
     )
 }
 
-export default OrderListPage
+export default OrderPage
