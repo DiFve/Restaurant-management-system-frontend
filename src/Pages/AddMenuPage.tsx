@@ -54,7 +54,7 @@ const AddMenuPage: React.FC = () => {
 
   const inputNewFoodType = (event:any) => {
     setNewFoodType(event.currentTarget.value)
-  }
+  };
 
   const inputDescribtion = (event: any) => {
     setDescribtion(event.currentTarget.value);
