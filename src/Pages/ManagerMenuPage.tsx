@@ -7,20 +7,12 @@ import { useEffect, useState } from "react";
 
 const ManagerMenuPage: React.FC = () => {
   const [menu, setMenu] = useState([]);
-  const [menuTypeSelected,setMenuTypeSelected] = useState("all"); 
+  const [menuTypeSelected, setMenuTypeSelected] = useState("all");
+  const [fillMenu, setFillMenu] = useState<any>([]);
 
-  const menuTypeChange = (event:any) => { 
+  const menuTypeChange = (event: any) => {
     setMenuTypeSelected(event.target.value);
-  }
-
-  useEffect(() => {
-    const getMenu = async () => {
-      var res = await allMenu();
-      var menuAll = res?.data;
-      setMenu(menuAll);
-    };
-    getMenu();
-  }, [menu]);
+  };
 
   const navigate = useNavigate();
 
@@ -28,18 +20,59 @@ const ManagerMenuPage: React.FC = () => {
     navigate("/ManagerMenu/addMenu");
   };
 
+
+  useEffect(() => {
+    const getMenu = async () => {
+      var res = await allMenu();
+      var menuAll = res?.data;
+      setMenu(menuAll);
+      setFillMenu(menuAll);
+    };
+    getMenu();
+  }, []);
+
+  useEffect(() => {
+    const filterChange=()=>{
+      var newMenu:any = []
+      if (menuTypeSelected != "all") {
+        menu.filter((element: any) => {
+          if (element.foodType.includes(menuTypeSelected)) {
+            newMenu.push(element);
+          }
+        });
+        setFillMenu(newMenu)
+      } 
+      else {
+        newMenu = menu
+        setFillMenu(newMenu)
+      }
+    }
+    filterChange()
+    console.log(fillMenu)
+  },[menuTypeSelected])
+
   return (
     <div>
       <div className="bg-white">
         <HeaderBar name="Menu"></HeaderBar>
-        <div className="flex flex-row w-full h-[75px] justify-between bg-red-50">
+        <div className="flex flex-row w-full h-[75px] justify-between items-center bg-red-50">
           <select
-            className="form-select block text-base font-normal text-gray-700 bg-white border
+            className="form-select block text-lg font-normal text-gray-700 bg-white border h-[50px] ml-5
                     border-solid border-gray-300 rounded focus:text-gray-700 focus:border-blue-600 focus:outline-none"
-            onChange={menuTypeChange}>
-            <option value="all" selected={menuTypeSelected === "all"}>all</option>
-            <option value="a-la-carte" selected={menuTypeSelected === "a-la-carte"}>a-la-carte</option>
-            <option value="buffet" selected={menuTypeSelected === "buffet"}>buffet</option>
+            onChange={menuTypeChange}
+          >
+            <option value="all" selected={menuTypeSelected === "all"}>
+              all
+            </option>
+            <option
+              value="a-la-carte"
+              selected={menuTypeSelected === "a-la-carte"}
+            >
+              a-la-carte
+            </option>
+            <option value="buffet" selected={menuTypeSelected === "buffet"}>
+              buffet
+            </option>
             );
           </select>
         </div>
@@ -52,7 +85,7 @@ const ManagerMenuPage: React.FC = () => {
               <img src={AddIcon} className="h-10 w-10 rounded-full" />
             </div>
           </div>
-          {menu.map((element: any) => {
+          {fillMenu.map((element: any) => {
             return (
               <MenuComponent
                 name={element["foodName"]}
