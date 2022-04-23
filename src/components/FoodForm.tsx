@@ -1,7 +1,7 @@
 import jwtDecode from "jwt-decode";
 import { MouseEventHandler, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
-import { getFoodInfo } from "../api/food"
+import { addFoodToCart, getFoodInfo } from "../api/food"
 import config from "../config.json";
 interface idProps{
     id:string | undefined
@@ -34,8 +34,9 @@ const FoodForm : React.FC<idProps> = (props) =>{
     const [number,setNumber] = useState(0)
     const [additional,setAdditional] = useState('')
     const [errorText,setErrorText] = useState('')
-    const decodedJWT:Object = jwtDecode(localStorage.getItem('token') || '')
-    const userFoodType:string = Object.values(decodedJWT)[3]
+    const decodedJWT:any = jwtDecode(localStorage.getItem('token') || '')
+    const userFoodType = Object.values(decodedJWT)[3] || 'all'
+    const userTableNumber = decodedJWT.table
     useEffect(() => {
         const getFood = async () => {
             const res = await getFoodInfo(props.id)
@@ -63,7 +64,7 @@ const FoodForm : React.FC<idProps> = (props) =>{
             }
         }
         getFood()
-      }, []);
+    }, []);
     var {topicName,choice,option,require,_id,additionalPrice} = foodDetail
     const onNumberClickHandler=(event:any)=>{
         var action = event.target.id
@@ -119,28 +120,36 @@ const FoodForm : React.FC<idProps> = (props) =>{
     const additionalHandler = (event:any)=>{
         setAdditional(event.target.value)
     }
-    const submitHandler = (event:any)=>{
+    const submitHandler = async (event:any)=>{
         var reqBody = {
-            "topicName":[
-
+            'detail':[{
+                "topicName":'',
+                'option':[],
+                }
             ],
-            "choice": [
-            ],
-            "option": [
-            ],
-            "require": [
-            ],
-            "_id": "",
-            "price" : 0
+            "price" : 0,
+            'quantity': 0,
+            'foodID': '',
+            //'additionalInfo' : additional
         }
-        reqBody.topicName = topicName
-        reqBody.choice = choice
-        reqBody.option = foodOption
-        reqBody.require = require
-        reqBody._id = _id
+        reqBody.detail.pop()
+        topicName.map((element:string,index:number)=>{
+            var choice = {
+                "topicName":'',
+                "option": [],
+            }
+            choice.topicName=element
+            choice.option = foodOption[index]
+            reqBody.detail.push(choice)
+        })
         reqBody.price = number * foodPrice
-        console.log(reqBody)
-        //navigate(`/menu/${userFoodType}`)
+        reqBody.quantity = number
+        if(props.id !== undefined){
+            reqBody.foodID = props.id
+        }
+        const res = await addFoodToCart(userTableNumber,reqBody)
+        console.log(res)
+        navigate(`/menu/${userFoodType}`)
     }
     return(
             <div className="flex flex-col h-full">
