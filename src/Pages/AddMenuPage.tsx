@@ -1,70 +1,122 @@
 import React, { useState, useEffect } from "react";
+import api from "../api/apiClient";
+import config from "../config.json";
 import HeaderBar from "../components/RestaurantManagerBar";
 import loginIcon from "./img/LoginPageimg/loginIcon.png";
 const AddMenuPage: React.FC = () => {
   const [showPopUp, setShowPopUp] = React.useState(false);
-  const [thaiName, setThaiName] = useState("");
-  const [englishName, setEnglishName] = useState("");
+  const [foodName, setFoodName] = useState("");
   const [describtion, setDescribtion] = useState("");
   const [optionList, setOptionList] = useState<any>([]);
   const [choiceList, setChoiceList] = useState([
     {
       id: 1,
       name: "choice",
+      additionPrice: 0,
     },
   ]);
   const [foodType, SetfoodType] = useState(["hee", "kuy", "other"]);
   const [foodTypeSelected, setFoodTypeSelected] = useState("other");
   const [newFoodType, setNewFoodType] = useState("");
   const [addChoiceData, setAddChoiceData] = useState("");
+  const [addAdditionPriceData, setAddAdditionPriceData] = useState("");
   const [editChoiceData, setEditChoiceData] = useState("");
+  const [editAdditionPriceData, setEditAdditionPriceData] = useState("");
   const [editChoiceID, setEditChoiceID] = useState(0);
   const [numberOfChoice, setNumberOfChoice] = useState(1);
   const [numberOfOption, setNumberOfOption] = useState(0);
-  const [typeOption, setTypeOption] = useState("one answer");
+  const [typeOption, setTypeOption] = useState("single");
   const [optionName, setOptionName] = useState("");
   const [required, setRequired] = useState(false);
-
+  const [isAlacarte, setIsAlacarte] = useState(false);
+  const [isBuffet, setIsBuffet] = useState(false);
+  const [price, setPrice] = useState(0);
   const [picture, setPicture] = useState<any>(null);
   const [imgData, setImgData] = useState<any>(null);
 
-  const inputPicture = (event: any) => {
+  const inputPicture = async (event: any) => {
     if (event.target.files[0]) {
-      console.log("picture", event.target.files);
+      console.log("picture", event.target.files[0]);
       setPicture(event.target.files[0]);
       const reader = new FileReader();
       reader.addEventListener("load", () => {
         setImgData(reader.result);
       });
       reader.readAsDataURL(event.target.files[0]);
+
+      var formData = new FormData();
+      // var imagefile = document.querySelector("#file");
+      formData.append("image", event.target.files[0]);
+      const res = await api.post(`${config.apiURL}addMenuPicture`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      console.log(res);
     }
   };
 
-  const inputThaiName = (event: React.FormEvent<HTMLInputElement>) => {
-    setThaiName(event.currentTarget.value);
+  const inputFoodName = (event: React.FormEvent<HTMLInputElement>) => {
+    setFoodName(event.currentTarget.value);
   };
 
-  const inputEnglishName = (event: React.FormEvent<HTMLInputElement>) => {
-    setEnglishName(event.currentTarget.value);
+  const handleAlacarte = () => {
+    setIsAlacarte(!isAlacarte);
+    if (isAlacarte === false) {
+      setPrice(0);
+    }
+  };
+
+  const handleBuffet = () => {
+    setIsBuffet(!isBuffet);
+  };
+
+  const handlePriceChange = (event: any) => {
+    setPrice(event.target.value);
   };
 
   const inputFoodType = (event: any) => {
     setFoodTypeSelected(event.target.value);
   };
 
-  const inputNewFoodType = (event:any) => {
-    setNewFoodType(event.currentTarget.value)
+  const inputNewFoodType = (event: any) => {
+    setNewFoodType(event.currentTarget.value);
   };
 
   const inputDescribtion = (event: any) => {
     setDescribtion(event.currentTarget.value);
   };
 
-  const onClickConfirm = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    {
-      /*check*/
-    }
+  const onClickConfirm = () => {
+    const topicName: Array<any> = [];
+    const require: Array<any> = [];
+    const option: Array<any> = [];
+    const additionalPrice: Array<any> = [];
+    const optionType: Array<any> = [];
+    optionList.map((opt: any) => {
+      topicName.push(opt.name);
+      require.push(opt.required);
+      optionType.push(opt.type)
+      const choices: Array<any> = [];
+      const addPrice: Array<any> = [];
+      opt.choice.map((choi: any) => {
+        choices.push(choi.name);
+        addPrice.push((choi.additionPrice))
+      });
+      option.push(choices);
+      additionalPrice.push(addPrice);
+    });
+    
+    const detail: Array<any> = [
+      {
+        "topicName" : topicName,
+        "choice" : optionType,
+        "option" : option,
+        "additionalPrice" : additionalPrice,
+        "require" : require,
+      }
+    ]
+    console.log(detail);
   };
 
   const onClickCancel = () => {
@@ -83,13 +135,26 @@ const AddMenuPage: React.FC = () => {
     setAddChoiceData(event.currentTarget.value);
   };
 
+  const handleAddAdditionPriceChange = (event: any) => {
+    setAddAdditionPriceData(event.currentTarget.value);
+  };
+
   const handleEditChoiceChange = (event: any) => {
     setEditChoiceData(event.currentTarget.value);
   };
 
-  const handleEditChoice = (choiceID: Number, choiceName: String) => {
+  const handleEditAdditionPriceChange = (event: any) => {
+    setEditAdditionPriceData(event.currentTarget.value);
+  };
+
+  const handleEditChoice = (
+    choiceID: Number,
+    choiceName: String,
+    additionPrice: Number
+  ) => {
     setEditChoiceID(Number(choiceID));
     setEditChoiceData(String(choiceName));
+    setEditAdditionPriceData(String(additionPrice));
   };
 
   const handleCancelChoice = () => {
@@ -115,29 +180,36 @@ const AddMenuPage: React.FC = () => {
   };
 
   const handleAddChoiceSubmit = () => {
-    if (addChoiceData.length > 0) {
+    if (addChoiceData.length > 0 && (parseInt(addAdditionPriceData)!=NaN) && Number(addAdditionPriceData) >= 0) {
       const number = numberOfChoice + 1;
       const addChoice = {
         id: number,
         name: addChoiceData,
+        additionPrice: Number(addAdditionPriceData),
       };
       const newChoice = [...choiceList, addChoice];
       setChoiceList(newChoice);
       setNumberOfChoice(number);
       setAddChoiceData("");
+      setAddAdditionPriceData("");
     }
   };
 
   const handleEditChoiceSubmit = () => {
-    const editChoice = {
-      id: Number(editChoiceID),
-      name: editChoiceData,
-    };
-    const newChoice = [...choiceList];
-    const index = choiceList.findIndex((choice) => choice.id === editChoiceID);
-    newChoice[index] = editChoice;
-    setChoiceList(newChoice);
-    setEditChoiceID(0);
+    if (editChoiceData.length > 0 && (parseInt(editAdditionPriceData)!=NaN) && Number(editAdditionPriceData) >= 0) {
+      const editChoice = {
+        id: Number(editChoiceID),
+        name: editChoiceData,
+        additionPrice: Number(editAdditionPriceData),
+      };
+      const newChoice = [...choiceList];
+      const index = choiceList.findIndex(
+        (choice) => choice.id === editChoiceID
+      );
+      newChoice[index] = editChoice;
+      setChoiceList(newChoice);
+      setEditChoiceID(0);
+    }
   };
 
   const handleAddOptionCancel = () => {
@@ -145,10 +217,12 @@ const AddMenuPage: React.FC = () => {
       {
         id: numberOfChoice + 1,
         name: "choice",
+        additionPrice: 0,
       },
     ]);
     setOptionName("");
     setAddChoiceData("");
+    setAddAdditionPriceData("");
     setEditChoiceID(0);
     setRequired(false);
     setTypeOption("one answer");
@@ -176,13 +250,15 @@ const AddMenuPage: React.FC = () => {
         {
           id: numberOfChoice + 1,
           name: "choice",
+          additionPrice: 0,
         },
       ]);
       setOptionName("");
       setAddChoiceData("");
+      setAddAdditionPriceData("");
       setEditChoiceID(0);
       setRequired(false);
-      setTypeOption("one answer");
+      setTypeOption("single");
       setNumberOfChoice(numberOfChoice + 1);
       setNumberOfOption(number);
       setShowPopUp(false);
@@ -194,12 +270,13 @@ const AddMenuPage: React.FC = () => {
       <HeaderBar name="Add menu"></HeaderBar>
       <form className="flex flex-col w-full h-auto" onSubmit={onClickConfirm}>
         <div className="flex flex-row flex-wrap w-full h-auto">
-          <div className="flex md:w-1/2 md:h-[350px] lg:w-1/2 lg:h-[350px] xl:w-5/12 xl:h-[400px] w-full h-[300px]">
+          {/*image input*/}
+          <div className="flex md:w-1/2 md:h-[350px] lg:w-1/2 lg:h-[350px] xl:w-5/12 xl:h-[400px] w-full h-[400px]">
             <div className="flex flex-col content-end w-full h-full">
               <div className="flex justify-center items-center w-full h-[90%]">
                 <img
                   src={imgData}
-                  className="flex w-[90%] h-[90%] object-cover"
+                  className="flex w-[90%] h-[90%] object-contain"
                   alt=""
                 />
               </div>
@@ -211,51 +288,28 @@ const AddMenuPage: React.FC = () => {
               />
             </div>
           </div>
+
+          {/*sub detail input*/}
           <div className="flex flex-col flex-wrap md:w-1/2 md:h-[350px] lg:w-1/2 lg:h-[350px] xl:w-7/12 xl:h-[400px] w-full h-auto bg-green-100">
             {/*Name Input*/}
-            <div className="flex flex-row flex-wrap w-full h-auto">
-              {/*Thai Name Input*/}
-              <div className="flex justify-center sm:w-1/2 lg:w-1/2 xl:w-1/2 w-full">
-                <div className="my-5 w-[75%]">
-                  <label className="inline-block mb-2 text-gray-700">
-                    ชื่อภาษาไทย
-                  </label>
-                  <input
-                    type="text"
-                    className="block w-full px-3 py-1.5 text-sm font-normal text-gray-700 bg-white
+            <div className="flex justify-center w-full h-auto">
+              <div className="my-5 w-[75%]">
+                <label className="inline-block mb-2 text-gray-700">
+                  ชื่ออาหาร
+                </label>
+                <input
+                  type="text"
+                  className="block w-full px-3 py-1.5 text-sm font-normal text-gray-700 bg-white
                   border border-solid border-gray-300 rounded focus:bg-white focus:border-blue-600 focus:outline-none"
-                    placeholder="ชื่อเมนูอาหารภาษาไทย"
-                    onChange={inputThaiName}
-                    pattern="^[ก-๏\s]+$"
-                    maxLength={10}
-                    value={thaiName}
-                  />
-                  <label className="inline-block text-xs mt-2 text-rose-600">
-                    กรอกได้เฉพาะชื่อภาษาไทยเท่านั้น
-                  </label>
-                </div>
-              </div>
-
-              {/*English Name Input*/}
-              <div className="flex justify-center sm:w-1/2 lg:w-1/2 xl:w-1/2 w-full">
-                <div className="my-5 w-[75%]">
-                  <label className="inline-block mb-2 text-gray-700">
-                    ชื่อภาษาอังกฤษ
-                  </label>
-                  <input
-                    type="text"
-                    className="block w-full px-3 py-1.5 text-sm font-normal text-gray-700 bg-white
-                  border border-solid border-gray-300 rounded focus:bg-white focus:border-blue-600 focus:outline-none"
-                    placeholder="ชื่อเมนูอาหารภาษาอังกฤษ"
-                    onChange={inputEnglishName}
-                    pattern="^[a-zA-Z\s]+$"
-                    maxLength={5}
-                    value={englishName}
-                  />
-                  <label className="inline-block text-xs mt-2 text-rose-600">
-                    กรอกได้เฉพาะชื่อภาษาอังกฤษเท่านั้น
-                  </label>
-                </div>
+                  placeholder="ชื่อเมนูอาหารภาษาไทย"
+                  onChange={inputFoodName}
+                  pattern="^[ก-๏\s]+$"
+                  maxLength={10}
+                  value={foodName}
+                />
+                <label className="inline-block text-xs mt-2 text-rose-600">
+                  กรอกได้เฉพาะชื่อภาษาไทยเท่านั้น
+                </label>
               </div>
             </div>
 
@@ -269,10 +323,11 @@ const AddMenuPage: React.FC = () => {
                   <div>
                     <div className="form-check mb-2">
                       <input
-                        className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white 
+                        className="form-check-input appearance-none rounded-sm h-4 w-4 border border-gray-300 bg-white 
                       checked:bg-green-600 checked:border-gray-500 mt-1 float-left mr-2 cursor-pointer"
                         type="checkbox"
-                        name="flexRadioDefault"
+                        onChange={handleAlacarte}
+                        checked={isAlacarte}
                       />
                       <label className="form-check-label inline-block text-gray-800">
                         A-la-carte
@@ -280,10 +335,11 @@ const AddMenuPage: React.FC = () => {
                     </div>
                     <div className="form-check">
                       <input
-                        className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white 
+                        className="form-check-input appearance-none rounded-sm h-4 w-4 border border-gray-300 bg-white 
                       checked:bg-green-600 checked:border-gray-500 mt-1 float-left mr-2 cursor-pointer"
                         type="checkbox"
-                        name="flexRadioDefault"
+                        onChange={handleBuffet}
+                        checked={isBuffet}
                       />
                       <label className="form-check-label inline-block text-gray-800">
                         Buffet
@@ -323,24 +379,22 @@ const AddMenuPage: React.FC = () => {
                   </div>
                 </div>
               </div>
-              {(foodTypeSelected==="other") ? (
+              {foodTypeSelected === "other" ? (
                 <div className="mt-8 flex justify-start xl:w-1/2 w-1/3">
-                <div className="xl:w-[75%] w-[90%]">
-                  <input
-                    type="text"
-                    className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white
+                  <div className="xl:w-[75%] w-[90%]">
+                    <input
+                      type="text"
+                      className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white
                   border border-solid border-gray-300 rounded focus:bg-white focus:border-blue-600 focus:outline-none"
-                    placeholder="ประเภทของเมนูอาหาร"
-                    onChange={inputNewFoodType}
-                    pattern="^[ก-๏\s]+$"
-                    maxLength={30}
-                    value={newFoodType}
-                  />
-                  
+                      placeholder="ประเภทของเมนูอาหาร"
+                      onChange={inputNewFoodType}
+                      pattern="^[ก-๏\s]+$"
+                      maxLength={30}
+                      value={newFoodType}
+                    />
+                  </div>
                 </div>
-              </div>
-              )
-              :null}
+              ) : null}
             </div>
           </div>
         </div>
@@ -354,7 +408,7 @@ const AddMenuPage: React.FC = () => {
                 type="button"
                 onClick={() => setShowPopUp(true)}
               >
-                Add Option
+                เพิ่มตัวเลือก
               </button>
               {showPopUp ? (
                 <>
@@ -383,9 +437,9 @@ const AddMenuPage: React.FC = () => {
                                           checked:bg-green-600 checked:border-gray-500 mt-2 float-left mr-2 cursor-pointer"
                                     type="radio"
                                     name="flexRadioChoice"
-                                    value="one answer"
+                                    value="single"
                                     onChange={handleChangeTypeChoice}
-                                    checked={typeOption === "one answer"}
+                                    checked={typeOption === "single"}
                                   />
                                   <label className="text-sm inline-block text-gray-800">
                                     ตอบได้เพียงหนึ่งตัวเลือก
@@ -397,9 +451,9 @@ const AddMenuPage: React.FC = () => {
                                           checked:bg-green-600 checked:border-gray-500 mt-2 float-left mr-2 cursor-pointer"
                                     type="radio"
                                     name="flexRadioChoice"
-                                    value="multiple answer"
+                                    value="multiple"
                                     onChange={handleChangeTypeChoice}
-                                    checked={typeOption === "multiple answer"}
+                                    checked={typeOption === "multiple"}
                                   />
                                   <label className="text-sm inline-block text-gray-800">
                                     ตอบได้หลายตัวเลือก
@@ -437,13 +491,24 @@ const AddMenuPage: React.FC = () => {
                                   <div>
                                     {editChoiceID === choice.id ? (
                                       <div className="flex flex-row justify-between mb-2">
-                                        <input
-                                          type="text"
-                                          className="block w-[90%] px-3 py-1.5 text-sm font-normal text-black bg-gray-100
+                                        <div className="flex flex-row justify-evenly block w-[90%]">
+                                          <input
+                                            type="text"
+                                            className="block w-[45%] px-3 py-1.5 text-sm font-normal text-black bg-gray-100
                                            rounded focus:outline-none"
-                                          onChange={handleEditChoiceChange}
-                                          value={editChoiceData}
-                                        />
+                                            onChange={handleEditChoiceChange}
+                                            value={editChoiceData}
+                                          />
+                                          <input
+                                            type="text"
+                                            className="block w-[45%] px-3 py-1.5 text-sm font-normal text-black bg-gray-100
+                                           rounded focus:outline-none"
+                                            onChange={
+                                              handleEditAdditionPriceChange
+                                            }
+                                            value={editAdditionPriceData}
+                                          />
+                                        </div>
                                         <button
                                           type="button"
                                           className="text-sm mx-2"
@@ -461,9 +526,14 @@ const AddMenuPage: React.FC = () => {
                                       </div>
                                     ) : (
                                       <div className="flex flex-row justify-between mb-2">
-                                        <span className="text-sm mx-2 text-black">
-                                          {choice.name}
-                                        </span>
+                                        <div className="flex flex-row w-[70%]">
+                                          <span className="w-1/2 mt-1.5 text-sm mx-2 text-black">
+                                            {choice.name}
+                                          </span>
+                                          <span className="w-1/2 mt-1.5 text-sm mx-2 text-black">
+                                            {choice.additionPrice}
+                                          </span>
+                                        </div>
                                         <div>
                                           <button
                                             type="button"
@@ -471,7 +541,8 @@ const AddMenuPage: React.FC = () => {
                                             onClick={() => {
                                               handleEditChoice(
                                                 choice.id,
-                                                choice.name
+                                                choice.name,
+                                                choice.additionPrice,
                                               );
                                             }}
                                           >
@@ -495,14 +566,23 @@ const AddMenuPage: React.FC = () => {
                                 ))}
                               </div>
                               <div className="flex flex-row justify-between mb-2">
-                                <input
-                                  type="text"
-                                  className="block w-[90%] px-3 py-1.5 text-sm font-normal text-black bg-gray-100
+                                <div className="flex flex-row justify-evenly block w-[90%]">
+                                  <input
+                                    type="text"
+                                    className="block w-[45%] px-3 py-1.5 text-sm font-normal text-black bg-gray-100
                                            rounded focus:outline-none"
-                                  placeholder="ตัวเลือก"
-                                  onChange={handleAddChoiceChange}
-                                  value={addChoiceData}
-                                />
+                                    placeholder="ตัวเลือก"
+                                    onChange={handleAddChoiceChange}
+                                    value={addChoiceData}
+                                  />
+                                  <input
+                                    type="text"
+                                    className="block w-[45%] px-3 py-1.5 text-sm font-normal text-black bg-gray-100 appearance-none
+                                           rounded focus:outline-none"
+                                    onChange={handleAddAdditionPriceChange}
+                                    value={addAdditionPriceData}
+                                  />
+                                </div>
                                 <button
                                   type="button"
                                   className="text-sm mx-2"
@@ -543,7 +623,7 @@ const AddMenuPage: React.FC = () => {
 
           {optionList.length != 0 ? (
             <div>
-              <div className="ml-5 mt-5 text-xl ">Option</div>
+              <div className="ml-5 mt-5 text-xl ">ตัวเลือก</div>
             </div>
           ) : null}
 
@@ -577,12 +657,17 @@ const AddMenuPage: React.FC = () => {
                       <div className="flex w-full ml-9 ">
                         <input
                           className={`form-check-input appearance-none h-4 w-4 border border-gray-300 bg-white 
-                          mt-1 float-left mr-2 cursor-pointer ${(option.type==="one answer") && "rounded-full"}
-                          ${(option.type==="multiple answer") && "rounded-sm"}`}
+                          mt-1 float-left mr-2 cursor-pointer ${
+                            option.type === "single" && "rounded-full"
+                          }
+                          ${option.type === "multiple" && "rounded-sm"}`}
                           disabled
                         />
                         <label className="form-check-label inline-block text-md text-gray-800 text-gray-800 opacity-60">
                           {choice.name}
+                        </label>
+                        <label className="form-check-label inline-block text-md ml-10 text-gray-800 text-gray-800 opacity-60">
+                          {"+"+choice.additionPrice}
                         </label>
                       </div>
                     );
@@ -592,16 +677,30 @@ const AddMenuPage: React.FC = () => {
             })}
           </div>
 
-          <div className="ml-5 mt-5 text-xl ">describtion</div>
+          <div className="ml-5 mt-5 text-xl ">คำอธิบาย</div>
           <div className="flex w-full justify-center items-center h-[200px] mb-5">
             <textarea
               className="block w-[90%] h-[90%] px-3 py-1.5 text-sm font-normal text-gray-700 bg-white
               border border-solid border-gray-300 rounded focus:bg-white focus:border-blue-600 focus:outline-none"
-              placeholder="describtion..."
+              placeholder="คำอธิบาย..."
               onChange={inputDescribtion}
               value={describtion}
             />
           </div>
+
+          {isAlacarte ? (
+            <div className="flex flex-row justify-start w-full">
+              <div className="flex ml-5 mt-1 text-xl ">ราคา</div>
+              <input
+                type="number"
+                className="flex ml-5 mb-5 block px-3 py-1.5 text-md font-normal text-gray-700 bg-white appearance-none
+                  border border-solid border-gray-300 rounded focus:bg-white focus:border-blue-600 focus:outline-none"
+                placeholder="ราคา..."
+                onChange={handlePriceChange}
+                value={price}
+              />
+            </div>
+          ) : null}
         </div>
 
         {/*button submit*/}
@@ -618,7 +717,8 @@ const AddMenuPage: React.FC = () => {
           <div className="p-5 w-[200px] h-[100px]">
             <button
               className="rounded-lg w-full h-full border bg-white shadow-md hover:bg-gray-200"
-              type="submit"
+              type="button"
+              onClick={onClickConfirm}
             >
               <span className="text ">Confirm</span>
             </button>

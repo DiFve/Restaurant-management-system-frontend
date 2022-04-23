@@ -1,4 +1,5 @@
 import React from "react";
+import config from "../config.json";
 interface menu {
   name: string;
   price: string;
@@ -11,7 +12,7 @@ const MenuComponent: React.FC<menu> = (props) => {
     <div className="flex flex-row h-full w-full rounded-lg border-2 p-[3px] shadow-md cursor-pointer">
       <img
         className="bg-black w-5/12 h-full object-cover"
-        src={props.pic}
+        src={config.imageURL+props.pic}
       />
       <div className="flex flex-col bg-white w-7/12 h-full">
         <span className="w-full h-full text-center text-3xl pt-[20px]">
