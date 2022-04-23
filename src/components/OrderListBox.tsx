@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { getFoodByID } from '../api/food'
 
 interface Box {
     foodID:string,

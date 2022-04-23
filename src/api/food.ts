@@ -1,6 +1,5 @@
 import api from "./apiClient";
 import config from "../config.json";
-
 export const getFoodInfo = async (id: string | undefined) => {
     try {
         const res = await api(`${config.apiURL}getMenuByID/${id}`, {
@@ -16,17 +15,19 @@ export const getFoodInfo = async (id: string | undefined) => {
     }
 }
 
-export const getFoodByID = async (id: string | undefined) => {
+export const addFoodToCart = async (tableNumber: number, body: any) => {
     try {
-        const res = await api(`${config.apiURL}getFoodById/${id}`, {
+        const detailBody = {
+            'detail': body
+        }
+        const res = await api(`${config.apiURL}addItemToCart/${tableNumber.toString()}`, {
             headers: {},
-            data: {},
-            method: "GET",
+            data: detailBody,
+            method: "PUT",
         });
-        console.log(res)
         return res
     }
-    catch (error) {
-        console.log('get food detail error')
+    catch (error: any) {
+        console.log('add food to cart error : ' + (error.message || ''))
     }
 }

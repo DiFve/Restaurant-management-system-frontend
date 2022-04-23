@@ -19,9 +19,20 @@ const LoginPage: React.FC = () => {
     if (username != "" && password != "") {
       const res = await login(username, password);
       try {
-        const jwtDecoded: Object = jwtDecode(res);
+        const jwtDecoded: any = jwtDecode(res);
         const user_ID = Object.values(jwtDecoded)[0];
-        navigate(`/home`);
+        console.log(jwtDecoded)
+        var role : string = jwtDecoded.role
+        console.log(role)
+        if(role === 'admin'){
+          navigate(`/home`)
+        }
+        else if(role === 'employee'){
+          navigate('/EmployeeMain')
+        }
+        else if(role==='customer'){
+          navigate(`/menu/${Object.values(jwtDecoded)[3]}`);
+        }
       } catch (error) {
         setEmailError(true);
         setPWError(true);

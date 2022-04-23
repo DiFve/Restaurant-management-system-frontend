@@ -1,5 +1,7 @@
+import jwtDecode from "jwt-decode";
 import { MouseEventHandler, useEffect, useState } from "react"
-import { getFoodInfo } from "../api/food"
+import { useNavigate } from "react-router-dom";
+import { addFoodToCart, getFoodInfo } from "../api/food"
 import config from "../config.json";
 interface idProps {
     id: string | undefined
@@ -22,6 +24,7 @@ const FoodForm: React.FC<idProps> = (props) => {
                 }
             ]
     }
+    const navigate = useNavigate()
     const [foodInfo, setFoodInfo] = useState<any>(obj)
     const [foodDetail, setFoodDetail] = useState<any>(obj.detail[0])
     const [foodPic, setFoodPic] = useState('')
@@ -31,7 +34,9 @@ const FoodForm: React.FC<idProps> = (props) => {
     const [number, setNumber] = useState(0)
     const [additional, setAdditional] = useState('')
     const [errorText, setErrorText] = useState('')
-    const userFoodType: string = 'buffet'
+    const decodedJWT: any = jwtDecode(localStorage.getItem('token') || '')
+    const userFoodType = Object.values(decodedJWT)[3] || 'all'
+    const userTableNumber = decodedJWT.table
     useEffect(() => {
         const getFood = async () => {
             const res = await getFoodInfo(props.id)
@@ -115,27 +120,36 @@ const FoodForm: React.FC<idProps> = (props) => {
     const additionalHandler = (event: any) => {
         setAdditional(event.target.value)
     }
-    const submitHandler = (event: any) => {
+    const submitHandler = async (event: any) => {
         var reqBody = {
-            "topicName": [
-
+            'detail': [{
+                "topicName": '',
+                'option': [],
+            }
             ],
-            "choice": [
-            ],
-            "option": [
-            ],
-            "require": [
-            ],
-            "_id": "",
-            "price": 0
+            "price": 0,
+            'quantity': 0,
+            'foodID': '',
+            //'additionalInfo' : additional
         }
-        reqBody.topicName = topicName
-        reqBody.choice = choice
-        reqBody.option = foodOption
-        reqBody.require = require
-        reqBody._id = _id
+        reqBody.detail.pop()
+        topicName.map((element: string, index: number) => {
+            var choice = {
+                "topicName": '',
+                "option": [],
+            }
+            choice.topicName = element
+            choice.option = foodOption[index]
+            reqBody.detail.push(choice)
+        })
         reqBody.price = number * foodPrice
-        console.log(reqBody)
+        reqBody.quantity = number
+        if (props.id !== undefined) {
+            reqBody.foodID = props.id
+        }
+        const res = await addFoodToCart(userTableNumber, reqBody)
+        console.log(res)
+        navigate(`/menu/${userFoodType}`)
     }
     return (
         <div className="flex flex-col h-full">
@@ -154,57 +168,16 @@ const FoodForm: React.FC<idProps> = (props) => {
                         <label>{foodPrice}&nbsp;฿</label>
                     </div>
                 </div>
-                <div className="h-[15%] w-[100%] pl-[3%] pr-[4%] break-words overflow-y-scroll border-b-2">
-                    <label className="text-2xl">Details : </label>
-                    <p className="text-xl">{foodInfo.description}</p>
-                </div>
-                <form className="text-2xl w-[100%] h-[83%]" onSubmit={e => e.preventDefault()}>
-                    <div className="flex flex-col h-[70%] w-[100%] mt-[2%] pl-[3%] pr-[4%] overflow-y-scroll border-b-2 min-h-[200px]">
-                        {
-                            topicName.map((val: any, index: number) => {
-                                var indexUP = index
-                                if (val !== '') {
-                                    return (
-                                        <fieldset id={index.toString()} onChange={optionChangeHandler}>
-                                            <label>{val}</label>
-                                            {
-                                                option[index].map((val: any, index: number) => {
-                                                    if (require[indexUP] === "true") {
-                                                        return (
-                                                            <div className="ml-[10%] text-xl" >
-                                                                <input className='' id={index.toString()} type={choice[indexUP]} value={val} name={indexUP.toString()} required />
-                                                                <label className="pl-[2%]">{val}</label>
-                                                                <label className="pl-[5%] text-base text-hardYellow">{'+ ' + additionalPrice[indexUP][index] + ' ฿'}</label>
-                                                            </div>
-                                                        )
-                                                    }
-                                                    else if (require[indexUP] === 'false') {
-                                                        return (
-                                                            <div className="ml-[10%] text-xl" >
-                                                                <input className='' id={index.toString()} type={choice[indexUP]} value={val} name={indexUP.toString()} />
-                                                                <label className="pl-[2%]">{val}</label>
-                                                                <label className="pl-[5%] text-base text-hardYellow">{'+ ' + additionalPrice[indexUP][index] + ' ฿'}</label>
-                                                            </div>
-                                                        )
-                                                    }
-                                                })
-                                            }
-                                        </fieldset>
-                                    )
-                                }
-                                else {
-                                    return (
-                                        <div>
+                <div className="h-[70%] w-[100%]">
+                    <div className="flex flex-row w-full border-b-2 items-center justify-center">
+                        <div className="h-[100%] w-[15%] break-words text-center text-4xl">
 
-                                        </div>
-                                    )
-                                }
-                            })
-                        }
-                        <div>
-                            <label>Additional : </label>
-                            <textarea className="bg-gray-100 border border-black " onChange={additionalHandler}>
-                            </textarea>
+                        </div>
+                        <div className="h-[100%] w-[70%] break-words text-center text-2xl font-bold max-h-[38px]">
+                            <label>{foodInfo.foodName}</label>
+                        </div>
+                        <div className="flex h-[100%] w-[15%] break-words text-center text-xl justify-center items-center">
+                            <label>{foodPrice}&nbsp;฿</label>
                         </div>
                     </div>
                     <div className="flex flex-col h-[30%] w-[100%] mt-[2%]">
@@ -265,11 +238,53 @@ const FoodForm: React.FC<idProps> = (props) => {
                                 <button className="flex bg-headerRed h-[50%] w-[30%] text-center text-xl text-white justify-center items-center border-[2px] ml-[5%]" onClick={popupHandler}>cancel</button>
                             </div>
                         </div>
+                    </form>
+                        {openPopup &&
+                    <div className="flex h-screen z-10 bg-[#edededcc] absolute w-[100%] top-0 left-0 justify-center items-center ">
+                        <div className="flex flex-col bg-white h-[40%] w-[80%] border-[2px] border-black max-w-[350px]">
+                            <div className="flex flex-row h-[30%] w-[100%] items-center">
+                                <img src={foodPic} alt="" className="h-[90%] w-[50%] ml-[3%]" />
+                                <label className="text-xl ml-[2%] text-right">{'ชื่อ : ' + foodInfo.foodName}<br></br>
+                                    <label className="text-sm text-headerRed">{'x' + number}</label>
+                                </label>
+                            </div>
+                            <div className="flex flex-col h-[30%] overflow-y-scroll pl-[2%]">
+                                {
+                                    foodOption.map((val: any) => {
+                                        return (
+                                            <div>
+                                                <label htmlFor="">
+                                                    {
+                                                        val.map((element: any) => {
+                                                            return element + ','
+                                                        })
+                                                    }
+                                                </label>
+
+                                            </div>
+
+                                        )
+                                    })
+                                }
+                                Additional :&nbsp;
+                                {
+                                    additional
+                                }
+                            </div>
+                            <div className="flex h-[20%] w-[100%] justify-center items-center text-center text-xl text-right">
+                                <label htmlFor="">Price :&nbsp;{foodPrice * number}</label>
+                            </div>
+                            <div className="flex h-[20%] w-[100%] justify-center items-center text-center">
+                                <button className="flex bg-headerRed h-[50%] w-[30%] text-center text-xl text-white justify-center items-center border-[2px]" onClick={submitHandler}>confirm</button>
+                                <button className="flex bg-headerRed h-[50%] w-[30%] text-center text-xl text-white justify-center items-center border-[2px] ml-[5%]" onClick={popupHandler}>cancel</button>
+                            </div>
+                        </div>
                     </div>
 
                 }
             </div>
         </div>
+        </div >
 
     )
 }

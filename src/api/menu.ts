@@ -40,3 +40,29 @@ export const alacarteMenu = async () => {
     console.error(error);
   }
 };
+
+export const addMenu = async () => {
+  try {
+    const result = await api(`${apiURL}addMenu`, {
+      headers: {},
+      data: {foodName:"",type:[],description:"",Image:"",foodType:"",detail:""},
+      method: "POST",
+    });
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const MenuType = async () => {
+  try {
+    const result = await api(`${apiURL}getFoodType`, {
+      headers: {},
+      data: {},
+      method: "GET",
+    });
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
