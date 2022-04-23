@@ -29,10 +29,10 @@ const MenuComponent: React.FC<Menu> = (props) => {
         </div>
         <div className="h-full w-[60%] text-center">
           <div className="flex flex-col">
-            <div className="flex w-full h-[56px] items-center justify-center mt-[2%]">
+            <div className="flex w-full h-[80%] items-center justify-center pt-[2%]">
               <p className="text-xl h-full w-full">{name}</p>
             </div>
-            <div className="w-full h-auto text-right pr-[3%]">
+            <div className="w-full h-[20%] text-right pr-[3%] pb-[7%]">
               <p className="text-xl">{price + '฿'}</p>
             </div>
           </div>

@@ -44,7 +44,7 @@ const HomeTest: React.FC = () => {
     const getData = async () => {
       const res = await home();
       const decoded: Object = jwtDecode(res?.data);
-      //console.log(decoded)
+      console.log(decoded)
       setUserData(Object.values(decoded)[1]);
       const menu = await allMenu();
       setMenuPic(`${imageUrl}${menu?.data[4].image}`);
