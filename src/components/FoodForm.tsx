@@ -1,4 +1,6 @@
+import jwtDecode from "jwt-decode";
 import { MouseEventHandler, useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom";
 import { getFoodInfo } from "../api/food"
 import config from "../config.json";
 interface idProps{
@@ -22,6 +24,7 @@ const FoodForm : React.FC<idProps> = (props) =>{
             }
         ]
     }
+    const navigate = useNavigate()
     const [foodInfo,setFoodInfo] = useState<any>(obj)
     const [foodDetail,setFoodDetail] = useState<any>(obj.detail[0])
     const [foodPic,setFoodPic] = useState('')
@@ -31,7 +34,8 @@ const FoodForm : React.FC<idProps> = (props) =>{
     const [number,setNumber] = useState(0)
     const [additional,setAdditional] = useState('')
     const [errorText,setErrorText] = useState('')
-    const userFoodType:string = 'buffet'
+    const decodedJWT:Object = jwtDecode(localStorage.getItem('token') || '')
+    const userFoodType:string = Object.values(decodedJWT)[3]
     useEffect(() => {
         const getFood = async () => {
             const res = await getFoodInfo(props.id)
@@ -136,6 +140,7 @@ const FoodForm : React.FC<idProps> = (props) =>{
         reqBody._id = _id
         reqBody.price = number * foodPrice
         console.log(reqBody)
+        //navigate(`/menu/${userFoodType}`)
     }
     return(
             <div className="flex flex-col h-full">
@@ -144,13 +149,13 @@ const FoodForm : React.FC<idProps> = (props) =>{
                 </div>
                 <div className="h-[70%] w-[100%]">
                     <div className="flex flex-row w-full border-b-2 items-center justify-center">
-                        <div className="h-[100%] w-[22.5%] break-words text-center text-4xl">
+                        <div className="h-[100%] w-[15%] break-words text-center text-4xl">
                             
                         </div>
-                        <div className="h-[100%] w-[55%] break-words text-center text-3xl font-bold">
+                        <div className="h-[100%] w-[70%] break-words text-center text-2xl font-bold max-h-[38px]">
                             <label>{foodInfo.foodName}</label>
                         </div>
-                        <div className="flex h-[100%] w-[22.5%] break-words text-center text-2xl justify-center items-center">
+                        <div className="flex h-[100%] w-[15%] break-words text-center text-xl justify-center items-center">
                             <label>{foodPrice}&nbsp;฿</label>
                         </div>
                     </div>
@@ -226,8 +231,8 @@ const FoodForm : React.FC<idProps> = (props) =>{
                         </div>
                     </form>
                         {openPopup &&
-                            <div className="flex h-screen z-10 bg-[#edededcc] absolute w-[100%] top-0 left-0 justify-center items-center">
-                                <div className="flex flex-col bg-white h-[40%] w-[80%] border-[2px] border-black">
+                            <div className="flex h-screen z-10 bg-[#edededcc] absolute w-[100%] top-0 left-0 justify-center items-center ">
+                                <div className="flex flex-col bg-white h-[40%] w-[80%] border-[2px] border-black max-w-[350px]">
                                     <div className="flex flex-row h-[30%] w-[100%] items-center">
                                         <img src={foodPic} alt="" className="h-[90%] w-[50%] ml-[3%]"/>
                                         <label className="text-xl ml-[2%] text-right">{'ชื่อ : '+foodInfo.foodName}<br></br>
