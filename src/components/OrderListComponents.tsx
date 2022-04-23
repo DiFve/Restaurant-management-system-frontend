@@ -7,21 +7,18 @@ interface listOrder {
 }
 
 const checkStatus = (status: string) => {
-    if (status == "Complete") {
+    if (status == "Working") {
         return <div className="w-[10%] h-full  bg-green-600 border-r-[2px] border-black"> </div>
     }
-    else if (status == "Cancelled") {
-        return <div className="w-[10%] h-full  bg-red-600 border-r-[2px] border-black"> </div>
-    }
     else {
-        return <div className="w-[10%] h-full  bg-yellow-300 border-r-[2px] border-black"> </div>
+        return <div className="w-[10%] h-full  bg-gray-300 border-r-[2px] border-black"> </div>
     }
 
 }
 
 const OrderListComponents: React.FC<listOrder> = (props) => {
     const { order, timeOrder, status } = props
-    const navigate = useNavigate();
+    var navigate = useNavigate();
     const onClickOrder = () => {
         navigate("/cart");
     };

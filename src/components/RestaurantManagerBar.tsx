@@ -1,7 +1,7 @@
 import React from 'react'
 
 interface HeaderName {
-    name: string;
+    name: string | undefined | number
 }
 const HeaderBar: React.FC<HeaderName> = (props) => {
 

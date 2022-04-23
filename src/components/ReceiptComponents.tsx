@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 
 const ReceiptComponents: React.FC = () => {
     var totalPrice = 1000
-    const menuType = "buffet"
+    const menuType = "alacarte"
 
     const data = [
         { orderName: "ผัดกระเพรากุ้งรุ้งๆ", detail: [""], price: 1000 },
@@ -28,7 +28,7 @@ const ReceiptComponents: React.FC = () => {
                         })}
                         <div className="h-[15%] flex justify-between pr-[5%] mx-[3%] ">
                             <div className="w-[50%] flex flex-col justify-center items-center">
-                                <label className="text-5xl text-red-600"> Fail </label>
+                                <label className="text-5xl text-red-600">  </label>
                             </div>
                             <div className="w-[50%] flex flex-col items-end">
                                 <label className="text-2xl items-center">ยอดรวม</label>

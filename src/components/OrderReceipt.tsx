@@ -1,16 +1,26 @@
+import { useEffect, useState } from 'react'
+
 interface Receipt {
   orderName: string;
   detail: Array<string>;
   price: Number;
   quantity: Number | undefined;
   menuType: string | undefined;
+
 }
 const OrderReceipt: React.FC<Receipt> = (props) => {
   //console.log({ props })
   const { orderName, detail, price, quantity, menuType } = props
+
+  //console.log(detail)
   var statusOrder = true
   var editButton = ""
-  if (statusOrder) { editButton = "แก้ไข" }
+  var deleteButton = ""
+  //console.log(detail)
+  if (statusOrder) {
+    editButton = "แก้ไข"
+    deleteButton = "ลบ"
+  }
 
   if (menuType == "alacarte") {
     if (quantity != 0 && quantity != undefined) {
@@ -32,8 +42,9 @@ const OrderReceipt: React.FC<Receipt> = (props) => {
                 })
               }</label>
             </div>
-            <button className="">
+            <button className="flex flex-row">
               <label className="text-base text-red-600"> {editButton} </label>
+              <label className="text-base ml-[50%] text-red-600"> {deleteButton} </label>
             </button>
 
           </div>
@@ -59,8 +70,9 @@ const OrderReceipt: React.FC<Receipt> = (props) => {
         <div className="p-[4%] mt-[3%] flex justify-between ">
           <div className="w-[65%] ">
             <label className="text-xl">{orderName}</label>
-            <button className="flex flex-col">
+            <button className="flex flex-row">
               <label className="text-base text-red-600"> {editButton} </label>
+              <label className="text-base ml-[50%] text-red-600"> {deleteButton} </label>
             </button>
           </div>
           <div className="w-[20%] flex flex-col items-end">

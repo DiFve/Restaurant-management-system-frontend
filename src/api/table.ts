@@ -1,9 +1,9 @@
 import api from "./apiClient";
 import config from "../config.json";
 
-export const getFoodInfo = async (id: string | undefined) => {
+export const getTableInfo = async () => {
     try {
-        const res = await api(`${config.apiURL}getMenuByID/${id}`, {
+        const res = await api(`${config.apiURL}seeTable`, {
             headers: {},
             data: {},
             method: "GET",
@@ -12,21 +12,22 @@ export const getFoodInfo = async (id: string | undefined) => {
         return res
     }
     catch (error) {
-        console.log('get food detail error')
+        console.log('get table detail error')
     }
 }
 
-export const getFoodByID = async (id: string | undefined) => {
+export const getTableByID = async (id: string | undefined) => {
     try {
-        const res = await api(`${config.apiURL}getFoodById/${id}`, {
+        const res = await api(`${config.apiURL}seeTableByID/${id}`, {
             headers: {},
             data: {},
             method: "GET",
         });
-        console.log(res)
+        //console.log(res)
         return res
     }
     catch (error) {
-        console.log('get food detail error')
+        console.log('get see tableByID detail error')
     }
 }
+

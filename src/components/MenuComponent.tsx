@@ -3,7 +3,7 @@ import plus_icon from "./img/plus_icon.png";
 import config from "../config.json";
 import { useNavigate } from "react-router-dom";
 interface Menu {
-  id : string;
+  id: string;
   name: string;
   pic: string;
   price: number;
@@ -14,7 +14,7 @@ const MenuComponent: React.FC<Menu> = (props) => {
   var pic = props.pic;
   var price = props.price;
   var navigate = useNavigate()
-  const gotoFood = () =>{
+  const gotoFood = () => {
     navigate(`/food/${id}`)
   }
   return (
@@ -22,7 +22,7 @@ const MenuComponent: React.FC<Menu> = (props) => {
       <div className="flex flex-row w-full">
         <div className="flex h-full max-w-[120px] w-[100%] shrink justify-center items-center">
           <img
-            src={config.imageURL+pic}
+            src={config.imageURL + pic}
             alt=""
             className="h-[90%] w-[90%] border border-black bg-white"
           />
@@ -40,9 +40,9 @@ const MenuComponent: React.FC<Menu> = (props) => {
       </div>
       <div className="bg-headerRed h-full w-[40px] shrink-0">
         <button className="h-full w-full" onClick={gotoFood}>
-            <div className="flex justify-center items-center h-full w-full">
-                <img src={plus_icon} alt="" className="w-[70%] bg-white rounded-[50%]" />
-            </div>
+          <div className="flex justify-center items-center h-full w-full">
+            <img src={plus_icon} alt="" className="w-[70%] bg-white rounded-[50%]" />
+          </div>
         </button>
       </div>
     </div>

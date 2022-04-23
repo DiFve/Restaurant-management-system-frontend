@@ -2,7 +2,7 @@ import React from 'react'
 import QueueOrder from './QueueOrder'
 
 
-const QueueLayout =()=>{
+const QueueLayout: React.FC =()=>{
 
     const example = [
         {foodname:"ไก่ทอด",amount:1,tablenumber:5},
