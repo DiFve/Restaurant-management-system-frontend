@@ -25,6 +25,16 @@ const ReceiptComponents: React.FC<idProps> = (props) => {
         navigateBack("/orderlist");
     };
 
+    const checkTotal = () => {
+        if (menuType == "a-la-carte") {
+            return (
+                <div className="w-[50%] flex flex-col items-end">
+                    <label className="text-2xl items-center">ยอดรวม</label>
+                    <label className="text-2xl items-center">{totalPrice} -</label>
+                </div>)
+        }
+
+    }
 
 
     // const data = [
@@ -51,10 +61,7 @@ const ReceiptComponents: React.FC<idProps> = (props) => {
                             <div className="w-[50%] flex flex-col justify-center items-center">
                                 <label className="text-5xl text-red-600">  </label>
                             </div>
-                            <div className="w-[50%] flex flex-col items-end">
-                                <label className="text-2xl items-center">ยอดรวม</label>
-                                <label className="text-2xl items-center">{totalPrice} -</label>
-                            </div>
+                            {checkTotal}
                         </div>
 
                     </div>

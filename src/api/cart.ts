@@ -18,14 +18,14 @@ export const getItemInCart = async (tableNumber: string | undefined) => {
     }
 }
 
-export const deleteItemInCart = async (tableNumber: string | undefined) => {
+export const deleteItemInCart = async (tableNumber: string | undefined, _id: string | undefined) => {
     try {
         const res = await api(`${config.apiURL}deleteItemInCart/${tableNumber}`, {
             headers: {},
-            data: { tableNumber },
+            data: { _id },
             method: "delete",
         });
-        //console.log(res)
+        console.log(res)
         return res
     }
     catch (error) {

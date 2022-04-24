@@ -30,13 +30,9 @@ const OrderListComponents: React.FC<listOrder> = (props) => {
         goReceipt(`/receipt/${id}`)
     }
 
-    var checkGotoOrder = false
-    if (status == "cooking") { checkGotoOrder = true }
-
-
     return (
 
-        <button onClick={checkGotoOrder ? onClickOrder : onClickReceipt} className="flex flex-row h-[15%] w-[95%] mb-[10%] mt-[3%] ml-[2%] border-[2px] border-black">
+        <button onClick={onClickReceipt} className="flex flex-row h-[15%] w-[95%] mb-[10%] mt-[3%] ml-[2%] border-[2px] border-black">
             {checkStatus(status)}
             <div className="flex flex-col w-[60%] h-full">
                 <div className="w-full flex justify-center ]">

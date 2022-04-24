@@ -8,16 +8,18 @@ import OrderListComponents from "../components/OrderListComponents"
 const OrderPage: React.FC = () => {
 
     const decodedJWT: any = jwtDecode(localStorage.getItem('token') || '')
+    const typeFood = decodedJWT.foodType
     const userTableNumber = decodedJWT.table
-    //console.log(decodedJWT.foodType)
+    //console.log(decodedJWT)
     const [getCartOreder, setCartOreder] = useState<any>([])
     const goBackMenu = useNavigate();
+
     const onClickBack = () => {
-        goBackMenu(`/menu/${userTableNumber}`);
+        goBackMenu(`/menu/${typeFood}`);
     };
     useEffect(() => {
         const getCOrder = async () => {
-            const res = await getCartOrder((3).toString())
+            const res = await getCartOrder((userTableNumber).toString())
             setCartOreder(res?.data.order)
             //console.log(res?.data.order)
             //console.log(res?.data.order)
@@ -30,7 +32,7 @@ const OrderPage: React.FC = () => {
 
     return (
         <div className="flex flex-col h-screen ">
-            <HeaderBar name='Cart' />
+            <HeaderBar name='Order' />
             <div className="flex h-screen w-full items-center overflow-y-hidden justify-center bg-white">
                 <div className="h-[95%] w-[95%] bg-white" >
                     <div className="h-[90%]">

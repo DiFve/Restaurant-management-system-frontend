@@ -32,9 +32,7 @@ const CartPageComponents: React.FC = () => {
             ]
     }]
 
-    //const menuType = "buffet"
-    const menuType = "alacarte"
-    var totalPrice = 1000
+    var totalPrice = 0
 
     const navigate = useNavigate();
     const onClickBack = () => {
@@ -42,12 +40,31 @@ const CartPageComponents: React.FC = () => {
     };
 
     const [getAllItem, setAllItem] = useState<any>(objAllItemMenu)
-
     const decodedJWT: any = jwtDecode(localStorage.getItem('token') || '')
     const userTableNumber = decodedJWT.table
+    const menuType = decodedJWT.foodType
+
+
+    useEffect(() => {
+        const getItemCart = async () => {
+            //console.log(getTableID[0].tableNumber)
+            const res = await getItemInCart((userTableNumber).toString())
+            setAllItem(res?.data.detail)
+            console.log(res?.data.detail)
+            //console.log(res?.data.detail[0].detail)
+        }
+        getItemCart()
+
+    }, []);
+
+    getAllItem.map((priceMenu: any) => {
+        totalPrice = totalPrice + priceMenu.price
+    })
+    console.log(totalPrice)
+    //console.log(userTableNumber)
 
     const totolCheck = () => {
-        if (totalPrice >= 0) {
+        if (totalPrice > 0) {
             return (
                 <div className="h-[15%] flex flex-col items-end pr-[5%] mx-[3%] ">
                     <label className="text-2xl items-center">ยอดรวม</label>
@@ -58,22 +75,12 @@ const CartPageComponents: React.FC = () => {
         }
     }
     const confirm = async () => {
-        const res = await confirmItemInCart((3).toString())
+        const res = await confirmItemInCart((userTableNumber).toString())
     }
 
-    useEffect(() => {
-        const getItemCart = async () => {
-            //console.log(getTableID[0].tableNumber)
-            const res = await getItemInCart((3).toString())
-            setAllItem(res?.data.detail)
-            console.log(res?.data.detail)
-            //console.log(res?.data.detail[0].detail)
-        }
-        getItemCart()
 
-    }, []);
     //console.log(getAllItem)
-
+    console.log(getAllItem)
     if (getAllItem != 0) {
         return (
             <div className="flex h-screen w-full items-center overflow-y-hidden justify-center bg-white">
@@ -82,7 +89,15 @@ const CartPageComponents: React.FC = () => {
                         <div className="w-[93.5%] h-[95%] mx-[3%] bg-lightYellow overflow-y-scroll">
                             {getAllItem.map((element: any) => {
                                 return (
-                                    <OrderReceipt orderName={element.foodName} detail={element.detail[0].option} price={element.price} quantity={element.quantity} menuType={menuType} />
+                                    //<div></div>
+                                    <OrderReceipt
+                                        orderName={element.foodName}
+                                        detail={element.detail[0].option}
+                                        price={element.price} quantity={element.quantity}
+                                        menuType={menuType}
+                                        tableNumber={userTableNumber}
+                                        foodID={element._id}
+                                    />
                                     //<OrderReceipt orderName={element.orderName} detail={element.detail} price={element.price} quantity={element.quantity} menuType={menuType} />
                                 )
                             })}
