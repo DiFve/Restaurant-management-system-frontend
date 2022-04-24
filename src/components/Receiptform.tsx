@@ -1,3 +1,4 @@
+import jwtDecode from 'jwt-decode';
 import { useEffect, useState } from 'react'
 import { getCartOrder } from '../api/cart';
 
@@ -13,6 +14,20 @@ const Receiptform: React.FC<Receipt> = (props) => {
   //console.log({ props })
   const { orderName, detail, price, quantity, menuType } = props
 
+  // const [getCartOreder, setCartOreder] = useState<any>([])
+  // const decodedJWT: any = jwtDecode(localStorage.getItem('token') || '')
+  // const typeFood = decodedJWT.foodType
+  // const userTableNumber = decodedJWT.table
+  // useEffect(() => {
+  //   const getCOrder = async () => {
+  //     const res = await getCartOrder((userTableNumber).toString())
+  //     setCartOreder(res?.data.order)
+  //     //console.log(res?.data.order)
+  //     //console.log(res?.data.order)
+  //   }
+  //   getCOrder()
+
+  // }, []);
 
 
   if (menuType == "alacarte") {

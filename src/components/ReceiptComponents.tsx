@@ -7,14 +7,13 @@ import jwtDecode from "jwt-decode"
 interface idProps {
     id: string | undefined
     detail: Array<any>
+    total: number
 }
 
 const ReceiptComponents: React.FC<idProps> = (props) => {
     var id = props.id
     var detail = props.detail
-    console.log(detail)
-
-    var totalPrice = 1000
+    var total = props.total
 
     const decodedJWT: any = jwtDecode(localStorage.getItem('token') || '')
     const userTableNumber = decodedJWT.table
@@ -24,46 +23,31 @@ const ReceiptComponents: React.FC<idProps> = (props) => {
     const onClickBack = () => {
         navigateBack("/orderlist");
     };
-
+    console.log("menuType")
+    console.log(menuType)
     const checkTotal = () => {
-        if (menuType == "a-la-carte") {
+        if (menuType == "a-la-carte") //a-la-carte
+        {
             return (
-                <div className="w-[50%] flex flex-col items-end">
-                    <label className="text-2xl items-center">ยอดรวม</label>
-                    <label className="text-2xl items-center">{totalPrice} -</label>
-                </div>)
+                <div className="flex flex-col items-end mr-[10%] my-[10%] max-my-[60px]">
+                    <label className="text-3xl items-center">ยอดรวม</label>
+                    <label className="text-3xl items-center">{total} -</label>
+                </div>
+            )
         }
 
     }
-
-
-    // const data = [
-    //     { orderName: "ผัดกระเพรากุ้งรุ้งๆ", detail: [""], price: 1000 },
-    //     { orderName: "ข้าวผัดกุ้งมุ่งใส่กระเทียม", detail: ["พิเศษ", "ใส่ไข่", "ใส่ตูด"], price: 100, quantity: 2 },
-    //     { orderName: "ผัดกระเพรากุ้ง", detail: ["พิเศษ"], price: 250, quantity: 2 },
-    //     { orderName: "ผัดกระเพรากุ้งไม่ใส่ใบกระเพราว้าวๆวุ้วหุ้วว", detail: ["พิเศษ"], price: 10000, quantity: 1 },
-    //     { orderName: "ผัดกระเพรากุ้งไม่ใส่ใบกระเพรา", detail: ["พิเศษจ้า"], price: 9999, quantity: 2 },
-    //     { orderName: "ผัดกระเพรากุ้งไม่ใส่ใบกระเพรา", detail: ["พิเศษงุงิ"], price: -200, quantity: 9 },
-    //     { orderName: "ผัดกระเพรากุ้งไม่ใส่ใบกระเพรา", detail: ["พิเศษ", "ใส่ไข่", "ใส่ตูด"], price: 1000, quantity: 5 },
-    //     { orderName: "ผัดกระเพรากุ้ง", detail: [""], price: 0, quantity: 0 },
-    // ]
 
 
     return (
         <div className="flex h-screen w-full items-center overflow-y-hidden justify-center bg-white">
             <div className="h-[95%] w-[95%] bg-white" >
                 <div className="h-[90%] ">
-                    <div className="w-[93.5%] h-[95%] mx-[3%] bg-gray-100 overflow-y-scroll border-[2px] border-black">
+                    <div className="w-[93.5%] h-[95%] mx-[3%] bg-gray-200 overflow-y-scroll border-[2px] border-black">
                         {detail.map((element) => {
                             return <Receiptform orderName={element.foodName} detail={element.detail} price={element.price} quantity={element.quantity} menuType={menuType} />
                         })}
-                        <div className="h-[15%] flex justify-between pr-[5%] mx-[3%] ">
-                            <div className="w-[50%] flex flex-col justify-center items-center">
-                                <label className="text-5xl text-red-600">  </label>
-                            </div>
-                            {checkTotal}
-                        </div>
-
+                        {checkTotal()}
                     </div>
 
                 </div>
