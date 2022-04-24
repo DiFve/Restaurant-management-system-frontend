@@ -33,7 +33,7 @@ const HomeTest: React.FC = () => {
 
 
   const onClickQRCodeHandle = async () => {
-    const res = await makeQR();
+    const res = await makeQR(69, "buffet");
     console.log(res?.data.qrImage);
 
     setQRCodeImage(res?.data.qrImage);
@@ -51,7 +51,7 @@ const HomeTest: React.FC = () => {
     };
     getData();
 
-    setQRCodeImage("/images/qrcode/table69.png")
+    setQRCodeImage("/images/qrcode/table69.png");
   }, []);
   //const params = useParams();
   return (

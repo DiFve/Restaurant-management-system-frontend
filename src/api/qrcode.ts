@@ -3,11 +3,11 @@ import config from "../config.json";
 
 const homeAPI = config.apiURL + "makeTableForCustomer";
 
-export const makeQR = async () => {
+export const makeQR = async (tableNumber:number, tableType:string) => {
   try {
     const result = await api(`${homeAPI}`, {
       headers: {},
-      data: { tableNumber: 69, tableType: "buffet", role: "customer" },
+      data: { tableNumber:tableNumber, tableType: tableType, role: "customer" },
       method: "POST",
     });
 

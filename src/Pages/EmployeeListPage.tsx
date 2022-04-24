@@ -2,6 +2,7 @@ import HeaderBar from "../components/RestaurantManagerBar";
 import Employee from "../components/employeeComponent";
 import addIcon from "../components/img/add_icon.jpg";
 import loginIcon from "../components/img/login_icon.png";
+import { register } from "../services/authServices";
 import React, { useState } from "react";
 const EmployeeListPage: React.FC = () => {
   const [showPopUp, setShowPopUp] = useState(false);
@@ -115,6 +116,18 @@ const EmployeeListPage: React.FC = () => {
     setConfirmPassword("")
   }
 
+  const onClickConfirmAddEmployee = async(event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    await register(name,surName,nickName,userName,password)
+    setShowPopUp(false)
+    setNickName("")
+    setName("")
+    setSurName("")
+    setUserName("")
+    setPassword("")
+    setConfirmPassword("")
+  }
+
   return (
     <div>
       <HeaderBar name="Employee List"></HeaderBar>
@@ -139,7 +152,7 @@ const EmployeeListPage: React.FC = () => {
         })}
       </div>
       {showPopUp ? (
-        <form>
+        <form onSubmit={onClickConfirmAddEmployee}>
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50">
             <div className="relative w-auto my-6 mx-auto max-w-3xl">
               {/*content*/}
@@ -194,13 +207,13 @@ const EmployeeListPage: React.FC = () => {
                         />
                       </div>
                       <label className="inline-block mb-2 text-base text-gray-700">
-                        Username
+                        Email
                       </label>
                       <input
                         type="email"
                         className="block w-full px-3 py-1.5 text-sm font-normal text-gray-700 bg-white mb-5
                                   border border-solid border-gray-300 rounded focus:bg-white focus:border-blue-600 focus:outline-none"
-                        placeholder="Username"
+                        placeholder="Email"
                         onChange={inputUserName}
                         value={userName}
                       />
@@ -243,7 +256,7 @@ const EmployeeListPage: React.FC = () => {
                   </button>
                   <button
                     className="bg-rose-500 text-white active:bg-rose-600 font-semibold text-sm px-6 py-3 rounded shadow hover:shadow-lg mr-1 mb-1 ease-linear transition-all duration-150"
-                    type="button"
+                    type="submit"
                   >
                     Confirm
                   </button>
