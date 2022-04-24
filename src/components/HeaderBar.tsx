@@ -7,14 +7,24 @@ import { useNavigate } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import { useState } from "react";
 import EmployeeCall from "./EmployeeCall";
+import api from "../api/apiClient";
+import { callEmployee, cancelEmployee } from "../api/table";
 interface HeaderName {
   name: string 
 }
 const HeaderBar: React.FC<HeaderName> = (props) => {
   const navigate = useNavigate()
   const [waitingPage,setWaitingPage] = useState<boolean>(false)
-  const bellClickHandler=(event:any)=>{
+  const decodedJWT:any = jwtDecode(localStorage.getItem('token') || '')
+  const userTableNumber = decodedJWT.table
+  const bellClickHandler= async (event:any)=>{
     setWaitingPage(!waitingPage)
+    if(waitingPage!=true){
+      const res = callEmployee(userTableNumber)
+    }
+    else{
+      const res = cancelEmployee(userTableNumber)
+    }
   }
   const cartClickHandler=(event:any)=>{
     var idvar = event.target.id
@@ -26,7 +36,7 @@ const HeaderBar: React.FC<HeaderName> = (props) => {
     navigate(`/menu/${userFoodType}`)
   }
   return (
-    <div className="flex flex-row bg-headerRed h-[92px] w-full">
+    <div className="flex flex-row bg-headerRed h-[92px] w-full min-h-[53px]">
       <div className="flex w-[25%] h-full justify-center items-center">
         <img
           src={home_icon}

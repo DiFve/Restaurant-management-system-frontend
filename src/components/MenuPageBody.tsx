@@ -88,10 +88,10 @@ const MenuPageBody: React.FC<menuType> = (props) => {
                 <div className='flex flex-row w-[90%] h-full'>
                     <div className="flex basis-3/4 h-full items-center">
                         <img src={search_icon} alt="search_icon" className='h-[65%]' />
-                        <input type="text" className="h-[70%] w-[70%] indent-2.5 focus:outline-none" placeholder='Search...' onChange={searchHandler} />
+                        <input type="text" className="h-[70%] w-[70%] indent-2.5 focus:outline-none" placeholder='ค้นหา...' onChange={searchHandler} />
                     </div>
                     <div className="flex basis-1/4 justify-center items-center">
-                        <select className='h-[60%] w-[80%]' onChange={optionHandler} >
+                        <select className='h-[60%] w-[80%] rounded-md' onChange={optionHandler} >
                             {
                                 options.map((element) => {
                                     return (
@@ -115,7 +115,7 @@ const MenuPageBody: React.FC<menuType> = (props) => {
                                 thePrice = element['price']
                             }
                             return (
-                                <MenuComponent id={element['_id']} name={element['foodName']} pic={element['image']} price={thePrice} />
+                                <MenuComponent id={element['_id']} name={element['foodName']} pic={element['image']} price={thePrice} status={element['status']} />
                             )
                         })}
                     </div>

@@ -33,11 +33,11 @@ const HomeTest: React.FC = () => {
 
 
   const onClickQRCodeHandle = async () => {
-    const res = await makeQR(69, "buffet");
-    console.log(res?.data.qrImage);
+    // const res = await makeQR(69, "buffet");
+    // console.log(res?.data.qrImage);
 
-    setQRCodeImage(res?.data.qrImage);
-    console.log(config.imageURL + QRCodeImage);
+    // setQRCodeImage(res?.data.qrImage);
+    // console.log(config.imageURL + QRCodeImage);
   };
 
   useEffect(() => {

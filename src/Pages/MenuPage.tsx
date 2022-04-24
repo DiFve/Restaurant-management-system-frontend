@@ -8,7 +8,7 @@ const MenuPage: React.FC = () => {
     const { type } = useParams()
     return (
         <div className="flex flex-col h-screen">
-            <HeaderBar name='Menu' />
+            <HeaderBar name='เมนู' />
             <MenuPageBody menuType={type} />
         </div>
     )

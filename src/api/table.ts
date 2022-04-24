@@ -29,6 +29,37 @@ export const getTableByID = async (id: string | undefined) => {
   }
 };
 
+export const callEmployee = async(tableNumber:number)=>{
+    try{
+        console.log(tableNumber)
+        const res = await api(`${config.apiURL}pushEmployeeCall`,{
+            headers:{},
+            data:{tableNumber:tableNumber},
+            method:"PUT",
+        })
+        console.log(res)
+        return res
+    }
+    catch(error){
+        console.log('call employee fail');
+    }
+}
+
+export const cancelEmployee = async(tableNumber:number)=>{
+    try{
+        console.log(tableNumber)
+        const res = await api(`${config.apiURL}cancelEmployeeCall`,{
+            headers:{},
+            data:{tableNumber:tableNumber},
+            method:"PUT",
+        })
+        console.log(res)
+        return res
+    }
+    catch(error){
+        console.log('call employee fail');
+    }
+}
 export const getTableOrder = async (id: string | undefined) => {
   try {
     const res = await api(`${config.apiURL}seeOrderTable/${id}`, {
