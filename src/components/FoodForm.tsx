@@ -35,8 +35,8 @@ const FoodForm : React.FC<idProps> = (props) =>{
     const [additional,setAdditional] = useState('')
     const [errorText,setErrorText] = useState('')
     const decodedJWT:any = jwtDecode(localStorage.getItem('token') || '')
-    const userFoodType = Object.values(decodedJWT)[3] || 'all'
     const userTableNumber = decodedJWT.table
+    const userFoodType = Object.values(decodedJWT)[3] || 'all'
     useEffect(() => {
         const getFood = async () => {
             const res = await getFoodInfo(props.id)
@@ -130,6 +130,7 @@ const FoodForm : React.FC<idProps> = (props) =>{
             "price" : 0,
             'quantity': 0,
             'foodID': '',
+            'foodName': foodInfo.foodName
             //'additionalInfo' : additional
         }
         reqBody.detail.pop()
@@ -271,7 +272,7 @@ const FoodForm : React.FC<idProps> = (props) =>{
                                             additional
                                         }
                                     </div>
-                                    <div  className="flex h-[20%] w-[100%] justify-center items-center text-center text-xl text-right">
+                                    <div  className="flex h-[20%] w-[100%] justify-center items-center text-xl text-right">
                                         <label htmlFor="">Price :&nbsp;{foodPrice * number}</label>
                                     </div>
                                     <div  className="flex h-[20%] w-[100%] justify-center items-center text-center">

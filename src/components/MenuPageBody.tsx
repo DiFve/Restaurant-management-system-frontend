@@ -79,26 +79,28 @@ const MenuPageBody : React.FC<menuType> = (props) => {
     },[filter,search])
     return(
         <div className="flex flex-col w-full h-full">
-            <div className="flex flex-row h-[55px] w-full mt-[3%]">
-                <div className="flex basis-3/4 h-full items-center justify-center">
-                    <img src={search_icon} alt="search_icon" className='h-[65%]'/>
-                    <input type="text" className="h-[70%] w-[70%] indent-2.5 focus:outline-none" placeholder='Search...' onChange={searchHandler}/>
-                </div>
-                <div className="flex basis-1/4 justify-center items-center">
-                    <select className='h-[60%] w-[80%]' onChange={optionHandler} >
-                        {
-                            options.map((element)=>{
-                                return (
-                                    <option value={element} key={element}> {element}</option>
-                                )
-                            })
-                        }
-                    </select>
+            <div className="flex flex-row h-[55px] w-full mt-[3%] bg-red-200 items-center justify-center">
+                <div className='flex flex-row w-[90%] h-full bg-blue-200'>
+                    <div className="flex basis-3/4 h-full items-center">
+                        <img src={search_icon} alt="search_icon" className='h-[65%]'/>
+                        <input type="text" className="h-[70%] w-[70%] indent-2.5 focus:outline-none" placeholder='Search...' onChange={searchHandler}/>
+                    </div>
+                    <div className="flex basis-1/4 justify-center items-center">
+                        <select className='h-[60%] w-[80%]' onChange={optionHandler} >
+                            {
+                                options.map((element)=>{
+                                    return (
+                                        <option value={element} key={element}> {element}</option>
+                                    )
+                                })
+                            }
+                        </select>
+                    </div>
                 </div>
             </div>
             <div className='flex h-[70%] w-[100%] justify-center items-center'>
                 <div className='flex flex-col bg-gray-100 h-[90%] w-[90%] items-center'>
-                    <div className='overflow-y-scroll w-full h-full border-[2px] border-black'>
+                    <div className='overflow-y-scroll w-full h-full border-[2px] border-black rounded-md'>
                         {filMenu.map((element:any)=>{
                             var thePrice
                             if(menuType=='buffet'){
@@ -115,7 +117,7 @@ const MenuPageBody : React.FC<menuType> = (props) => {
                 </div>
             </div>
             <div className='flex h-[16%] w-[100%] justify-center items-center'>
-                <div className='bg-headerRed h-[42px] w-[186px] text-center border-[2px] border-black'>
+                <div className='bg-headerRed h-[42px] w-[186px] text-center border-[2px] border-black rounded-md'>
                     <button className=''>
                         <label className='text-3xl text-white'> Your Cart </label>
                     </button>

@@ -5,18 +5,20 @@ import home_icon from "./img/home_icon.png";
 import config from "../config.json";
 import { useNavigate } from "react-router-dom";
 import jwtDecode from "jwt-decode";
+import { useState } from "react";
+import EmployeeCall from "./EmployeeCall";
 interface HeaderName {
   name: string 
 }
 const HeaderBar: React.FC<HeaderName> = (props) => {
   const navigate = useNavigate()
+  const [waitingPage,setWaitingPage] = useState<boolean>(false)
   const bellClickHandler=(event:any)=>{
-    var idvar = event.target.id
-    navigate('/call-staff')
+    setWaitingPage(!waitingPage)
   }
   const cartClickHandler=(event:any)=>{
     var idvar = event.target.id
-    navigate('/go-cart')
+    navigate('/cart')
   }
   const homeClickHandler = (event:any)=>{
     const decodedJWT:Object = jwtDecode(localStorage.getItem('token') || '')
@@ -29,7 +31,7 @@ const HeaderBar: React.FC<HeaderName> = (props) => {
         <img
           src={home_icon}
           alt="res_headbar_icon"
-          className="rounded-[70%] max-w-[92px] w-[40%] h-[50%]"
+          className="rounded-[70%] max-w-[46px] w-[40%] h-[50%]"
           onClick={homeClickHandler}
         />
       </div>
@@ -50,6 +52,11 @@ const HeaderBar: React.FC<HeaderName> = (props) => {
           </div>
         </div>
       </div>
+      {waitingPage &&
+      <div className="flex flex-col justify-center items-center h-screen z-10 bg-[#edededcc] absolute w-[100%] top-0 left-0">
+          <EmployeeCall/>
+          <button onClick={bellClickHandler} className="z-10 bg-headerRed absolute mt-[130%] w-[26%] h-[4%] text-2xl rounded-md border-2 border-black text-white">Cancel</button>
+      </div>}
     </div>
   );
 };
