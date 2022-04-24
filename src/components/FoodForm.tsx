@@ -169,7 +169,7 @@ const FoodForm: React.FC<idProps> = (props) => {
                     </div>
                 </div>
                 <div className="h-[15%] w-[100%] pl-[3%] pr-[4%] break-words overflow-y-scroll border-b-2">
-                    <label className="text-2xl">Details : </label>
+                    <label className="text-2xl">รายละเอียด : </label>
                     <p className="text-xl">{foodInfo.description}</p>
                 </div>
                 <form className="text-2xl w-[100%] h-[83%]" onSubmit={e => e.preventDefault()}>
@@ -216,7 +216,7 @@ const FoodForm: React.FC<idProps> = (props) => {
                             })
                         }
                         <div>
-                            <label>Additional : </label>
+                            <label>เพิ่มเติม : </label>
                             <textarea className="bg-gray-100 border border-black rounded-md pl-[2%] pt-[1%] text-xl" onChange={additionalHandler}>
                             </textarea>
                         </div>
