@@ -20,7 +20,7 @@ import ManagerMenuPage from "./Pages/ManagerMenuPage";
 import EmployeeListPage from "./Pages/EmployeeListPage";
 import AddMenuPage from "./Pages/AddMenuPage";
 import FoodPage from "./Pages/FoodPage";
-import EditPage from "./Pages/editMenuPage";
+import EditPage from "./Pages/EditMenuPage";
 import AuthPage from "./Pages/AuthPage";
 import CartPage from "./Pages/CartPage";
 import NewOrderPage from "./Pages/NewOrderPage";
