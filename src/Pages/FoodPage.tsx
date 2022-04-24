@@ -10,7 +10,7 @@ const FoodPage: React.FC = () => {
 
     return (
         <div className="flex flex-col h-screen w-full items-center justify-center">
-            <HeaderBar name="Food" />
+            <HeaderBar name="อาหาร" />
             <div className="flex flex-col items-center w-[90%] h-full mt-[20px] mb-[20px] border-black border-[2px] rounded-md">
                 <FoodForm id={id} />
             </div>
