@@ -9,6 +9,7 @@ import ReceiptComponents from "../components/ReceiptComponents"
 const OrderReceiptOld: React.FC = () => {
 
     var detail = [""]
+    var total = 0
     const { id } = useParams()
     const decodedJWT: any = jwtDecode(localStorage.getItem('token') || '')
     const userTableNumber = decodedJWT.table
@@ -33,9 +34,10 @@ const OrderReceiptOld: React.FC = () => {
         console.log(data._id)
         console.log("-------")
         if (data._id == id) {
-            console.log("check ID=ID")
+            console.log(data.totalPrice)
             console.log(data.detail)
             detail = (data.detail)
+            total = (data.totalPrice)
         }
 
     })
@@ -45,7 +47,7 @@ const OrderReceiptOld: React.FC = () => {
     return (
         <div className="flex flex-col h-screen">
             <HeaderBar name='ใบเสร็จ' />
-            <ReceiptComponents id={id} detail={detail} />
+            <ReceiptComponents id={id} detail={detail} total={total} />
 
         </div>
     )
