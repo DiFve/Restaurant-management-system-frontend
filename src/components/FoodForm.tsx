@@ -113,7 +113,7 @@ const FoodForm: React.FC<idProps> = (props) => {
             event.preventDefault()
         }
         else {
-            setErrorText('Please Select the amount')
+            setErrorText('โปรดเลือกจำนวนสินค้า')
         }
     }
     const additionalHandler = (event: any) => {
@@ -161,10 +161,10 @@ const FoodForm: React.FC<idProps> = (props) => {
                     <div className="h-[100%] w-[15%] break-words text-center text-4xl">
 
                     </div>
-                    <div className="h-[100%] w-[70%] break-words text-center text-2xl font-bold max-h-[38px]">
+                    <div className="h-[100%] w-[65%] break-words text-center text-2xl font-bold max-h-[38px]">
                         <label>{foodInfo.foodName}</label>
                     </div>
-                    <div className="flex h-[100%] w-[15%] break-words text-center text-xl justify-center items-center text-hardYellow">
+                    <div className="flex h-[100%] w-[20%] break-words text-left text-xl justify-center items-center text-hardYellow">
                         <label>{foodPrice}&nbsp;฿</label>
                     </div>
                 </div>
@@ -233,7 +233,7 @@ const FoodForm: React.FC<idProps> = (props) => {
                         </div>
                         <div className="flex flex-col h-[70%] w-[100%] justify-center items-center text-center">
                             <button className="flex bg-headerRed h-[75%] w-[50%] text-center text-3xl text-white justify-center items-center border-[2px] rounded-md border-black" onClick={popupHandler}>
-                                <label htmlFor=""> Add to Cart </label>
+                                <label htmlFor=""> เพิ่มในตะกร้า </label>
                             </button>
                             <label htmlFor="" className="text-headerRed text-sm">{errorText}</label>
                         </div>
@@ -266,17 +266,17 @@ const FoodForm: React.FC<idProps> = (props) => {
                                         )
                                     })
                                 }
-                                Additional :&nbsp;
+                                เพิ่มเติม :&nbsp;
                                 {
                                     additional
                                 }
                             </div>
                             <div className="flex h-[20%] w-[100%] justify-center items-center text-xl text-right">
-                                <label htmlFor="">Price :&nbsp;{foodPrice * number}</label>
+                                <label htmlFor="">ราคา :&nbsp;{foodPrice * number}</label>
                             </div>
                             <div className="flex h-[20%] w-[100%] justify-center items-center text-center">
-                                <button className="flex bg-headerRed h-[50%] w-[30%] text-center text-xl text-white justify-center items-center border-[2px] " onClick={popupHandler}>cancel</button>
-                                <button className="flex bg-headerRed h-[50%] w-[30%] text-center text-xl text-white justify-center items-center border-[2px] ml-[5%]" onClick={submitHandler}>confirm</button>
+                                <button className="flex bg-headerRed h-[50%] w-[30%] text-center text-xl text-white justify-center items-center border-[2px] " onClick={popupHandler}>ยกเลิก</button>
+                                <button className="flex bg-headerRed h-[50%] w-[30%] text-center text-xl text-white justify-center items-center border-[2px] ml-[5%]" onClick={submitHandler}>ยืนยัน</button>
                             </div>
                         </div>
                     </div>
