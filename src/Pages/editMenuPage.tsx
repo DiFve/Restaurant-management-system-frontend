@@ -4,7 +4,7 @@ import config from "../config.json";
 import HeaderBar from "../components/RestaurantManagerBar";
 import { useNavigate, useParams } from "react-router-dom";
 import { getFoodInfo } from "../api/food";
-import { deleteMenu,editMenu } from "../api/menu";
+import { deleteMenu, editMenu } from "../api/menu";
 
 const EditMenuPage: React.FC = () => {
   const { id } = useParams();
@@ -20,6 +20,7 @@ const EditMenuPage: React.FC = () => {
       additionPrice: 0,
     },
   ]);
+  ////
   const [foodType, SetfoodType] = useState([
     "อาหารประเภทข้าว",
     "อาหารประเภทเส้น",
@@ -250,11 +251,11 @@ const EditMenuPage: React.FC = () => {
     }
   };
 
-  const onClickDeleteConfirm = async () =>{
-    setshowDeletePopUp(false)
-    await deleteMenu(id)
+  const onClickDeleteConfirm = async () => {
+    setshowDeletePopUp(false);
+    await deleteMenu(id);
     navigate("/ManagerMenu");
-  }
+  };
 
   const onClickCancel = () => {
     navigate("/ManagerMenu");
