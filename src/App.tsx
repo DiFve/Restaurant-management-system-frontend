@@ -23,6 +23,7 @@ import FoodPage from "./Pages/FoodPage";
 import EditPage from "./Pages/EditMenuPage";
 import AuthPage from "./Pages/AuthPage";
 import CartPage from "./Pages/CartPage";
+import OrderReceiptOld from "./Pages/OrderReceiptOld";
 import NewOrderPage from "./Pages/NewOrderPage";
 function App() {
   return (
@@ -66,6 +67,26 @@ function App() {
             <ProtectedRoutes
               authenticationPath="/login"
               outlet={<CartPage />}
+              role="customer"
+            />
+          }
+        />
+        <Route
+          path="/orderlist"
+          element={
+            <ProtectedRoutes
+              authenticationPath="/login"
+              outlet={<OrderPage />}
+              role="customer"
+            />
+          }
+        />
+        <Route
+          path="/receipt/:id"
+          element={
+            <ProtectedRoutes
+              authenticationPath="/login"
+              outlet={<OrderReceiptOld />}
               role="customer"
             />
           }

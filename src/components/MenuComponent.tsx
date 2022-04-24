@@ -4,37 +4,37 @@ import config from "../config.json";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 interface Menu {
-  id : string;
+  id: string;
   name: string;
   pic: string;
   price: number;
-  status:string;
+  status: string;
 }
 const MenuComponent: React.FC<Menu> = (props) => {
-  const {id,name,pic,price,status} = props 
-  var inStock:boolean = false
+  const { id, name, pic, price, status } = props
+  var inStock: boolean = false
   var buttonBGcolor = 'bg-headerRed'
   var componentBGcolor = 'bg-lightYellow'
   var navigate = useNavigate()
-  const gotoFood = () =>{
+  const gotoFood = () => {
     navigate(`/food/${id}`)
   }
-  if(status == 'InStock'){
+  if (status == 'InStock') {
     inStock = true
     buttonBGcolor = 'bg-headerRed'
     componentBGcolor = 'bg-lightYellow'
   }
-  else{
+  else {
     inStock = false
     componentBGcolor = 'bg-zinc-400'
     buttonBGcolor = 'bg-zinc-800'
   }
   return (
-    <div className={"flex flex-row mt-[1%] ml-[2.5%] h-[18%] w-[95%] border-[1px] border-black rounded-md min-h-[83px] "+componentBGcolor}>
+    <div className={"flex flex-row mt-[1%] ml-[2.5%] h-[18%] w-[95%] border-[1px] border-black rounded-md min-h-[83px] " + componentBGcolor}>
       <div className="flex flex-row w-full">
         <div className="flex h-full max-w-[120px] w-[100%] shrink justify-center items-center">
           <img
-            src={pic!=''?config.imageURL+pic:menu_placeholder}
+            src={pic != '' ? config.imageURL + pic : menu_placeholder}
             alt=""
             className="h-[90%] w-[90%] border border-black bg-white rounded-md"
           />
@@ -50,12 +50,12 @@ const MenuComponent: React.FC<Menu> = (props) => {
           </div>
         </div>
       </div>
-      <div className={"h-full w-[40px] shrink-0 "+buttonBGcolor}>
+      <div className={"h-full w-[40px] shrink-0 " + buttonBGcolor}>
         {inStock &&
           <button className="h-full w-full" onClick={gotoFood}>
-              <div className="flex justify-center items-center h-full w-full">
-                  <img src={plus_icon} alt="" className="w-[70%] bg-white rounded-[50%]" />
-              </div>
+            <div className="flex justify-center items-center h-full w-full">
+              <img src={plus_icon} alt="" className="w-[70%] bg-white rounded-[50%]" />
+            </div>
           </button>
         }
       </div>
