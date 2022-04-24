@@ -70,15 +70,6 @@ const HomeTest: React.FC = () => {
             </span>
           </button>
           <button
-            onClick={onClickEmployeeMainPage}
-            className="flex flex-row bg-white w-10/12 h=10/12 mx-auto my-auto py-10 border-2 border-gray-300 rounded-lg shadow-md justify-center hover:border-4 hover:bg-gray-200"
-          >
-            <img className="h-10 w-10 inline align-center" src={MenuIcon} />
-            <span className="pl-10 font-semibold text-3xl text-green-600">
-              EmployeeMainPage
-            </span>
-          </button>
-          <button
             onClick={onClickEmployeeListPage} 
             className="flex flex-row bg-white w-10/12 h=10/12 mx-auto my-auto py-10 border-2 border-gray-300 rounded-lg shadow-md justify-center hover:border-4 hover:bg-gray-200">
             <img className="h-10 w-10 inline align-center" src={EmployeeIcon} />
@@ -86,22 +77,7 @@ const HomeTest: React.FC = () => {
               Employee
             </span>
           </button>
-          <button className="flex flex-row bg-white w-10/12 h=10/12 mx-auto my-auto py-10 border-2 border-gray-300 rounded-lg shadow-md justify-center hover:border-4 hover:bg-gray-200">
-            <img className="h-10 w-10 inline align-center" src={SettingIcon} />
-            <span className="pl-10 font-semibold text-3xl text-green-600">
-              Setting
-            </span>
-          </button>
-          <button
-            onClick={onClickQRCodeHandle}
-            className="flex flex-row bg-white w-10/12 h=10/12 mx-auto my-auto py-10 border-2 border-gray-300 rounded-lg shadow-md justify-center hover:border-4 hover:bg-gray-200"
-          >
-            <img className="h-10 w-10 inline align-center" src={SettingIcon} />
-            <span className="pl-10 font-semibold text-3xl text-green-600">
-              ขอที่หน่อย
-            </span>
-          </button>
-          <img className="h-60 w-60" src={config.imageURL + QRCodeImage} />
+          
         </div>
       </div>
     </div>
