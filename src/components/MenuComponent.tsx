@@ -18,7 +18,7 @@ const MenuComponent: React.FC<Menu> = (props) => {
     navigate(`/food/${id}`)
   }
   return (
-    <div className="flex flex-row mt-[1%] ml-[2.5%] h-[18%] w-[95%] bg-lightYellow">
+    <div className="flex flex-row mt-[1%] ml-[2.5%] h-[18%] w-[95%] bg-lightYellow border-[1px] border-black rounded-md">
       <div className="flex flex-row w-full">
         <div className="flex h-full max-w-[120px] w-[100%] shrink justify-center items-center">
           <img
