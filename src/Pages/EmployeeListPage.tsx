@@ -3,7 +3,10 @@ import Employee from "../components/employeeComponent";
 import addIcon from "../components/img/add_icon.jpg";
 import loginIcon from "../components/img/login_icon.png";
 import { register } from "../services/authServices";
-import React, { useState } from "react";
+import { getEmployeeInfo } from "../api/employee";
+import React, { useEffect, useState } from "react";
+import backIcon from "../components/img/back_icon.png"
+import { useNavigate } from "react-router-dom";
 const EmployeeListPage: React.FC = () => {
   const [showPopUp, setShowPopUp] = useState(false);
   const [nickName, setNickName] = useState("");
@@ -12,75 +15,20 @@ const EmployeeListPage: React.FC = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [employeeList, setEmplyeeList] = useState<any>([]);
+  const navigate = useNavigate();
+  useEffect(() => {
+    const getEmployeeData = async () => {
+      const res = await getEmployeeInfo();
+      const employeeList = res?.data;
+      setEmplyeeList(employeeList);
+    };
+    getEmployeeData();
+  }, [employeeList]);
 
-  let EmployeeList = [
-    {
-      role: "Employee",
-      nickname: "focus",
-      name: "suratan",
-      surname: "boonpong",
-    },
-    {
-      role: "Employee",
-      nickname: "focus",
-      name: "suratan",
-      surname: "boonpong",
-    },
-    {
-      role: "Employee",
-      nickname: "focus",
-      name: "suratan",
-      surname: "boonpong",
-    },
-    {
-      role: "Employee",
-      nickname: "focus",
-      name: "suratan",
-      surname: "boonpong",
-    },
-    {
-      role: "Employee",
-      nickname: "focus",
-      name: "suratan",
-      surname: "boonpong",
-    },
-    {
-      role: "Employee",
-      nickname: "focus",
-      name: "suratan",
-      surname: "boonpong",
-    },
-    {
-      role: "Employee",
-      nickname: "focus",
-      name: "suratan",
-      surname: "boonpong",
-    },
-    {
-      role: "Employee",
-      nickname: "focus",
-      name: "suratan",
-      surname: "boonpong",
-    },
-    {
-      role: "Employee",
-      nickname: "focus",
-      name: "suratan",
-      surname: "boonpong",
-    },
-    {
-      role: "Employee",
-      nickname: "focus",
-      name: "suratan",
-      surname: "boonpong",
-    },
-    {
-      role: "Employee",
-      nickname: "focus",
-      name: "suratan",
-      surname: "boonpong",
-    },
-  ];
+  const backHandle = () =>{
+    navigate("/home")
+  }
 
   const inputNickName = (event: React.FormEvent<HTMLInputElement>) => {
     setNickName(event.currentTarget.value);
@@ -107,26 +55,28 @@ const EmployeeListPage: React.FC = () => {
   };
 
   const onClickCancelAddEmployee = () => {
-    setShowPopUp(false)
-    setNickName("")
-    setName("")
-    setSurName("")
-    setUserName("")
-    setPassword("")
-    setConfirmPassword("")
-  }
+    setShowPopUp(false);
+    setNickName("");
+    setName("");
+    setSurName("");
+    setUserName("");
+    setPassword("");
+    setConfirmPassword("");
+  };
 
-  const onClickConfirmAddEmployee = async(event: React.FormEvent<HTMLFormElement>) => {
+  const onClickConfirmAddEmployee = async (
+    event: React.FormEvent<HTMLFormElement>
+  ) => {
     event.preventDefault();
-    await register(name,surName,nickName,userName,password)
-    setShowPopUp(false)
-    setNickName("")
-    setName("")
-    setSurName("")
-    setUserName("")
-    setPassword("")
-    setConfirmPassword("")
-  }
+    await register(name, surName, nickName, userName, password);
+    setShowPopUp(false);
+    setNickName("");
+    setName("");
+    setSurName("");
+    setUserName("");
+    setPassword("");
+    setConfirmPassword("");
+  };
 
   return (
     <div>
@@ -140,16 +90,19 @@ const EmployeeListPage: React.FC = () => {
         >
           <img src={addIcon} className="flex h-[50%]" />
         </button>
-        {EmployeeList.map((employee) => {
+        {employeeList.map((employee: any) => {
           return (
             <Employee
-              role={employee.role}
+              Email={employee.email}
               nickname={employee.nickname}
               name={employee.name}
               surname={employee.surname}
             ></Employee>
           );
         })}
+        <button className="mt-5 w-full" onClick={backHandle}>
+          <img className="ml-5 w-[50px] h-[50px] object-cover" src={backIcon} />
+        </button>
       </div>
       {showPopUp ? (
         <form onSubmit={onClickConfirmAddEmployee}>
