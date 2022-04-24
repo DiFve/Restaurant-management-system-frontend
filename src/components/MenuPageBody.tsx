@@ -2,27 +2,34 @@ import search_icon from './img/search_icon.png'
 import menu_placeholder from './img/menu_placeholder.png'
 import MenuComponent from './MenuComponent'
 import { useEffect, useState } from 'react'
+import { useNavigate } from "react-router-dom";
 import { alacarteMenu, allMenu, buffetMenu } from '../api/menu'
-interface menuType {
-    menuType: string | undefined
+import jwtDecode from "jwt-decode";
+interface menuType{
+    menuType:string | undefined
 }
 const MenuPageBody: React.FC<menuType> = (props) => {
     var menuType = props.menuType
-    const [menu, setMenu] = useState([])
-    const [options, setoptions] = useState<Array<string>>([])
-    const [filter, setFilter] = useState('all')
-    const [filMenu, setFilMenu] = useState<any>([])
-    const [search, setSearch] = useState<string>('')
-    const optionHandler = (event: any) => {
+    const [menu,setMenu] = useState([])
+    const [options,setoptions] = useState<Array<string>>([])
+    const [filter,setFilter] = useState('all')
+    const [filMenu,setFilMenu] = useState<any>([])
+    const [search,setSearch] = useState<string>('')
+    const navigate = useNavigate()
+    const optionHandler = (event:any) =>{
         setFilter(event.target.value)
     }
     const searchHandler = (event: any) => {
         console.log(event.target.value)
         setSearch(event.target.value)
     }
+    const gotocart = (event:any) =>{
+        navigate('/cart')
+    }
     useEffect(() => {
         const getMenu = async () => {
-            if (menuType === 'buffet') {
+            console.log(menuType)
+            if(menuType === 'buffet'){
                 var res = await buffetMenu()
             }
             else if (menuType === 'all') {
@@ -123,7 +130,7 @@ const MenuPageBody: React.FC<menuType> = (props) => {
             </div>
             <div className='flex h-[16%] w-[100%] justify-center items-center'>
                 <div className='bg-headerRed h-[42px] w-[186px] text-center border-[2px] border-black rounded-md'>
-                    <button className=''>
+                    <button className='' onClick={gotocart}>
                         <label className='text-3xl text-white'> Your Cart </label>
                     </button>
                 </div>
