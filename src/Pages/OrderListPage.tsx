@@ -39,7 +39,7 @@ const OrderListPage: React.FC = (props) => {
 
   return (
     <div className="w-screen h-screen">
-      <HeaderBar name={tableNumber} />
+      <HeaderBar name={tableNumber} pathback="" />
       <div className="grid grid-cols-4 gap-2 m-2">
         {allTableOrder &&
           allTableOrder.map((element: any, index: number) => {

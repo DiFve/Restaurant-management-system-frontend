@@ -3,7 +3,6 @@ import HeaderBar from "../components/RestaurantManagerBar";
 import EmployeeIcon from "../components/img/employee_icon.jpg";
 import MenuIcon from "../components/img/menu_icon.png";
 import { useNavigate } from "react-router-dom";
-import backIcon from "../components/img/back_icon.png";
 
 const HomeTest: React.FC = () => {
   const navigate = useNavigate();
@@ -17,14 +16,11 @@ const HomeTest: React.FC = () => {
     navigate("/EmployeeList");
   };
 
-  const backHandle = () => {
-    navigate("/login");
-  };
 
   return (
     <div>
       <div className="bg-white">
-        <HeaderBar name="หน้าแรก"></HeaderBar>
+        <HeaderBar name="หน้าแรก" pathback="/login"></HeaderBar>
 
         <div className="flex flex-col min-h-[80vh] justify-between align-center">
           <button
@@ -44,9 +40,6 @@ const HomeTest: React.FC = () => {
               พนักงาน
             </span>
           </button>
-          <button className="absolute bottom-5 left-5 w-full" onClick={backHandle}>
-          <img className="ml-5 w-[50px] h-[50px] object-cover" src={backIcon} />
-        </button>
         </div>
       </div>
     </div>
