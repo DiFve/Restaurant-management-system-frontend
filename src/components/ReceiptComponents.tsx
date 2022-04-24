@@ -56,7 +56,7 @@ const ReceiptComponents: React.FC<idProps> = (props) => {
                     <div className="flex justify-center w-[40%]">
                         <div className='bg-headerRed w-[50%] text-center min-h-[40px] min-w-[120px] max-w-[250px] max-h-[40px] border-[2px] border-black'>
                             <button className='pt-[3%] ' onClick={onClickBack}>
-                                <label className='text-2xl text-white '> Back </label>
+                                <label className='text-2xl text-white '> กลับ </label>
                             </button>
                         </div>
                     </div>

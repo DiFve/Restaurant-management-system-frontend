@@ -37,6 +37,8 @@ const OrderReceipt: React.FC<Receipt> = (props) => {
     window.location.reload()
 
   }
+  // console.log("tableNumber")
+  // console.log(tableNumber)
 
   // detail.map((element: any) => {
   //   console.log(element.option)
@@ -58,7 +60,7 @@ const OrderReceipt: React.FC<Receipt> = (props) => {
               <label className="text-base">{
                 detail.map((element: any) => {
                   //element.option.map((dataDetail: any) => {
-                  if (element != "") {
+                  if (element.option != "") {
                     return (
                       <div className="flex flex-col">
                         <label className="text-base"> {"* " + element.option} </label>
@@ -97,6 +99,22 @@ const OrderReceipt: React.FC<Receipt> = (props) => {
         <div className="p-[4%] mt-[3%] flex justify-between ">
           <div className="w-[65%] ">
             <label className="text-xl">{orderName}</label>
+            <div className="pl-[4%]">
+              <label className="text-base">{
+                detail.map((element: any) => {
+                  //element.option.map((dataDetail: any) => {
+                  if (element.option != "") {
+                    return (
+                      <div className="flex flex-col">
+                        <label className="text-base"> {"* " + element.option} </label>
+                      </div>
+                    )
+                  }
+                  // })
+
+                })
+              }</label>
+            </div>
             <button className="flex flex-row " onClick={deleteMenu}>
               <label className="text-base text-red-600"> ลบ </label>
             </button>

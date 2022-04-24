@@ -32,7 +32,7 @@ const OrderPage: React.FC = () => {
 
     return (
         <div className="flex flex-col h-screen ">
-            <HeaderBar name='Order' />
+            <HeaderBar name='ออเดอร์' />
             <div className="flex h-screen w-full items-center overflow-y-hidden justify-center bg-white">
                 <div className="h-[95%] w-[95%] bg-white" >
                     <div className="h-[90%]">
@@ -40,15 +40,15 @@ const OrderPage: React.FC = () => {
                             {getCartOreder.map((element: any, index: number) => {
                                 var time = element.time.substr(11, 8) // "2013-03-10"
                                 //console.log(time)
-                                return <OrderListComponents order={"Order " + (index + 1)} timeOrder={time} status={element.orderStatus} id={element._id} />
+                                return <OrderListComponents order={"ออเดอร์ที่ " + (index + 1)} timeOrder={time} status={element.orderStatus} id={element._id} />
 
                             })}
 
                         </div>
                     </div>
                     <div className="flex justify-center ">
-                        <button className="flex justify-center bg-headerRed h-[25%] w-[25%] max-w-[140px] max-h-[45px] max-w-[300 px] min-w-[100px] text-center border-[2px] border-black" onClick={onClickBack}>
-                            <label className="text-3xl text-white"> Back </label>
+                        <button className="flex justify-center bg-headerRed h-[25%] w-[25%] min-w-[150px] max-h-[45px] max-w-[250px] text-center border-[2px] border-black" onClick={onClickBack}>
+                            <label className="text-3xl text-white"> สั่งอาหาร </label>
                         </button>
                     </div>
 

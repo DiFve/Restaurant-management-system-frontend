@@ -13,23 +13,6 @@ interface Receipt {
 const Receiptform: React.FC<Receipt> = (props) => {
   //console.log({ props })
   const { orderName, detail, price, quantity, menuType } = props
-  //console.log(detail[0])
-
-  // const [getCartOreder, setCartOreder] = useState<any>([])
-  // const decodedJWT: any = jwtDecode(localStorage.getItem('token') || '')
-  // const typeFood = decodedJWT.foodType
-  // const userTableNumber = decodedJWT.table
-  // useEffect(() => {
-  //   const getCOrder = async () => {
-  //     const res = await getCartOrder((userTableNumber).toString())
-  //     setCartOreder(res?.data.order)
-  //     //console.log(res?.data.order)
-  //     //console.log(res?.data.order)
-  //   }
-  //   getCOrder()
-
-  // }, []);
-
 
   if (menuType == "a-la-carte") {
     if (quantity != 0 && quantity != undefined) {
@@ -74,7 +57,22 @@ const Receiptform: React.FC<Receipt> = (props) => {
         <div className="p-[4%] mt-[3%] flex justify-between ">
           <div className="w-[65%] ">
             <label className="text-xl">{orderName}</label>
+            <div className="pl-[4%]">
+              <label className="text-base">{
+                (detail[0].option).map((element: any) => {
+                  if (element != "") {
+                    return (
+                      <div className="flex flex-col">
+                        <label className="text-base"> {"* " + element} </label>
+                      </div>
+                    )
+                  }
+
+                })
+              }</label>
+            </div>
           </div>
+
           <div className="w-[20%] flex flex-col items-end">
             <label className="text-2xl"> {"X" + quantity} </label>
           </div>
