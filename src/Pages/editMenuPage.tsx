@@ -4,11 +4,12 @@ import config from "../config.json";
 import HeaderBar from "../components/RestaurantManagerBar";
 import { useNavigate, useParams } from "react-router-dom";
 import { getFoodInfo } from "../api/food";
-import { editMenu } from "../api/menu";
+import { deleteMenu,editMenu } from "../api/menu";
 
 const EditMenuPage: React.FC = () => {
   const { id } = useParams();
   const [showPopUp, setShowPopUp] = React.useState(false);
+  const [showDeletePopUp, setshowDeletePopUp] = React.useState(false);
   const [foodName, setFoodName] = useState("");
   const [description, setDescription] = useState("");
   const [optionList, setOptionList] = useState<any>([]);
@@ -156,9 +157,8 @@ const EditMenuPage: React.FC = () => {
   };
 
   const handlePriceChange = (event: any) => {
-    if(parseInt(event.target.value) != NaN &&
-    Number(event.target.value) >= 0)
-    setPrice(Number(event.target.value));
+    if (parseInt(event.target.value) != NaN && Number(event.target.value) >= 0)
+      setPrice(Number(event.target.value));
   };
 
   const inputFoodType = (event: any) => {
@@ -244,11 +244,17 @@ const EditMenuPage: React.FC = () => {
         price: addPrice,
         status: addStatus,
       };
-      console.log(newMenu)
-      await editMenu(id,newMenu);
+      console.log(newMenu);
+      await editMenu(id, newMenu);
       navigate("/ManagerMenu");
     }
   };
+
+  const onClickDeleteConfirm = async () =>{
+    setshowDeletePopUp(false)
+    await deleteMenu(id)
+    navigate("/ManagerMenu");
+  }
 
   const onClickCancel = () => {
     navigate("/ManagerMenu");
@@ -415,7 +421,7 @@ const EditMenuPage: React.FC = () => {
 
   return (
     <div>
-      <HeaderBar name="Add menu"></HeaderBar>
+      <HeaderBar name="Edit menu"></HeaderBar>
       <form className="flex flex-col w-full h-auto" onSubmit={onClickConfirm}>
         <div className="flex flex-row flex-wrap w-full h-auto">
           {/*image input*/}
@@ -895,7 +901,18 @@ const EditMenuPage: React.FC = () => {
 
         {/*button submit*/}
         <div className="flex w-full h-auto justify-center md:justify-end lg:justify-end xl:justify-end">
-          <div className="p-5 w-[200px] h-[100px]">
+          <div className="p-5 w-1/3 max-w-[200px] sm:h-[100px] md:h-[100px] lg:h-[100px] xl:h-[100px] h-[75px]">
+            <button
+              className="rounded-lg w-full h-full border bg-rose-300 shadow-md hover:bg-rose-400"
+              onClick={() => {
+                setshowDeletePopUp(true);
+              }}
+              type="button"
+            >
+              <span className="text ">Delete</span>
+            </button>
+          </div>
+          <div className="p-5 w-1/3 max-w-[200px] sm:h-[100px] md:h-[100px] lg:h-[100px] xl:h-[100px] h-[75px]">
             <button
               className="rounded-lg w-full h-full border bg-white shadow-md hover:bg-gray-200"
               onClick={onClickCancel}
@@ -904,7 +921,7 @@ const EditMenuPage: React.FC = () => {
               <span className="text ">Cancel</span>
             </button>
           </div>
-          <div className="p-5 w-[200px] h-[100px]">
+          <div className="p-5 w-1/3 max-w-[200px] sm:h-[100px] md:h-[100px] lg:h-[100px] xl:h-[100px] h-[75px]">
             <button
               className="rounded-lg w-full h-full border bg-white shadow-md hover:bg-gray-200"
               type="submit"
@@ -912,6 +929,44 @@ const EditMenuPage: React.FC = () => {
               <span className="text ">Confirm</span>
             </button>
           </div>
+          {showDeletePopUp ? (
+            <div>
+              <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50">
+                <div className="relative w-auto my-6 mx-auto max-w-3xl">
+                  {/*content*/}
+                  <div className="rounded-lg shadow-lg relative flex flex-col w-full bg-white">
+                    {/*header*/}
+                    <div className="flex flex-row items-center justify-center p-5 border-b border-solid border-slate-200 rounded-t">
+                      <h3 className="text-xl font-semibold">
+                        คุณต้องการลบเมนูนี้หรือไม่ ?
+                      </h3>
+                    </div>
+
+                    {/*footer*/}
+                    <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
+                      <button
+                        className="text-black background-transparent font-semibold px-6 py-2 text-sm mr-1 mb-1 ease-linear transition-all duration-150"
+                        type="button"
+                        onClick={() => {
+                          setshowDeletePopUp(false);
+                        }}
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        className="bg-rose-500 text-white active:bg-rose-600 font-semibold text-sm px-6 py-3 rounded shadow hover:shadow-lg mr-1 mb-1 ease-linear transition-all duration-150"
+                        type="button"
+                        onClick={onClickDeleteConfirm}
+                      >
+                        Confirm
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+            </div>
+          ) : null}
         </div>
       </form>
     </div>
