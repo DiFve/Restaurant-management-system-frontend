@@ -325,7 +325,7 @@ const EditMenuPage: React.FC = () => {
       addChoiceData.length > 0 &&
       parseInt(addAdditionPriceData) != NaN &&
       Number(addAdditionPriceData) >= 0 &&
-      /^[a-zA-Zก-๏\s]+$/.test(addChoiceData) &&
+      /^[a-zA-Zก-๏0-9\s]+$/.test(addChoiceData) &&
       choiceList.length <= 15
     ) {
       const number = numberOfChoice + 1;
@@ -347,7 +347,7 @@ const EditMenuPage: React.FC = () => {
       editChoiceData.length > 0 &&
       parseInt(editAdditionPriceData) != NaN &&
       Number(editAdditionPriceData) >= 0 &&
-      /^[a-zA-Zก-๏\s]+$/.test(editChoiceData)
+      /^[a-zA-Zก-๏0-9\s]+$/.test(editChoiceData)
     ) {
       const editChoice = {
         id: Number(editChoiceID),
