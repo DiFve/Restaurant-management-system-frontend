@@ -154,7 +154,7 @@ const FoodForm : React.FC<idProps> = (props) =>{
     return(
             <div className="flex flex-col h-full">
                 <div className='flex w-[100%] h-[25%] justify-center items-center'>
-                    <img src={foodPic} alt="menu_thumbnail" className='w-[90%] h-[80%] max-h-[170px] min-h-[170px]'/>
+                    <img src={foodPic} alt="menu_thumbnail" className='w-[90%] h-[80%] max-h-[170px] rounded-md'/>
                 </div>
                 <div className="h-[70%] w-[100%]">
                     <div className="flex flex-row w-full border-b-2 items-center justify-center">
@@ -164,7 +164,7 @@ const FoodForm : React.FC<idProps> = (props) =>{
                         <div className="h-[100%] w-[70%] break-words text-center text-2xl font-bold max-h-[38px]">
                             <label>{foodInfo.foodName}</label>
                         </div>
-                        <div className="flex h-[100%] w-[15%] break-words text-center text-xl justify-center items-center">
+                        <div className="flex h-[100%] w-[15%] break-words text-center text-xl justify-center items-center text-hardYellow">
                             <label>{foodPrice}&nbsp;฿</label>
                         </div>
                     </div>
@@ -173,7 +173,7 @@ const FoodForm : React.FC<idProps> = (props) =>{
                         <p className="text-xl">{foodInfo.description}</p>
                     </div>
                     <form className="text-2xl w-[100%] h-[83%]" onSubmit={e => e.preventDefault()}>
-                        <div className="flex flex-col h-[70%] w-[100%] mt-[2%] pl-[3%] pr-[4%] overflow-y-scroll border-b-2 min-h-[200px]">
+                        <div className="flex flex-col h-[67%] w-[100%] mt-[2%] pl-[3%] pr-[4%] overflow-y-scroll border-b-2 min-h-[180px]">
                                 {  
                                     topicName.map((val:any,index:number)=>{
                                         var indexUP = index
@@ -217,7 +217,7 @@ const FoodForm : React.FC<idProps> = (props) =>{
                                 }
                                 <div>
                                     <label>Additional : </label>
-                                    <textarea className="bg-gray-100 border border-black " onChange={additionalHandler}>
+                                    <textarea className="bg-gray-100 border border-black rounded-md pl-[2%] pt-[1%] text-xl" onChange={additionalHandler}>
                                     </textarea>
                                 </div>
                         </div>
@@ -232,7 +232,7 @@ const FoodForm : React.FC<idProps> = (props) =>{
                                 </button>
                             </div>
                             <div className="flex flex-col h-[70%] w-[100%] justify-center items-center text-center">
-                                <button className="flex bg-headerRed h-[75%] w-[50%] text-center text-3xl text-white justify-center items-center border-[2px]" onClick={popupHandler}>
+                                <button className="flex bg-headerRed h-[75%] w-[50%] text-center text-3xl text-white justify-center items-center border-[2px] rounded-md border-black" onClick={popupHandler}>
                                     <label htmlFor=""> Add to Cart </label>
                                 </button>
                                 <label htmlFor="" className="text-headerRed text-sm">{errorText}</label>

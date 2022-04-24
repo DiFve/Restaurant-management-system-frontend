@@ -8,9 +8,9 @@ import { useEffect, useState } from "react"
 const FoodPage : React.FC = () =>{
     const {id} = useParams()
     return (
-        <div className="flex flex-col h-screen w-full items-center overflow-y-hidden justify-center">
+        <div className="flex flex-col h-screen w-full items-center justify-center">
             <HeaderBar name="Food"/>
-            <div className="flex flex-col items-center w-[90%] h-full mt-[20px] mb-[20px] border-black border-[2px]">
+            <div className="flex flex-col items-center w-[90%] h-full mt-[20px] mb-[20px] border-black border-[2px] rounded-md">
                 <FoodForm id={id}/>
             </div>
         </div>
