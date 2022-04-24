@@ -83,9 +83,11 @@ const FoodForm: React.FC<idProps> = (props) => {
         if (event.target.type == 'radio') {
             if (event.target.checked) {
                 newOption[Number(event.target.name)] = [event.target.value]
+                setFoodPrice(foodPrice + additionalPrice[Number(event.target.name)][Number(event.target.id)])
             }
             else if (!event.target.checked) {
                 newOption[Number(event.target.name)] = ['']
+                setFoodPrice(foodPrice + additionalPrice[Number(event.target.name)][Number(event.target.id)])
             }
         }
         else if (event.target.type == 'checkbox') {
@@ -129,8 +131,8 @@ const FoodForm: React.FC<idProps> = (props) => {
             "price": 0,
             'quantity': 0,
             'foodID': '',
-            'foodName': foodInfo.foodName
-            //'additionalInfo' : additional
+            'foodName': foodInfo.foodName,
+            'additionalInfo' : additional
         }
         if(topicName.length !=0){
             reqBody.detail.pop()
