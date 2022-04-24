@@ -16,7 +16,7 @@ const EditMenuPage: React.FC = () => {
   const [choiceList, setChoiceList] = useState([
     {
       id: 1,
-      name: "choice",
+      name: "ตัวเลือก",
       additionPrice: 0,
     },
   ]);
@@ -26,9 +26,9 @@ const EditMenuPage: React.FC = () => {
     "ของหวาน",
     "ของทานเล่น",
     "เครื่องดื่ม",
-    "other",
+    "อื่น ๆ",
   ]);
-  const [foodTypeSelected, setFoodTypeSelected] = useState("other");
+  const [foodTypeSelected, setFoodTypeSelected] = useState("อื่น ๆ");
   const [newFoodType, setNewFoodType] = useState("");
   const [addChoiceData, setAddChoiceData] = useState("");
   const [addAdditionPriceData, setAddAdditionPriceData] = useState("");
@@ -108,7 +108,7 @@ const EditMenuPage: React.FC = () => {
       setChoiceList([
         {
           id: choiceNumberID,
-          name: "choice",
+          name: "ตัวเลือก",
           additionPrice: 0,
         },
       ]);
@@ -179,15 +179,15 @@ const EditMenuPage: React.FC = () => {
       foodName.length > 0 &&
       /^[a-zA-Zก-๏\s]+$/.test(foodName) &&
       (isAlacarte === true || isBuffet === true) &&
-      (foodTypeSelected !== "other" ||
-        (foodTypeSelected === "other" &&
+      (foodTypeSelected !== "อื่น ๆ" ||
+        (foodTypeSelected === "อื่น ๆ" &&
           newFoodType.length > 0 &&
           /^[a-zA-Zก-๏\s]+$/.test(newFoodType)))
     ) {
       console.log("hello");
       const inputFoodName: string = foodName;
       const type: Array<any> = [];
-      if (foodTypeSelected === "other") {
+      if (foodTypeSelected === "อื่น ๆ") {
         type.push(newFoodType);
       } else {
         type.push(foodTypeSelected);
@@ -368,7 +368,7 @@ const EditMenuPage: React.FC = () => {
     setChoiceList([
       {
         id: numberOfChoice + 1,
-        name: "choice",
+        name: "ตัวเลือก",
         additionPrice: 0,
       },
     ]);
@@ -403,7 +403,7 @@ const EditMenuPage: React.FC = () => {
       setChoiceList([
         {
           id: numberOfChoice + 1,
-          name: "choice",
+          name: "ตัวเลือก",
           additionPrice: 0,
         },
       ]);
@@ -421,7 +421,7 @@ const EditMenuPage: React.FC = () => {
 
   return (
     <div>
-      <HeaderBar name="Edit menu"></HeaderBar>
+      <HeaderBar name="แก้ไขเมนูอาหาร"></HeaderBar>
       <form className="flex flex-col w-full h-auto" onSubmit={onClickConfirm}>
         <div className="flex flex-row flex-wrap w-full h-auto">
           {/*image input*/}
@@ -483,8 +483,8 @@ const EditMenuPage: React.FC = () => {
                         onChange={handleAlacarte}
                         checked={isAlacarte}
                       />
-                      <label className="form-check-label inline-block text-gray-800">
-                        A-la-carte
+                      <label className="form-check-label text-sm inline-block text-gray-800">
+                        อาหารจานเดียว
                       </label>
                     </div>
                     <div className="form-check">
@@ -495,8 +495,8 @@ const EditMenuPage: React.FC = () => {
                         onChange={handleBuffet}
                         checked={isBuffet}
                       />
-                      <label className="form-check-label inline-block text-gray-800">
-                        Buffet
+                      <label className="form-check-label text-sm inline-block text-gray-800">
+                        บุฟเฟต์
                       </label>
                     </div>
                   </div>
@@ -537,7 +537,7 @@ const EditMenuPage: React.FC = () => {
                   </div>
                 </div>
               </div>
-              {foodTypeSelected === "other" ? (
+              {foodTypeSelected === "อื่น ๆ" ? (
                 <div className="mt-8 flex justify-start xl:w-1/2 w-1/3">
                   <div className="xl:w-[75%] w-[90%]">
                     <input
@@ -626,7 +626,7 @@ const EditMenuPage: React.FC = () => {
                                   onChange={handleChangeRequired}
                                 />
                                 <label className="text-sm inline-block text-gray-800">
-                                  required
+                                  จำเป็น
                                 </label>
                               </div>
 
@@ -672,14 +672,14 @@ const EditMenuPage: React.FC = () => {
                                           className="text-sm mx-2"
                                           onClick={handleEditChoiceSubmit}
                                         >
-                                          Save
+                                          ยืนยัน
                                         </button>
                                         <button
                                           type="button"
                                           className="text-sm mx-2"
                                           onClick={handleCancelChoice}
                                         >
-                                          Cancel
+                                          ยกเลิก
                                         </button>
                                       </div>
                                     ) : (
@@ -704,7 +704,7 @@ const EditMenuPage: React.FC = () => {
                                               );
                                             }}
                                           >
-                                            Edit
+                                            แก้ไข
                                           </button>
                                           <button
                                             type="button"
@@ -746,7 +746,7 @@ const EditMenuPage: React.FC = () => {
                                   className="text-sm mx-2"
                                   onClick={handleAddChoiceSubmit}
                                 >
-                                  Add
+                                  เพิ่ม
                                 </button>
                               </div>
                               <label className="text-xs text-red-500 inline-block text-gray-800">
@@ -764,14 +764,14 @@ const EditMenuPage: React.FC = () => {
                             type="button"
                             onClick={handleAddOptionCancel}
                           >
-                            Cancel
+                            ยกเลิก
                           </button>
                           <button
                             className="bg-rose-500 text-white active:bg-rose-600 font-semibold text-sm px-6 py-3 rounded shadow hover:shadow-lg mr-1 mb-1 ease-linear transition-all duration-150"
                             type="button"
                             onClick={handleAddOptionConfirm}
                           >
-                            Confirm
+                            ยืนยัน
                           </button>
                         </div>
                       </div>
@@ -909,7 +909,7 @@ const EditMenuPage: React.FC = () => {
               }}
               type="button"
             >
-              <span className="text ">Delete</span>
+              <span className="text ">ลบ</span>
             </button>
           </div>
           <div className="p-5 w-1/3 max-w-[200px] sm:h-[100px] md:h-[100px] lg:h-[100px] xl:h-[100px] h-[75px]">
@@ -918,7 +918,7 @@ const EditMenuPage: React.FC = () => {
               onClick={onClickCancel}
               type="button"
             >
-              <span className="text ">Cancel</span>
+              <span className="text ">ยกเลิก</span>
             </button>
           </div>
           <div className="p-5 w-1/3 max-w-[200px] sm:h-[100px] md:h-[100px] lg:h-[100px] xl:h-[100px] h-[75px]">
@@ -926,7 +926,7 @@ const EditMenuPage: React.FC = () => {
               className="rounded-lg w-full h-full border bg-white shadow-md hover:bg-gray-200"
               type="submit"
             >
-              <span className="text ">Confirm</span>
+              <span className="text ">ยืนยัน</span>
             </button>
           </div>
           {showDeletePopUp ? (
@@ -951,14 +951,14 @@ const EditMenuPage: React.FC = () => {
                           setshowDeletePopUp(false);
                         }}
                       >
-                        Cancel
+                        ยกเลิก
                       </button>
                       <button
                         className="bg-rose-500 text-white active:bg-rose-600 font-semibold text-sm px-6 py-3 rounded shadow hover:shadow-lg mr-1 mb-1 ease-linear transition-all duration-150"
                         type="button"
                         onClick={onClickDeleteConfirm}
                       >
-                        Confirm
+                        ยืนยัน
                       </button>
                     </div>
                   </div>
