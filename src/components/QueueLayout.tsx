@@ -28,10 +28,7 @@ const QueueLayout: React.FC = () => {
     <div className="flex flex-col content-center text-center m-5 gap-5 min-w-[50px] ">
       {comingOrder.map((element: any) => {
         return (
-          <QueueOrder
-            tableNumber={element.tableNumber}
-            orderID={element.orderID}
-          />
+          <QueueOrder tableNumber={element.tableNumber} orderID={element._id} />
         );
       })}
     </div>

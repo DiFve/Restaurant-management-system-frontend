@@ -17,7 +17,7 @@ const TableButton: React.FC<Tablename> = (props) => {
     if (status == "available") {
       navigate(`/EmployeeMain/NewOrder/${id}`);
     } else if (status == "busy") {
-      navigate(`/EmployeeMain/OrderList/${tablenumber}`);
+      navigate(`/EmployeeMain/Table/${tablenumber}`);
     }
   };
 

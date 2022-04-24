@@ -1,22 +1,62 @@
-import React from "react";
-import { useParams } from "react-router-dom";
+import jwtDecode from "jwt-decode";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { getCartOrder } from "../api/cart";
+import HeaderBar from "../components/HeaderBar"
+import OrderListComponents from "../components/OrderListComponents"
 
 const OrderPage: React.FC = () => {
-  const { tableNumber, id } = useParams();
-  return (
-    <div className="h-screen w-screen">
-      {/* Header */}
-      <div className="flex flex-col bg-[#dc2626] w-full h-1/6">
-        <div className="flex text-center text-white text-4xl font-normal justify-center items-center w-full h-full">
-          <label>Each Order Page</label>
-        </div>
-      </div>
-      
-      <div className="w-screen h-5/6">
-        <div className="grid grid-cols-4 gap-2"></div>
-      </div>
-    </div>
-  );
-};
 
-export default OrderPage;
+    const decodedJWT: any = jwtDecode(localStorage.getItem('token') || '')
+    const typeFood = decodedJWT.foodType
+    const userTableNumber = decodedJWT.table
+    //console.log(decodedJWT)
+    const [getCartOreder, setCartOreder] = useState<any>([])
+    const goBackMenu = useNavigate();
+
+    const onClickBack = () => {
+        goBackMenu(`/menu/${typeFood}`);
+    };
+    useEffect(() => {
+        const getCOrder = async () => {
+            const res = await getCartOrder((userTableNumber).toString())
+            setCartOreder(res?.data.order)
+            //console.log(res?.data.order)
+            //console.log(res?.data.order)
+        }
+        getCOrder()
+
+    }, []);
+
+    console.log(getCartOreder)
+
+    return (
+        <div className="flex flex-col h-screen ">
+            <HeaderBar name='Order' />
+            <div className="flex h-screen w-full items-center overflow-y-hidden justify-center bg-white">
+                <div className="h-[95%] w-[95%] bg-white" >
+                    <div className="h-[90%]">
+                        <div className="w-[93.5%] h-[95%] m-[3%] bg-lightYellow overflow-y-scroll">
+                            {getCartOreder.map((element: any, index: number) => {
+                                var time = element.time.substr(11, 8) // "2013-03-10"
+                                //console.log(time)
+                                return <OrderListComponents order={"Order " + (index + 1)} timeOrder={time} status={element.orderStatus} id={element._id} />
+
+                            })}
+
+                        </div>
+                    </div>
+                    <div className="flex justify-center ">
+                        <button className="flex justify-center bg-headerRed h-[25%] w-[25%] max-w-[140px] max-h-[45px] max-w-[300 px] min-w-[100px] text-center border-[2px] border-black" onClick={onClickBack}>
+                            <label className="text-3xl text-white"> Back </label>
+                        </button>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export default OrderPage

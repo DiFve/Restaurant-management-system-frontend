@@ -42,12 +42,12 @@ const OrderListPage: React.FC = (props) => {
       <HeaderBar name={tableNumber} />
       <div className="grid grid-cols-4 gap-2 m-2">
         {allTableOrder &&
-          allTableOrder.map((element:any,index:number) => {
+          allTableOrder.map((element: any, index: number) => {
             return (
-              <OrderListBox tableNumber={tableNumber} orderNumber={index+1} orderStatus={element.orderStatus} orderID={element._id}/>
+              <OrderListBox tableNumber={tableNumber} orderNumber={index + 1} orderStatus={element.orderStatus} orderID={element._id} />
             )
-                
-            
+
+
           })}
       </div>
     </div>
