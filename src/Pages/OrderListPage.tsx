@@ -1,73 +1,57 @@
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { getTableOrder } from "../api/table";
+import OrderListBox from "../components/OrderListBox";
+import HeaderBar from "../components/RestaurantManagerBar";
 
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import { getTableByID } from '../api/table'
-import OrderListBox from '../components/OrderListBox'
-import HeaderBar from '../components/RestaurantManagerBar'
 
 
-const OrderListPage : React.FC= (props) =>{
-    var obj = 
-    { 
-        "detail": 
-        [
-            {
-                "foodID":"" 
-                ,
-                "foodStatus":""
-                ,
-                "quantity": 0
-                ,
-                "time": ""
-                ,
-                "_id": ""
-            }
-        ]
-    }
+const OrderListPage: React.FC = (props) => {
+  const { tableNumber } = useParams();
 
-    const {id} = useParams()
-    const [tableByID,setTableByID] = useState(0)
-    const [detailInfo,setDetailInfo] = useState(obj.detail)
-   
-    useEffect(()=>{
-        
+  const [allTableOrder, setAllTableOrder] = useState([]);
 
-        const getAllTableByID =async () => {
-            var res = await getTableByID(id)
-            setTableByID(res?.data.tableNumber)
+  console.log(allTableOrder);
+
+  const tablenumber = useEffect(() => {
+    const getAllOrderInTable = async () => {
+      var res = await getTableOrder(tableNumber);
+
+      // setTableByID(res?.data.tableNumber);
+      // setDetailInfo(res?.data.orderList.detail);
+
+      setAllTableOrder(res?.data.order);
+
+      console.log(res?.data);
+      console.log(res?.data.order);
+    };
+    getAllOrderInTable();
+  }, []);
+
+  const example = [
+    { foodID: "ไก่ทอด", quantity: 2, foodStatus: "cooking" },
+    { foodID: "ไก่ทอด", quantity: 2, foodStatus: "fail" },
+    { foodID: "ไก่ทอด", quantity: 2, foodStatus: "success" },
+    { foodID: "ไก่ทอด", quantity: 2, foodStatus: "wrong" },
+    { foodID: "ไก่ทอด", quantity: 2, foodStatus: "success" },
+    { foodID: "ไก่ทอด", quantity: 2, foodStatus: "success" },
+  ];
+
+  return (
+    <div className="w-screen h-screen">
+      <HeaderBar name={tableNumber} />
+      <div className="grid grid-cols-4 gap-2 m-2">
+        {allTableOrder &&
+          allTableOrder.map((element:any,index:number) => {
+            return (
+              <OrderListBox tableNumber={tableNumber} orderNumber={index+1} orderStatus={element.orderStatus} orderID={element._id}/>
+            )
+                
             
-            setDetailInfo(res?.data.orderList.detail)
+          })}
+      </div>
+    </div>
+  );
+};
 
-            console.log(res?.data)
-        }
-        getAllTableByID()
-        
-    },[])
-
-    
-
-    const def = "bg-slate-300 p-8"
-
-    const example = [
-        {foodID:"ไก่ทอด",quantity:2,foodStatus:"cooking"},
-        {foodID:"ไก่ทอด",quantity:2,foodStatus:"fail"},
-        {foodID:"ไก่ทอด",quantity:2,foodStatus:"success"},
-        {foodID:"ไก่ทอด",quantity:2,foodStatus:"wrong"},
-        {foodID:"ไก่ทอด",quantity:2,foodStatus:"success"},
-        {foodID:"ไก่ทอด",quantity:2,foodStatus:"success"},
-    ]
-
-    return (
-        <div className="w-screen h-screen">
-            <HeaderBar name={tableByID} />
-            <div className="grid grid-cols-4 gap-2 m-2">
-            {detailInfo.map((element)=>{
-                return <OrderListBox foodID={element.foodID} quantity={element.quantity} foodStatus={element.foodStatus}/>
-            })}
-        </div>
-        </div>
-    )
-
-}
-
-export default OrderListPage
+export default OrderListPage;
