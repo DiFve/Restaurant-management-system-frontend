@@ -19,7 +19,14 @@ const EditMenuPage: React.FC = () => {
       additionPrice: 0,
     },
   ]);
-  const [foodType, SetfoodType] = useState(["hee", "kuy", "other"]);
+  const [foodType, SetfoodType] = useState([
+    "อาหารประเภทข้าว",
+    "อาหารประเภทเส้น",
+    "ของหวาน",
+    "ของทานเล่น",
+    "เครื่องดื่ม",
+    "other",
+  ]);
   const [foodTypeSelected, setFoodTypeSelected] = useState("other");
   const [newFoodType, setNewFoodType] = useState("");
   const [addChoiceData, setAddChoiceData] = useState("");
@@ -114,8 +121,7 @@ const EditMenuPage: React.FC = () => {
   }, []);
 
   const inputPicture = async (event: any) => {
-    if (event.target.files[0]) {
-      console.log(event.target.files[0]);
+    if (event.target.files[0] && event.target.files[0].size <= 10000000) {
       const reader = new FileReader();
       reader.addEventListener("load", () => {
         setImgData(reader.result);
@@ -150,7 +156,9 @@ const EditMenuPage: React.FC = () => {
   };
 
   const handlePriceChange = (event: any) => {
-    setPrice(event.target.value);
+    if(parseInt(event.target.value) != NaN &&
+    Number(event.target.value) >= 0)
+    setPrice(Number(event.target.value));
   };
 
   const inputFoodType = (event: any) => {
@@ -236,7 +244,8 @@ const EditMenuPage: React.FC = () => {
         price: addPrice,
         status: addStatus,
       };
-      await editMenu(id, newMenu);
+      console.log(newMenu)
+      await editMenu(id,newMenu);
       navigate("/ManagerMenu");
     }
   };
@@ -310,7 +319,8 @@ const EditMenuPage: React.FC = () => {
       addChoiceData.length > 0 &&
       parseInt(addAdditionPriceData) != NaN &&
       Number(addAdditionPriceData) >= 0 &&
-      /^[a-zA-Zก-๏\s]+$/.test(addChoiceData)
+      /^[a-zA-Zก-๏\s]+$/.test(addChoiceData) &&
+      choiceList.length <= 15
     ) {
       const number = numberOfChoice + 1;
       const addChoice = {
@@ -370,7 +380,8 @@ const EditMenuPage: React.FC = () => {
       optionName.length > 0 &&
       addChoiceData.length === 0 &&
       editChoiceID === 0 &&
-      /^[a-zA-Zก-๏\s]+$/.test(optionName)
+      /^[a-zA-Zก-๏\s]+$/.test(optionName) &&
+      optionList.length <= 15
     ) {
       const number = numberOfOption + 1;
       const addOption = {
@@ -440,7 +451,7 @@ const EditMenuPage: React.FC = () => {
                   border border-solid border-gray-300 rounded focus:bg-white focus:border-blue-600 focus:outline-none"
                   placeholder="ชื่อเมนูอาหาร"
                   onChange={inputFoodName}
-                  maxLength={10}
+                  maxLength={30}
                   value={foodName}
                 />
                 <label className="inline-block text-xs mt-2 text-rose-600">
@@ -529,7 +540,7 @@ const EditMenuPage: React.FC = () => {
                   border border-solid border-gray-300 rounded focus:bg-white focus:border-blue-600 focus:outline-none"
                       placeholder="ประเภทของเมนูอาหาร"
                       onChange={inputNewFoodType}
-                      maxLength={30}
+                      maxLength={15}
                       value={newFoodType}
                     />
                   </div>
@@ -619,7 +630,7 @@ const EditMenuPage: React.FC = () => {
                                 className="block w-full px-3 py-1.5 text-sm font-normal text-gray-700 bg-white mb-2
                                   border border-solid border-gray-300 rounded focus:bg-white focus:border-blue-600 focus:outline-none"
                                 placeholder="ชื่อตัวเลือก"
-                                maxLength={10}
+                                maxLength={15}
                                 value={optionName}
                                 onChange={optionNameInput}
                               />
@@ -712,6 +723,7 @@ const EditMenuPage: React.FC = () => {
                                   className="block w-[40%] px-3 py-1.5 text-sm font-normal text-black bg-gray-100
                                            rounded focus:outline-none"
                                   placeholder="ตัวเลือก"
+                                  maxLength={15}
                                   onChange={handleAddChoiceChange}
                                   value={addChoiceData}
                                 />
@@ -827,6 +839,7 @@ const EditMenuPage: React.FC = () => {
               className="block w-[90%] h-[90%] px-3 py-1.5 text-sm font-normal text-gray-700 bg-white
               border border-solid border-gray-300 rounded focus:bg-white focus:border-blue-600 focus:outline-none"
               placeholder="คำอธิบาย..."
+              maxLength={500}
               onChange={inputDescription}
               value={description}
             />
@@ -836,12 +849,12 @@ const EditMenuPage: React.FC = () => {
             <div className="flex flex-row justify-start w-full">
               <div className="flex ml-5 mt-1 text-xl ">ราคา</div>
               <input
-                type="number"
+                type="text"
                 className="flex ml-5 mb-5 block px-3 py-1.5 text-md font-normal text-gray-700 bg-white appearance-none
                   border border-solid border-gray-300 rounded focus:bg-white focus:border-blue-600 focus:outline-none"
                 placeholder="ราคา..."
                 onChange={handlePriceChange}
-                value={price}
+                value={String(price)}
               />
             </div>
           ) : null}
