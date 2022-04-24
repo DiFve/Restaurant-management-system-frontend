@@ -6,7 +6,7 @@ import CartPageComponents from './CartComponents';
 
 interface Receipt {
   orderName: string;
-  detail: Array<string>;
+  detail: Array<any>;
   price: Number;
   quantity: Number | undefined;
   menuType: string | undefined;
@@ -38,6 +38,16 @@ const OrderReceipt: React.FC<Receipt> = (props) => {
 
   }
 
+  // detail.map((element: any) => {
+  //   console.log(element.option)
+  //   element.option.map((dataDetail: any) => {
+  //     if (dataDetail != "") {
+  //       console.log(dataDetail)
+  //       console.log("----")
+  //     }
+  //   })
+  // })
+
   if (menuType == "a-la-carte") {
     if (quantity != 0 && quantity != undefined) {
       return (
@@ -46,19 +56,21 @@ const OrderReceipt: React.FC<Receipt> = (props) => {
             <label className="text-xl">{orderName}</label>
             <div className="pl-[4%]">
               <label className="text-base">{
-                detail.map((element) => {
+                detail.map((element: any) => {
+                  //element.option.map((dataDetail: any) => {
                   if (element != "") {
                     return (
                       <div className="flex flex-col">
-                        <label className="text-base"> {"* " + element} </label>
+                        <label className="text-base"> {"* " + element.option} </label>
                       </div>
                     )
                   }
+                  // })
 
                 })
               }</label>
             </div>
-            <button className="flex flex-row">
+            <button className="flex flex-row" onClick={deleteMenu}>
               <label className="text-base ml-[50%] text-red-600"> ลบ </label>
             </button>
 

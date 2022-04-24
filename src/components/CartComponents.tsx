@@ -50,7 +50,7 @@ const CartPageComponents: React.FC = () => {
             //console.log(getTableID[0].tableNumber)
             const res = await getItemInCart((userTableNumber).toString())
             setAllItem(res?.data.detail)
-            console.log(res?.data.detail)
+            //console.log(res?.data.detail)
             //console.log(res?.data.detail[0].detail)
         }
         getItemCart()
@@ -60,7 +60,7 @@ const CartPageComponents: React.FC = () => {
     getAllItem.map((priceMenu: any) => {
         totalPrice = totalPrice + priceMenu.price
     })
-    console.log(totalPrice)
+    //console.log(totalPrice)
     //console.log(userTableNumber)
 
     const totolCheck = () => {
@@ -76,6 +76,7 @@ const CartPageComponents: React.FC = () => {
     }
     const confirm = async () => {
         const res = await confirmItemInCart((userTableNumber).toString())
+        window.location.reload()
     }
 
 
@@ -92,7 +93,7 @@ const CartPageComponents: React.FC = () => {
                                     //<div></div>
                                     <OrderReceipt
                                         orderName={element.foodName}
-                                        detail={element.detail[0].option}
+                                        detail={element.detail}
                                         price={element.price} quantity={element.quantity}
                                         menuType={menuType}
                                         tableNumber={userTableNumber}
