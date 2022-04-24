@@ -17,7 +17,14 @@ const AddMenuPage: React.FC = () => {
       additionPrice: 0,
     },
   ]);
-  const [foodType, SetfoodType] = useState(["hee", "kuy", "other"]);
+  const [foodType, SetfoodType] = useState([
+    "อาหารประเภทข้าว",
+    "อาหารประเภทเส้น",
+    "ของหวาน",
+    "ของทานเล่น",
+    "เครื่องดื่ม",
+    "other",
+  ]);
   const [foodTypeSelected, setFoodTypeSelected] = useState("other");
   const [newFoodType, setNewFoodType] = useState("");
   const [addChoiceData, setAddChoiceData] = useState("");
@@ -74,7 +81,9 @@ const AddMenuPage: React.FC = () => {
   };
 
   const handlePriceChange = (event: any) => {
-    setPrice(event.target.value);
+    if(parseInt(event.target.value) != NaN &&
+    Number(event.target.value) >= 0)
+    setPrice(Number(event.target.value));
   };
 
   const inputFoodType = (event: any) => {
@@ -160,7 +169,7 @@ const AddMenuPage: React.FC = () => {
         price: addPrice,
         status: addStatus,
       };
-      console.log(newMenu)
+      console.log(newMenu);
       await addMenu(newMenu);
       navigate("/ManagerMenu");
     }
@@ -765,12 +774,12 @@ const AddMenuPage: React.FC = () => {
             <div className="flex flex-row justify-start w-full">
               <div className="flex ml-5 mt-1 text-xl ">ราคา</div>
               <input
-                type="number"
+                type="text"
                 className="flex ml-5 mb-5 block px-3 py-1.5 text-md font-normal text-gray-700 bg-white appearance-none
                   border border-solid border-gray-300 rounded focus:bg-white focus:border-blue-600 focus:outline-none"
                 placeholder="ราคา..."
                 onChange={handlePriceChange}
-                value={price}
+                value={String(price)}
               />
             </div>
           ) : null}
