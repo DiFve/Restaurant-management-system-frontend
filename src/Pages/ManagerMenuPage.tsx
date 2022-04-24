@@ -3,7 +3,7 @@ import MenuComponent from "../components/ManagerMenuComponent";
 import AddIcon from "../components/img/add_icon.jpg";
 import searchIcon from "../components/img/search_icon.png";
 import { useNavigate } from "react-router-dom";
-import { alacarteMenu, allMenu, buffetMenu } from "../api/menu";
+import { allMenu } from "../api/menu";
 import { useEffect, useState } from "react";
 
 const ManagerMenuPage: React.FC = () => {
@@ -118,6 +118,7 @@ const ManagerMenuPage: React.FC = () => {
                 name={element["foodName"]}
                 price={element["price"]}
                 pic={element["image"]}
+                status={element["status"]}
               />
             );
           })}
