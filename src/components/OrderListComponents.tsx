@@ -1,33 +1,42 @@
 import { useNavigate } from "react-router-dom";
+import ReceiptComponents from "./ReceiptComponents";
 
 interface listOrder {
     order: string;
     status: string;
     timeOrder: string | undefined;
+    id: string | undefined;
 }
 
 const checkStatus = (status: string) => {
-    if (status == "Working") {
-        return <div className="w-[10%] h-full  bg-green-600 border-r-[2px] border-black"> </div>
+    if (status == "cooking") {
+        return <div className="w-[10%] h-full  bg-yellow-300 border-r-[2px] border-black"> </div>
     }
     else {
-        return <div className="w-[10%] h-full  bg-gray-300 border-r-[2px] border-black"> </div>
+        return <div className="w-[10%] h-full  bg-green-300 border-r-[2px] border-black"> </div>
     }
 
 }
 
 const OrderListComponents: React.FC<listOrder> = (props) => {
-    const { order, timeOrder, status } = props
-    var navigate = useNavigate();
+    //console.log(props)
+    const { order, timeOrder, status, id } = props
+    var goCart = useNavigate();
+    var goReceipt = useNavigate();
     const onClickOrder = () => {
-        navigate("/cart");
+        goCart("/cart");
     };
+    const onClickReceipt = () => {
+        goReceipt(`/receipt/${id}`)
+    }
+
     var checkGotoOrder = false
-    if (status == "Working") { checkGotoOrder = true }
+    if (status == "cooking") { checkGotoOrder = true }
+
 
     return (
 
-        <button onClick={checkGotoOrder ? onClickOrder : undefined} className="flex flex-row h-[15%] w-[95%] mb-[10%] mt-[3%] ml-[2%] border-[2px] border-black">
+        <button onClick={checkGotoOrder ? onClickOrder : onClickReceipt} className="flex flex-row h-[15%] w-[95%] mb-[10%] mt-[3%] ml-[2%] border-[2px] border-black">
             {checkStatus(status)}
             <div className="flex flex-col w-[60%] h-full">
                 <div className="w-full flex justify-center ]">

@@ -47,3 +47,18 @@ export const confirmItemInCart = async (tableNumber: string | undefined) => {
         console.log('put item in cart error')
     }
 }
+
+export const getCartOrder = async (tableNumber: string | undefined) => {
+    try {
+        const res = await api(`${config.apiURL}seeOrderTable/${tableNumber}`, {
+            headers: {},
+            data: {},
+            method: "get",
+        });
+        //console.log(res)
+        return res
+    }
+    catch (error) {
+        console.log('get CartOrder in cart error')
+    }
+}

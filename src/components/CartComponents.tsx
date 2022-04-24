@@ -2,7 +2,7 @@
 import OrderReceipt from "./OrderReceipt"
 import DontHaveOrder from './img/DontHaveOrder.png'
 import { useEffect, useState } from 'react'
-import { getItemInCart, deleteItemInCart, confirmItemInCart } from '../api/cart'
+import { getItemInCart, deleteItemInCart, confirmItemInCart, getCartOrder } from '../api/cart'
 import jwtDecode from "jwt-decode"
 import { useNavigate } from "react-router-dom"
 
@@ -42,6 +42,7 @@ const CartPageComponents: React.FC = () => {
     };
 
     const [getAllItem, setAllItem] = useState<any>(objAllItemMenu)
+
     const decodedJWT: any = jwtDecode(localStorage.getItem('token') || '')
     const userTableNumber = decodedJWT.table
 
@@ -57,20 +58,21 @@ const CartPageComponents: React.FC = () => {
         }
     }
     const confirm = async () => {
-        const res = await confirmItemInCart((1).toString())
+        const res = await confirmItemInCart((3).toString())
     }
 
     useEffect(() => {
         const getItemCart = async () => {
             //console.log(getTableID[0].tableNumber)
-            const res = await getItemInCart((1).toString())
+            const res = await getItemInCart((3).toString())
             setAllItem(res?.data.detail)
-            //console.log(res?.data.detail)
+            console.log(res?.data.detail)
             //console.log(res?.data.detail[0].detail)
         }
         getItemCart()
+
     }, []);
-    console.log(getAllItem)
+    //console.log(getAllItem)
 
     if (getAllItem != 0) {
         return (

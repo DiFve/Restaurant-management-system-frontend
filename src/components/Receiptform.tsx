@@ -9,21 +9,11 @@ interface Receipt {
   menuType: string | undefined;
 
 }
-const OrderReceipt: React.FC<Receipt> = (props) => {
+const Receiptform: React.FC<Receipt> = (props) => {
   //console.log({ props })
   const { orderName, detail, price, quantity, menuType } = props
 
-  const [getCartOreder, setCartOreder] = useState<any>([])
-  useEffect(() => {
-    const getCOrder = async () => {
-      const res = await getCartOrder((3).toString())
-      setCartOreder(res?.data.order)
-      //console.log(res?.data.order)
-      console.log(res?.data.order[0].orderStatus)
-    }
-    getCOrder()
 
-  }, []);
 
   if (menuType == "alacarte") {
     if (quantity != 0 && quantity != undefined) {
@@ -45,10 +35,6 @@ const OrderReceipt: React.FC<Receipt> = (props) => {
                 })
               }</label>
             </div>
-            <button className="flex flex-row">
-              <label className="text-base ml-[50%] text-red-600"> ลบ </label>
-            </button>
-
           </div>
 
           <div className="w-[20%] flex flex-col items-end">
@@ -72,9 +58,6 @@ const OrderReceipt: React.FC<Receipt> = (props) => {
         <div className="p-[4%] mt-[3%] flex justify-between ">
           <div className="w-[65%] ">
             <label className="text-xl">{orderName}</label>
-            <button className="flex flex-row">
-              <label className="text-base ml-[50%] text-red-600"> ลบ </label>
-            </button>
           </div>
           <div className="w-[20%] flex flex-col items-end">
             <label className="text-2xl"> {"X" + quantity} </label>
@@ -93,4 +76,4 @@ const OrderReceipt: React.FC<Receipt> = (props) => {
 
 
 }
-export default OrderReceipt;
+export default Receiptform;

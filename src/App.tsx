@@ -75,7 +75,7 @@ function App() {
           }
         />
         <Route
-          path="/receipt"
+          path="/receipt/:id"
           element={
             <ProtectedRoutes
               authenticationPath="/login"
