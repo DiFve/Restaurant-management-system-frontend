@@ -1,11 +1,7 @@
-<<<<<<< HEAD
 import config from "../config.json";
 import React, { useEffect, useState } from "react";
 import { getFoodInfo } from "../api/food";
 import { useNavigate, useParams } from "react-router-dom";
-=======
-import React, { useEffect } from 'react'
->>>>>>> 7c4caf75f05dacca4b2acf93bb92f520d3404123
 
 interface Order {
   tableNumber: string | undefined;
