@@ -41,12 +41,38 @@ export const alacarteMenu = async () => {
   }
 };
 
-export const addMenu = async () => {
+export const addMenu = async (newMenu:object) => {
   try {
     const result = await api(`${apiURL}addMenu`, {
       headers: {},
-      data: {foodName:"",type:[],description:"",Image:"",foodType:"",detail:""},
+      data: newMenu,
       method: "POST",
+    });
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const editMenu = async (id:string | undefined, newMenu:object) => {
+  try {
+    const result = await api(`${apiURL}editMenu/${id}`, {
+      headers: {},
+      data: newMenu,
+      method: "PUT",
+    });
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const deleteMenu = async (id:string | undefined) => {
+  try {
+    const result = await api(`${apiURL}deleteMenu/${id}`, {
+      headers: {},
+      data: {},
+      method: "DELETE",
     });
     return result;
   } catch (error) {

@@ -21,6 +21,7 @@ export const addFoodToCart = async (tableNumber:number,body:any)=>{
             'detail':body
         }
         const res = await api(`${config.apiURL}addItemToCart/${tableNumber.toString()}`,{
+        //const res = await api(`${config.apiURL}addItemToCart/1`,{
             headers:{},
             data:detailBody,
             method:"PUT",
