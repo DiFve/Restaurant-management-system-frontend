@@ -15,10 +15,6 @@ const MenuPageBody: React.FC<menuType> = (props) => {
     const [filter,setFilter] = useState('all')
     const [filMenu,setFilMenu] = useState<any>([])
     const [search,setSearch] = useState<string>('')
-    const decodedJWT:any = jwtDecode(localStorage.getItem('token') || '')
-    const userTableNumber = decodedJWT.table
-    const userFoodType = decodedJWT.foodType || ''
-    const navigate = useNavigate()
 
     const optionHandler = (event:any) =>{
         setFilter(event.target.value)
@@ -29,9 +25,6 @@ const MenuPageBody: React.FC<menuType> = (props) => {
     }
     useEffect(() => {
         const getMenu = async () => {
-            if(userFoodType != menuType){
-                navigate(`/menu/${userFoodType}`)
-            }
             if(menuType === 'buffet'){
                 var res = await buffetMenu()
             }
