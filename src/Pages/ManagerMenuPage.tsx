@@ -20,7 +20,6 @@ const ManagerMenuPage: React.FC = () => {
     navigate("/ManagerMenu/addMenu");
   };
 
-
   useEffect(() => {
     const getMenu = async () => {
       var res = await allMenu();
@@ -32,24 +31,23 @@ const ManagerMenuPage: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const filterChange=()=>{
-      var newMenu:any = []
+    const filterChange = () => {
+      var newMenu: any = [];
       if (menuTypeSelected != "all") {
         menu.filter((element: any) => {
           if (element.foodType.includes(menuTypeSelected)) {
             newMenu.push(element);
           }
         });
-        setFillMenu(newMenu)
-      } 
-      else {
-        newMenu = menu
-        setFillMenu(newMenu)
+        setFillMenu(newMenu);
+      } else {
+        newMenu = menu;
+        setFillMenu(newMenu);
       }
-    }
-    filterChange()
-    console.log(fillMenu)
-  },[menuTypeSelected])
+    };
+    filterChange();
+    console.log(fillMenu);
+  }, [menuTypeSelected]);
 
   return (
     <div>
@@ -88,6 +86,7 @@ const ManagerMenuPage: React.FC = () => {
           {fillMenu.map((element: any) => {
             return (
               <MenuComponent
+                id={element['_id']}
                 name={element["foodName"]}
                 price={element["price"]}
                 pic={element["image"]}

@@ -19,6 +19,7 @@ import ManagerMenuPage from "./Pages/ManagerMenuPage";
 import EmployeeListPage from "./Pages/EmployeeListPage";
 import AddMenuPage from "./Pages/AddMenuPage";
 import FoodPage from "./Pages/FoodPage";
+import EditPage from "./Pages/editMenuPage"
 import AuthPage from "./Pages/AuthPage";
 import CartPage from "./Pages/CartPage";
 function App() {
@@ -42,6 +43,7 @@ function App() {
         <Route path="/ManagerMenu/addMenu" element={<AddMenuPage />} />
         <Route path="/EmployeeMain" element={<EmployeeMainPage/>} />
         <Route path="/EmployeeMain/OrderList/:id" element={<OrderListPage/>} />
+
         <Route
           path="/menu/:type"
           element={
@@ -69,6 +71,16 @@ function App() {
               authenticationPath="/login"
               outlet={<FoodPage />}
               role="customer"
+            />
+          }
+        />
+        <Route
+          path="/editMenu/:id"
+          element={
+            <ProtectedRoutes
+              authenticationPath="/login"
+              outlet={<EditPage />}
+              role="employee"
             />
           }
         />

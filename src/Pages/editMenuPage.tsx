@@ -2,11 +2,15 @@ import React, { useState, useEffect } from "react";
 import api from "../api/apiClient";
 import config from "../config.json";
 import HeaderBar from "../components/RestaurantManagerBar";
+import { useParams } from "react-router-dom";
+import { getFoodInfo } from "../api/food";
 
-const AddMenuPage: React.FC = () => {
+const EditMenuPage: React.FC = () => {
+
+  const {id} = useParams();
   const [showPopUp, setShowPopUp] = React.useState(false);
   const [foodName, setFoodName] = useState("");
-  const [describtion, setDescribtion] = useState("");
+  const [description, setDescription] = useState("");
   const [optionList, setOptionList] = useState<any>([]);
   const [choiceList, setChoiceList] = useState([
     {
@@ -35,6 +39,63 @@ const AddMenuPage: React.FC = () => {
   const [imgData, setImgData] = useState<any>(null);
   const [imgURL, setImgURL] = useState("");
 
+  useEffect(() => {
+    const getFood = async () => {
+      const res = await getFoodInfo(id);
+      const foodData = res?.data;
+      setFoodName(foodData.menu.foodName);
+
+      if (foodData.menu.foodType === "a-la-carte") {
+        setIsAlacarte(true);
+      } else if (foodData.menu.foodType === "buffet") {
+        setIsBuffet(true);
+      } else {
+        setIsAlacarte(true);
+        setIsBuffet(true);
+      }
+      setImgData(config.imageURL + foodData.menu.image);
+
+      const obj = foodData.menu.detail[0]
+
+      let choiceNumberID:number = 1
+      let optionNumberID:number = 1
+      const historyOption:Array<any> = []
+      obj.topicName.map((value:any,index:number)=>{
+        var optionIndex = index
+        const choiceNameList = obj.option[optionIndex]
+        const addPriceList = obj.additionalPrice[optionIndex]
+        const allChoice:Array<any> = []
+        
+        choiceNameList.map((val:any,index:number)=>{
+            var choiceIndex = index
+            const newChoice = {
+                id:choiceNumberID,
+                name:val,
+                additionPrice:Number(addPriceList[choiceIndex])
+            }
+            allChoice.push(newChoice)
+            choiceNumberID = choiceNumberID+1
+        })
+
+        const newOption = {
+            id:optionNumberID,
+            type:obj.choice[optionIndex],
+            name:value,
+            choice:allChoice,
+            required:obj.require[optionIndex],
+        }
+        historyOption.push(newOption)
+        optionNumberID = optionNumberID+1
+      })
+      setOptionList(historyOption)
+      setNumberOfChoice(choiceNumberID)
+      setNumberOfOption(optionNumberID)
+      setDescription(foodData.menu.description);
+      setPrice(foodData.menu.price);
+    };
+    getFood();
+  }, []);
+
   const inputPicture = async (event: any) => {
     if (event.target.files[0]) {
       setPicture(event.target.files[0]);
@@ -56,7 +117,7 @@ const AddMenuPage: React.FC = () => {
     }
   };
 
-  const inputFoodName = (event: any) => {
+  const inputFoodName = (event: React.FormEvent<HTMLInputElement>) => {
     setFoodName(event.currentTarget.value);
   };
 
@@ -84,12 +145,11 @@ const AddMenuPage: React.FC = () => {
   };
 
   const inputDescribtion = (event: any) => {
-    setDescribtion(event.currentTarget.value);
+    setDescription(event.currentTarget.value);
   };
 
   const onClickConfirm = () => {
-    
-    const inputFoodName: string = foodName
+    const inputFoodName: string = foodName;
     const type: Array<any> = [];
     if (foodTypeSelected === "other") {
       type.push(newFoodType);
@@ -107,7 +167,7 @@ const AddMenuPage: React.FC = () => {
       foodType = "a-la-carte buffet";
     }
 
-    const describt: string = describtion;
+    const describt: string = description;
 
     const topicName: Array<any> = [];
     const require: Array<any> = [];
@@ -136,7 +196,7 @@ const AddMenuPage: React.FC = () => {
         require: require,
       },
     ];
-    const pric: number = price
+    const pric: number = price;
 
     console.log(detail);
   };
@@ -714,7 +774,7 @@ const AddMenuPage: React.FC = () => {
               border border-solid border-gray-300 rounded focus:bg-white focus:border-blue-600 focus:outline-none"
               placeholder="คำอธิบาย..."
               onChange={inputDescribtion}
-              value={describtion}
+              value={description}
             />
           </div>
 
@@ -759,4 +819,4 @@ const AddMenuPage: React.FC = () => {
   );
 };
 
-export default AddMenuPage;
+export default EditMenuPage;
