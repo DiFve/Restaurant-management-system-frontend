@@ -1,4 +1,4 @@
-import menu_placeholder from "./img/menu_placeholder.jpg";
+import menu_placeholder from "./img/menu_placeholder.png"
 import plus_icon from "./img/plus_icon.png";
 import config from "../config.json";
 import { useNavigate } from "react-router-dom";
@@ -18,21 +18,21 @@ const MenuComponent: React.FC<Menu> = (props) => {
     navigate(`/food/${id}`)
   }
   return (
-    <div className="flex flex-row mt-[1%] ml-[2.5%] h-[18%] w-[95%] bg-lightYellow">
+    <div className="flex flex-row mt-[1%] ml-[2.5%] h-[18%] w-[95%] bg-lightYellow border-[1px] border-black rounded-md min-h-[83px]">
       <div className="flex flex-row w-full">
         <div className="flex h-full max-w-[120px] w-[100%] shrink justify-center items-center">
           <img
-            src={config.imageURL+pic}
+            src={pic!=''?config.imageURL+pic:menu_placeholder}
             alt=""
-            className="h-[90%] w-[90%] border border-black bg-white"
+            className="h-[90%] w-[90%] border border-black bg-white rounded-md"
           />
         </div>
-        <div className="h-full w-[60%] text-center">
+        <div className="h-full w-[100%] text-center ">
           <div className="flex flex-col">
-            <div className="flex w-full h-[56px] items-center justify-center mt-[2%]">
+            <div className="flex w-full h-[80%] items-center justify-center pt-[2%] ">
               <p className="text-xl h-full w-full">{name}</p>
             </div>
-            <div className="w-full h-auto text-right pr-[3%]">
+            <div className="w-full h-[20%] text-right pr-[3%] mb-[7%] ">
               <p className="text-xl">{price + '฿'}</p>
             </div>
           </div>

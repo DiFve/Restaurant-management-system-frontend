@@ -27,6 +27,11 @@ const HomeTest: React.FC = () => {
     navigate("/EmployeeMain");
   };
 
+  const onClickEmployeeListPage = () => {
+    navigate("/EmployeeList");
+  };
+
+
   const onClickQRCodeHandle = async () => {
     const res = await makeQR(69, "buffet");
     console.log(res?.data.qrImage);
@@ -39,7 +44,7 @@ const HomeTest: React.FC = () => {
     const getData = async () => {
       const res = await home();
       const decoded: Object = jwtDecode(res?.data);
-      //console.log(decoded)
+      console.log(decoded)
       setUserData(Object.values(decoded)[1]);
       const menu = await allMenu();
       setMenuPic(`${imageUrl}${menu?.data[4].image}`);
@@ -73,7 +78,9 @@ const HomeTest: React.FC = () => {
               EmployeeMainPage
             </span>
           </button>
-          <button className="flex flex-row bg-white w-10/12 h=10/12 mx-auto my-auto py-10 border-2 border-gray-300 rounded-lg shadow-md justify-center hover:border-4 hover:bg-gray-200">
+          <button
+            onClick={onClickEmployeeListPage} 
+            className="flex flex-row bg-white w-10/12 h=10/12 mx-auto my-auto py-10 border-2 border-gray-300 rounded-lg shadow-md justify-center hover:border-4 hover:bg-gray-200">
             <img className="h-10 w-10 inline align-center" src={EmployeeIcon} />
             <span className="pl-10 font-semibold text-3xl text-green-600">
               Employee
