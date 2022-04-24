@@ -1,5 +1,5 @@
 import search_icon from './img/search_icon.png'
-import menu_placeholder from './img/menu_placeholder.jpg'
+import menu_placeholder from './img/menu_placeholder.png'
 import MenuComponent from './MenuComponent'
 import { useEffect, useState } from 'react'
 import { alacarteMenu, allMenu, buffetMenu } from '../api/menu'
@@ -43,9 +43,13 @@ const MenuPageBody : React.FC<menuType> = (props) => {
                 })
             });
             setoptions(optionArr)
-
         }
         getMenu()
+        const cycleGetMenu = setInterval(()=>{
+            console.log('re-request Menu')
+            getMenu()
+        },10000)
+        return ()=> clearInterval(cycleGetMenu)
     }, []);
     useEffect(()=>{
         const filterChange=()=>{
@@ -79,8 +83,8 @@ const MenuPageBody : React.FC<menuType> = (props) => {
     },[filter,search])
     return(
         <div className="flex flex-col w-full h-full">
-            <div className="flex flex-row h-[55px] w-full mt-[3%] bg-red-200 items-center justify-center">
-                <div className='flex flex-row w-[90%] h-full bg-blue-200'>
+            <div className="flex flex-row h-[55px] w-full mt-[3%] items-center justify-center">
+                <div className='flex flex-row w-[90%] h-full'>
                     <div className="flex basis-3/4 h-full items-center">
                         <img src={search_icon} alt="search_icon" className='h-[65%]'/>
                         <input type="text" className="h-[70%] w-[70%] indent-2.5 focus:outline-none" placeholder='Search...' onChange={searchHandler}/>
