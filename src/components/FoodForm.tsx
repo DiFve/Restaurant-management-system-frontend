@@ -52,7 +52,6 @@ const FoodForm : React.FC<idProps> = (props) =>{
                     element=element
                 }
             });
-            console.log(foodData.menu)
             setFoodInfo(foodData.menu)
             setFoodDetail(foodData.menu.detail[0])
             setFoodPic(`${config.imageURL}${foodData.menu.image}`)
@@ -276,8 +275,8 @@ const FoodForm : React.FC<idProps> = (props) =>{
                                         <label htmlFor="">Price :&nbsp;{foodPrice * number}</label>
                                     </div>
                                     <div  className="flex h-[20%] w-[100%] justify-center items-center text-center">
-                                        <button className="flex bg-headerRed h-[50%] w-[30%] text-center text-xl text-white justify-center items-center border-[2px]" onClick={submitHandler}>confirm</button>
-                                        <button className="flex bg-headerRed h-[50%] w-[30%] text-center text-xl text-white justify-center items-center border-[2px] ml-[5%]" onClick={popupHandler}>cancel</button>
+                                        <button className="flex bg-headerRed h-[50%] w-[30%] text-center text-xl text-white justify-center items-center border-[2px] " onClick={popupHandler}>cancel</button>
+                                        <button className="flex bg-headerRed h-[50%] w-[30%] text-center text-xl text-white justify-center items-center border-[2px] ml-[5%]" onClick={submitHandler}>confirm</button>
                                     </div>
                                 </div>
                             </div>

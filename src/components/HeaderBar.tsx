@@ -31,7 +31,7 @@ const HeaderBar: React.FC<HeaderName> = (props) => {
         <img
           src={home_icon}
           alt="res_headbar_icon"
-          className="rounded-[70%] max-w-[46px] w-[40%] h-[50%]"
+          className="rounded-[70%] max-w-[46px] w-[40%] h-[50%] min-h-[46px]"
           onClick={homeClickHandler}
         />
       </div>
