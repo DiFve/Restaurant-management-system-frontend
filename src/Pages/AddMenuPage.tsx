@@ -301,7 +301,7 @@ const AddMenuPage: React.FC = () => {
 
   const handleAddOptionConfirm = () => {
     if (
-      optionName.length > 0 &&
+      optionName.length > 0 && optionName.length <= 15 &&
       addChoiceData.length === 0 &&
       editChoiceID === 0 &&
       /^[a-zA-Zก-๏\s]+$/.test(optionName) &&
@@ -339,7 +339,7 @@ const AddMenuPage: React.FC = () => {
 
   return (
     <div>
-      <HeaderBar name="เพิ่มเมนูอาหาร"></HeaderBar>
+      <HeaderBar name="เพิ่มเมนูอาหาร" pathback=""></HeaderBar>
       <form className="flex flex-col w-full h-auto" onSubmit={onClickConfirm}>
         <div className="flex flex-row flex-wrap w-full h-auto">
           {/*image input*/}
