@@ -15,7 +15,7 @@ const MenuPageBody: React.FC<menuType> = (props) => {
     const [filter,setFilter] = useState('all')
     const [filMenu,setFilMenu] = useState<any>([])
     const [search,setSearch] = useState<string>('')
-
+    const navigate = useNavigate()
     const optionHandler = (event:any) =>{
         setFilter(event.target.value)
     }
@@ -23,8 +23,12 @@ const MenuPageBody: React.FC<menuType> = (props) => {
         console.log(event.target.value)
         setSearch(event.target.value)
     }
+    const gotocart = (event:any) =>{
+        navigate('/cart')
+    }
     useEffect(() => {
         const getMenu = async () => {
+            console.log(menuType)
             if(menuType === 'buffet'){
                 var res = await buffetMenu()
             }
@@ -126,7 +130,7 @@ const MenuPageBody: React.FC<menuType> = (props) => {
             </div>
             <div className='flex h-[16%] w-[100%] justify-center items-center'>
                 <div className='bg-headerRed h-[42px] w-[186px] text-center border-[2px] border-black rounded-md'>
-                    <button className=''>
+                    <button className='' onClick={gotocart}>
                         <label className='text-3xl text-white'> Your Cart </label>
                     </button>
                 </div>
