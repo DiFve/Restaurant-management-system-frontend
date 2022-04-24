@@ -50,7 +50,7 @@ const CartPageComponents: React.FC = () => {
             //console.log(getTableID[0].tableNumber)
             const res = await getItemInCart((userTableNumber).toString())
             setAllItem(res?.data.detail)
-            console.log(res?.data.detail)
+            //console.log(res?.data.detail)
             //console.log(res?.data.detail[0].detail)
         }
         getItemCart()
@@ -58,11 +58,11 @@ const CartPageComponents: React.FC = () => {
     }, []);
 
     getAllItem.map((priceMenu: any) => {
-        totalPrice = totalPrice + priceMenu.price
+        totalPrice = totalPrice + (priceMenu.price * priceMenu.quantity)
     })
-    console.log(totalPrice)
+    //console.log(totalPrice)
     //console.log(userTableNumber)
-
+    console.log(totalPrice)
     const totolCheck = () => {
         if (totalPrice > 0) {
             return (
@@ -76,6 +76,7 @@ const CartPageComponents: React.FC = () => {
     }
     const confirm = async () => {
         const res = await confirmItemInCart((userTableNumber).toString())
+        window.location.reload()
     }
 
 
@@ -92,7 +93,7 @@ const CartPageComponents: React.FC = () => {
                                     //<div></div>
                                     <OrderReceipt
                                         orderName={element.foodName}
-                                        detail={element.detail[0].option}
+                                        detail={element.detail}
                                         price={element.price} quantity={element.quantity}
                                         menuType={menuType}
                                         tableNumber={userTableNumber}
@@ -101,7 +102,7 @@ const CartPageComponents: React.FC = () => {
                                     //<OrderReceipt orderName={element.orderName} detail={element.detail} price={element.price} quantity={element.quantity} menuType={menuType} />
                                 )
                             })}
-                            {totolCheck}
+                            {totolCheck()}
                         </div>
 
                     </div>
@@ -110,14 +111,14 @@ const CartPageComponents: React.FC = () => {
                         <div className="flex justify-center w-[40%]">
                             <div className='bg-headerRed h-[70%] w-[70%] min-h-[35px] min-w-[105px] max-w-[250px] max-h-[40px] text-center border-[2px] border-black' >
                                 <button className='pt-[3%] ' onClick={onClickBack}>
-                                    <label className='text-xl text-white '> Back </label>
+                                    <label className='text-xl text-white '> กลับ </label>
                                 </button>
                             </div>
                         </div>
                         <div className="flex justify-center w-[40%] ">
                             <div className='bg-headerRed h-[70%] w-[70%] min-h-[35px] min-w-[105px] max-w-[250px] max-h-[40px] text-center border-[2px] border-black'>
                                 <button className='pt-[3%]' onClick={confirm}>
-                                    <label className='text-xl text-white'> Comfirm </label>
+                                    <label className='text-xl text-white'> ยืนยัน </label>
                                 </button>
                             </div>
                         </div>
@@ -134,11 +135,11 @@ const CartPageComponents: React.FC = () => {
             <div className="flex h-screen w-screen items-center overflow-y-hidden justify-center bg-white ">
                 <div className="h-[95%] w-[95%] flex flex-col justify-center items-center mb-[5%] max-h-[450px] max-w-[650px] "  >
                     <img src={DontHaveOrder} alt="" className="max-h-[450px]" />
-                    <label className="text-2xl flex justify-center ">uh..You don't have</label>
-                    <label className="text-2xl flex justify-center">any order now</label>
-                    <div className='bg-headerRed h-[25%] w-[25%] max-h-[45px] max-w-[300 px] min-w-[100px] text-center border-[2px] border-black mt-[20%]'>
-                        <button className='pt-[3%] ' onClick={onClickBack}>
-                            <label className='text-3xl text-white '> Back </label>
+                    <label className="text-2xl flex justify-center ">โอ๊ ! คุณยังไม่มี</label>
+                    <label className="text-2xl flex justify-center">อะไรในตระก้าเลย</label>
+                    <div className='bg-headerRed h-[25%] w-[40%] max-h-[45px] max-w-[200 px] min-w-[150px] text-center border-[2px] border-black mt-[20%]'>
+                        <button className=' ' onClick={onClickBack}>
+                            <label className='text-3xl text-white '> ดูออเดอร์ </label>
                         </button>
                     </div>
                 </div>
