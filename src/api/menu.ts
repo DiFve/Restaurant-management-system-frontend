@@ -67,6 +67,19 @@ export const editMenu = async (id:string | undefined, newMenu:object) => {
   }
 };
 
+export const deleteMenu = async (id:string | undefined) => {
+  try {
+    const result = await api(`${apiURL}deleteMenu/${id}`, {
+      headers: {},
+      data: {},
+      method: "DELETE",
+    });
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export const MenuType = async () => {
   try {
     const result = await api(`${apiURL}getFoodType`, {
