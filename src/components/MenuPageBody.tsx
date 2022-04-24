@@ -2,18 +2,25 @@ import search_icon from './img/search_icon.png'
 import menu_placeholder from './img/menu_placeholder.png'
 import MenuComponent from './MenuComponent'
 import { useEffect, useState } from 'react'
+import { useNavigate } from "react-router-dom";
 import { alacarteMenu, allMenu, buffetMenu } from '../api/menu'
-interface menuType {
-    menuType: string | undefined
+import jwtDecode from "jwt-decode";
+interface menuType{
+    menuType:string | undefined
 }
 const MenuPageBody: React.FC<menuType> = (props) => {
     var menuType = props.menuType
-    const [menu, setMenu] = useState([])
-    const [options, setoptions] = useState<Array<string>>([])
-    const [filter, setFilter] = useState('all')
-    const [filMenu, setFilMenu] = useState<any>([])
-    const [search, setSearch] = useState<string>('')
-    const optionHandler = (event: any) => {
+    const [menu,setMenu] = useState([])
+    const [options,setoptions] = useState<Array<string>>([])
+    const [filter,setFilter] = useState('all')
+    const [filMenu,setFilMenu] = useState<any>([])
+    const [search,setSearch] = useState<string>('')
+    const decodedJWT:any = jwtDecode(localStorage.getItem('token') || '')
+    const userTableNumber = decodedJWT.table
+    const userFoodType = decodedJWT.foodType || ''
+    const navigate = useNavigate()
+
+    const optionHandler = (event:any) =>{
         setFilter(event.target.value)
     }
     const searchHandler = (event: any) => {
@@ -22,7 +29,10 @@ const MenuPageBody: React.FC<menuType> = (props) => {
     }
     useEffect(() => {
         const getMenu = async () => {
-            if (menuType === 'buffet') {
+            if(userFoodType != menuType){
+                navigate(`/menu/${userFoodType}`)
+            }
+            if(menuType === 'buffet'){
                 var res = await buffetMenu()
             }
             else if (menuType === 'all') {
