@@ -2,11 +2,14 @@ import React, { useState, useEffect } from "react";
 import api from "../api/apiClient";
 import config from "../config.json";
 import HeaderBar from "../components/RestaurantManagerBar";
-import { addMenu } from "../api/menu";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { getFoodInfo } from "../api/food";
+import { deleteMenu,editMenu } from "../api/menu";
 
-const AddMenuPage: React.FC = () => {
+const EditMenuPage: React.FC = () => {
+  const { id } = useParams();
   const [showPopUp, setShowPopUp] = React.useState(false);
+  const [showDeletePopUp, setshowDeletePopUp] = React.useState(false);
   const [foodName, setFoodName] = useState("");
   const [description, setDescription] = useState("");
   const [optionList, setOptionList] = useState<any>([]);
@@ -45,6 +48,79 @@ const AddMenuPage: React.FC = () => {
   const [imgURL, setImgURL] = useState("");
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const getFood = async () => {
+      const res = await getFoodInfo(id);
+      const foodData = res?.data;
+      setFoodName(foodData.menu.foodName);
+
+      if (foodData.menu.foodType === "a-la-carte") {
+        setIsAlacarte(true);
+      } else if (foodData.menu.foodType === "buffet") {
+        setIsBuffet(true);
+      } else {
+        setIsAlacarte(true);
+        setIsBuffet(true);
+      }
+
+      setImgData(config.imageURL + foodData.menu.image);
+      setImgURL(foodData.menu.image);
+
+      if (foodType.includes(foodData.menu.type[0])) {
+        setFoodTypeSelected(foodData.menu.type[0]);
+      } else {
+        SetfoodType([foodData.menu.type[0], ...foodType]);
+        setFoodTypeSelected(foodData.menu.type[0]);
+      }
+
+      const obj = foodData.menu.detail[0];
+
+      let choiceNumberID: number = 1;
+      let optionNumberID: number = 1;
+      const historyOption: Array<any> = [];
+      obj.topicName.map((value: any, index: number) => {
+        var optionIndex = index;
+        const choiceNameList = obj.option[optionIndex];
+        const addPriceList = obj.additionalPrice[optionIndex];
+        const allChoice: Array<any> = [];
+
+        choiceNameList.map((val: any, index: number) => {
+          var choiceIndex = index;
+          const newChoice = {
+            id: choiceNumberID,
+            name: val,
+            additionPrice: Number(addPriceList[choiceIndex]),
+          };
+          allChoice.push(newChoice);
+          choiceNumberID = choiceNumberID + 1;
+        });
+
+        const newOption = {
+          id: optionNumberID,
+          type: obj.choice[optionIndex],
+          name: value,
+          choice: allChoice,
+          required: obj.require[optionIndex],
+        };
+        historyOption.push(newOption);
+        optionNumberID = optionNumberID + 1;
+      });
+      setChoiceList([
+        {
+          id: choiceNumberID,
+          name: "ตัวเลือก",
+          additionPrice: 0,
+        },
+      ]);
+      setOptionList(historyOption);
+      setNumberOfChoice(choiceNumberID);
+      setNumberOfOption(optionNumberID);
+      setDescription(foodData.menu.description);
+      setPrice(foodData.menu.price);
+    };
+    getFood();
+  }, []);
+
   const inputPicture = async (event: any) => {
     if (event.target.files[0] && event.target.files[0].size <= 10000000) {
       const reader = new FileReader();
@@ -81,9 +157,8 @@ const AddMenuPage: React.FC = () => {
   };
 
   const handlePriceChange = (event: any) => {
-    if(parseInt(event.target.value) != NaN &&
-    Number(event.target.value) >= 0)
-    setPrice(Number(event.target.value));
+    if (parseInt(event.target.value) != NaN && Number(event.target.value) >= 0)
+      setPrice(Number(event.target.value));
   };
 
   const inputFoodType = (event: any) => {
@@ -109,6 +184,7 @@ const AddMenuPage: React.FC = () => {
           newFoodType.length > 0 &&
           /^[a-zA-Zก-๏\s]+$/.test(newFoodType)))
     ) {
+      console.log("hello");
       const inputFoodName: string = foodName;
       const type: Array<any> = [];
       if (foodTypeSelected === "อื่น ๆ") {
@@ -169,10 +245,16 @@ const AddMenuPage: React.FC = () => {
         status: addStatus,
       };
       console.log(newMenu);
-      await addMenu(newMenu);
+      await editMenu(id, newMenu);
       navigate("/ManagerMenu");
     }
   };
+
+  const onClickDeleteConfirm = async () =>{
+    setshowDeletePopUp(false)
+    await deleteMenu(id)
+    navigate("/ManagerMenu");
+  }
 
   const onClickCancel = () => {
     navigate("/ManagerMenu");
@@ -339,7 +421,7 @@ const AddMenuPage: React.FC = () => {
 
   return (
     <div>
-      <HeaderBar name="เพิ่มเมนูอาหาร"></HeaderBar>
+      <HeaderBar name="แก้ไขเมนูอาหาร"></HeaderBar>
       <form className="flex flex-col w-full h-auto" onSubmit={onClickConfirm}>
         <div className="flex flex-row flex-wrap w-full h-auto">
           {/*image input*/}
@@ -590,7 +672,7 @@ const AddMenuPage: React.FC = () => {
                                           className="text-sm mx-2"
                                           onClick={handleEditChoiceSubmit}
                                         >
-                                          บันทึก
+                                          ยืนยัน
                                         </button>
                                         <button
                                           type="button"
@@ -689,7 +771,7 @@ const AddMenuPage: React.FC = () => {
                             type="button"
                             onClick={handleAddOptionConfirm}
                           >
-                            ตกลง
+                            ยืนยัน
                           </button>
                         </div>
                       </div>
@@ -819,7 +901,18 @@ const AddMenuPage: React.FC = () => {
 
         {/*button submit*/}
         <div className="flex w-full h-auto justify-center md:justify-end lg:justify-end xl:justify-end">
-          <div className="p-5 w-[200px] h-[100px]">
+          <div className="p-5 w-1/3 max-w-[200px] sm:h-[100px] md:h-[100px] lg:h-[100px] xl:h-[100px] h-[75px]">
+            <button
+              className="rounded-lg w-full h-full border bg-rose-300 shadow-md hover:bg-rose-400"
+              onClick={() => {
+                setshowDeletePopUp(true);
+              }}
+              type="button"
+            >
+              <span className="text ">ลบ</span>
+            </button>
+          </div>
+          <div className="p-5 w-1/3 max-w-[200px] sm:h-[100px] md:h-[100px] lg:h-[100px] xl:h-[100px] h-[75px]">
             <button
               className="rounded-lg w-full h-full border bg-white shadow-md hover:bg-gray-200"
               onClick={onClickCancel}
@@ -828,18 +921,56 @@ const AddMenuPage: React.FC = () => {
               <span className="text ">ยกเลิก</span>
             </button>
           </div>
-          <div className="p-5 w-[200px] h-[100px]">
+          <div className="p-5 w-1/3 max-w-[200px] sm:h-[100px] md:h-[100px] lg:h-[100px] xl:h-[100px] h-[75px]">
             <button
-              className="rounded-lg w-full h-full border bg-green-300 shadow-md hover:bg-green-400"
+              className="rounded-lg w-full h-full border bg-white shadow-md hover:bg-gray-200"
               type="submit"
             >
               <span className="text ">ยืนยัน</span>
             </button>
           </div>
+          {showDeletePopUp ? (
+            <div>
+              <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50">
+                <div className="relative w-auto my-6 mx-auto max-w-3xl">
+                  {/*content*/}
+                  <div className="rounded-lg shadow-lg relative flex flex-col w-full bg-white">
+                    {/*header*/}
+                    <div className="flex flex-row items-center justify-center p-5 border-b border-solid border-slate-200 rounded-t">
+                      <h3 className="text-xl font-semibold">
+                        คุณต้องการลบเมนูนี้หรือไม่ ?
+                      </h3>
+                    </div>
+
+                    {/*footer*/}
+                    <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
+                      <button
+                        className="text-black background-transparent font-semibold px-6 py-2 text-sm mr-1 mb-1 ease-linear transition-all duration-150"
+                        type="button"
+                        onClick={() => {
+                          setshowDeletePopUp(false);
+                        }}
+                      >
+                        ยกเลิก
+                      </button>
+                      <button
+                        className="bg-rose-500 text-white active:bg-rose-600 font-semibold text-sm px-6 py-3 rounded shadow hover:shadow-lg mr-1 mb-1 ease-linear transition-all duration-150"
+                        type="button"
+                        onClick={onClickDeleteConfirm}
+                      >
+                        ยืนยัน
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+            </div>
+          ) : null}
         </div>
       </form>
     </div>
   );
 };
 
-export default AddMenuPage;
+export default EditMenuPage;

@@ -21,6 +21,11 @@ import AddMenuPage from "./Pages/AddMenuPage";
 import FoodPage from "./Pages/FoodPage";
 import AuthPage from "./Pages/AuthPage";
 import CartPage from "./Pages/CartPage";
+<<<<<<< HEAD
+=======
+import OrderReceiptOld from "./Pages/OrderReceiptOld";
+import NewOrderPage from "./Pages/NewOrderPage";
+>>>>>>> 1e83d2ca9862d7f19287bfb7bdfd1f5c9c5da0cb
 function App() {
   return (
     <BrowserRouter>
@@ -41,7 +46,16 @@ function App() {
         <Route path="/EmployeeList" element={<EmployeeListPage />} />
         <Route path="/ManagerMenu/addMenu" element={<AddMenuPage />} />
         <Route path="/EmployeeMain" element={<EmployeeMainPage />} />
+<<<<<<< HEAD
         <Route path="/EmployeeMain/OrderList/:id" element={<OrderListPage />} />
+=======
+        <Route path="/EmployeeMain/NewOrder/:id" element={<NewOrderPage />} />
+        <Route path="/EmployeeMain/Table/:tableNumber" element={<OrderListPage />} />
+        <Route
+          path="/EmployeeMain/Table/:tableNumber/:id"
+          element={<OrderPage />}
+        />
+>>>>>>> 1e83d2ca9862d7f19287bfb7bdfd1f5c9c5da0cb
         <Route
           path="/menu/:type"
           element={
@@ -58,6 +72,26 @@ function App() {
             <ProtectedRoutes
               authenticationPath="/login"
               outlet={<CartPage />}
+              role="customer"
+            />
+          }
+        />
+        <Route
+          path="/orderlist"
+          element={
+            <ProtectedRoutes
+              authenticationPath="/login"
+              outlet={<OrderPage />}
+              role="customer"
+            />
+          }
+        />
+        <Route
+          path="/receipt/:id"
+          element={
+            <ProtectedRoutes
+              authenticationPath="/login"
+              outlet={<OrderReceiptOld />}
               role="customer"
             />
           }
