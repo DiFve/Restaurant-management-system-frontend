@@ -132,7 +132,9 @@ const FoodForm: React.FC<idProps> = (props) => {
             'foodName': foodInfo.foodName
             //'additionalInfo' : additional
         }
-        reqBody.detail.pop()
+        if(topicName.length !=0){
+            reqBody.detail.pop()
+        }
         topicName.map((element: string, index: number) => {
             var choice = {
                 "topicName": '',
@@ -147,6 +149,7 @@ const FoodForm: React.FC<idProps> = (props) => {
         if (props.id !== undefined) {
             reqBody.foodID = props.id
         }
+        console.log(reqBody)
         const res = await addFoodToCart(userTableNumber, reqBody)
         console.log(res)
         navigate(`/menu/${userFoodType}`)
