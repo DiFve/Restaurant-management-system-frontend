@@ -8,7 +8,7 @@ const OrderPage: React.FC = () => {
       {/* Header */}
       <div className="flex flex-col bg-[#dc2626] w-full h-1/6">
         <div className="flex text-center text-white text-4xl font-normal justify-center items-center w-full h-full">
-          <label>Each Order Page</label>
+          <label>{tableNumber}</label>
         </div>
       </div>
       
