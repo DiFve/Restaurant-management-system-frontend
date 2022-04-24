@@ -8,6 +8,7 @@ const AuthPage: React.FC = () => {
   useEffect(() => {
     const data: Object = jwtDecode(token || "");
     localStorage.setItem("token", token || "");
+    navigate(`/menu/${Object.values(data)[3]}`);
   }, []);
   return <div></div>;
 };

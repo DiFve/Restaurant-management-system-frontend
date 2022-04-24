@@ -44,14 +44,10 @@ function App() {
         <Route path="/EmployeeList" element={<EmployeeListPage />} />
         <Route path="/ManagerMenu/addMenu" element={<AddMenuPage />} />
         <Route path="/EmployeeMain" element={<EmployeeMainPage />} />
-        <Route
-          path="/EmployeeMain/OrderList/:tableNumber"
-          element={<OrderListPage />}
-        />
         <Route path="/EmployeeMain/NewOrder/:id" element={<NewOrderPage />} />
-        <Route path="/EmployeeMain/Table/:id" element={<OrderListPage />} />
+        <Route path="/EmployeeMain/Table/:tableNumber" element={<OrderListPage />} />
         <Route
-          path="/EmployeeMain/OrderList/:tableNumber/:id"
+          path="/EmployeeMain/Table/:tableNumber/:id"
           element={<OrderPage />}
         />
         <Route
