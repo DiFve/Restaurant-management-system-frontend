@@ -1,68 +1,79 @@
-import React, { useEffect } from 'react'
-import { getFoodByID } from '../api/food'
+import config from "../config.json";
+import React, { useEffect, useState } from "react";
+import { getFoodInfo } from "../api/food";
+import { useNavigate, useParams } from "react-router-dom";
 
-interface Box {
-    foodID:string,
-    quantity:number,
-    foodStatus:string,
+interface Order {
+  tableNumber: string | undefined;
+  orderNumber: number;
+  orderStatus: string;
+  orderID: string;
 }
 
-const OrderListBox:React.FC<Box> =(props)=>{
-    const {foodID,quantity,foodStatus} = props
+const OrderListBox: React.FC<Order> = (props) => {
+  var obj = {
+    menu: {
+      description: "",
+      detail: [],
+      foodName: "",
+      foodType: "",
+      image: "",
+      price: 0,
+      type: [],
+      _id: "",
+    },
+  };
 
-    // useEffect(()=>{
-        
+  const { tableNumber, orderNumber, orderStatus, orderID } = props;
 
-    //     const getFoodInfo =async () => {
-    //         var res = await getFoodbyID()
-    //         setFoodInfo(res?.data)
-            
+  const navigate = useNavigate();
 
-    //         console.log(res?.data)
-    //     }
-    //     getFoodInfo()
-        
-    // },[])
+  var colorstatus = "";
+  if (orderStatus == "cooking") {
+    colorstatus = "bg-yellow-300 h-full w-full hover:bg-yellow-200";
+  } else if (orderStatus == "complete") {
+    colorstatus = "bg-green-300 h-full w-full hover:bg-green-200";
+  }
 
-    
-    
+  const defaultBox = "grid grid-cols border-2 h-28 ";
 
-    /* Color for Each Status */
-    let colorstatus = ""
-    if(props.foodStatus=="success"){
-        colorstatus = "bg-green-300"
-    }else if(props.foodStatus=="cooking"){
-        colorstatus = "bg-yellow-300"
-    }else if(props.foodStatus=="fail"){
-        colorstatus = "bg-red-300"
-    }else{
-        colorstatus = "bg-slate-500"
-    }
+  const goToOrderPage = () => {
+    navigate(`/EmployeeMain/OrderList/${tableNumber}/${orderID}`);
+  };
 
-    const defaultBox = "grid grid-cols border-2 p-2 " + colorstatus
-
-    return (
-        <div>
-            <div className={defaultBox}> {/**box size for each order */}
-            <div className="flex flex-row">
-                <div className="max-w-[10vw] max-h-[10vh]">
-                    <img
-                        src="https://media.istockphoto.com/photos/plate-of-fried-chicken-on-blue-plaid-towel-picture-id452813985?k=20&m=452813985&s=612x612&w=0&h=8EL4NfG-jGwkAZtfEAY0180mmU6jQoj6I1rZtdo4gy8="
-                        alt="chicken"
-                        className="max-w-[100%] max-h-[100%]"
-                    />
+  return (
+    <div>
+      <div className={defaultBox}>
+        <div className={colorstatus}>
+          <button
+            onClick={goToOrderPage}
+            className="h-full w-full flex flex-col justify-center items-center"
+          >
+            <label className="text-3xl">{orderNumber}</label>
+            <div className="flex flex-row h-auto w-auto">
+              <label>{orderStatus.toUpperCase()}</label>
+              {orderStatus == "cooking" ? (
+                <div className="flex items-center justify-center space-x-1 animate-pulse">
+                  <div></div>
+                  <div className="w-2 h-10 bg-transparent rounded-full text-xl ">
+                    .
+                  </div>
+                  <div className="w-2 h-10 bg-transparent rounded-full text-xl ">
+                    .
+                  </div>
+                  <div className="w-2 h-10 bg-transparent rounded-full text-xl">
+                    .
+                  </div>
                 </div>
-                <div className="flex flex-col  mx-2">
-                    <div>ชื่อ :  {props.foodID}</div>
-                    <div>จำนวน : {props.quantity}</div>
-                    <div>สภานะ :  {props.foodStatus}</div>
-                </div>
-                
+              ) : (
+                ""
+              )}
             </div>
-                
-            </div>
+          </button>
         </div>
-    )
-}
+      </div>
+    </div>
+  );
+};
 
-export default OrderListBox
+export default OrderListBox;
