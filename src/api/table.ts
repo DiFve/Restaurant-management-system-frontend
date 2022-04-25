@@ -29,37 +29,35 @@ export const getTableByID = async (id: string | undefined) => {
   }
 };
 
-export const callEmployee = async(tableNumber:number)=>{
-    try{
-        console.log(tableNumber)
-        const res = await api(`${config.apiURL}pushEmployeeCall`,{
-            headers:{},
-            data:{tableNumber:tableNumber},
-            method:"PUT",
-        })
-        console.log(res)
-        return res
-    }
-    catch(error){
-        console.log('call employee fail');
-    }
-}
+export const callEmployee = async (tableNumber: number) => {
+  try {
+    console.log(tableNumber);
+    const res = await api(`${config.apiURL}pushEmployeeCall`, {
+      headers: {},
+      data: { tableNumber: tableNumber },
+      method: "PUT",
+    });
+    console.log(res);
+    return res;
+  } catch (error) {
+    console.log("call employee fail");
+  }
+};
 
-export const cancelEmployee = async(tableNumber:number)=>{
-    try{
-        console.log(tableNumber)
-        const res = await api(`${config.apiURL}cancelEmployeeCall`,{
-            headers:{},
-            data:{tableNumber:tableNumber},
-            method:"PUT",
-        })
-        console.log(res)
-        return res
-    }
-    catch(error){
-        console.log('call employee fail');
-    }
-}
+export const cancelEmployee = async (tableNumber: number) => {
+  try {
+    console.log(tableNumber);
+    const res = await api(`${config.apiURL}cancelEmployeeCall`, {
+      headers: {},
+      data: { tableNumber: tableNumber },
+      method: "PUT",
+    });
+    console.log(res);
+    return res;
+  } catch (error) {
+    console.log("call employee fail");
+  }
+};
 export const getTableOrder = async (id: string | undefined) => {
   try {
     const res = await api(`${config.apiURL}seeOrderTable/${id}`, {
@@ -85,5 +83,19 @@ export const getIncomingOrder = async () => {
     return res;
   } catch (error) {
     console.log("getIncomingOrder Error from comingOrder API");
+  }
+};
+
+export const getItemsByOrder = async (id: string | undefined) => {
+  try {
+    const res = await api(`${config.apiURL}seeItembyOrderId/${id}`, {
+      headers: {},
+      data: {},
+      method: "GET",
+    });
+    console.log(res);
+    return res;
+  } catch (error) {
+    console.log("getItemsByOrder by API seeItembyOrderID");
   }
 };

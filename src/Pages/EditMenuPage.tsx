@@ -4,7 +4,7 @@ import config from "../config.json";
 import HeaderBar from "../components/RestaurantManagerBar";
 import { useNavigate, useParams } from "react-router-dom";
 import { getFoodInfo } from "../api/food";
-import { deleteMenu,editMenu } from "../api/menu";
+import { deleteMenu, editMenu } from "../api/menu";
 
 const EditMenuPage: React.FC = () => {
   const { id } = useParams();
@@ -182,7 +182,9 @@ const EditMenuPage: React.FC = () => {
       (foodTypeSelected !== "อื่น ๆ" ||
         (foodTypeSelected === "อื่น ๆ" &&
           newFoodType.length > 0 &&
-          /^[a-zA-Zก-๏\s]+$/.test(newFoodType)))
+          /^[a-zA-Zก-๏\s]+$/.test(newFoodType))) &&
+          /^[a-zA-Zก-๏0-9\s]+$/.test(description) &&
+          Number.isInteger(Number(price))
     ) {
       console.log("hello");
       const inputFoodName: string = foodName;
@@ -250,11 +252,11 @@ const EditMenuPage: React.FC = () => {
     }
   };
 
-  const onClickDeleteConfirm = async () =>{
-    setshowDeletePopUp(false)
-    await deleteMenu(id)
+  const onClickDeleteConfirm = async () => {
+    setshowDeletePopUp(false);
+    await deleteMenu(id);
     navigate("/ManagerMenu");
-  }
+  };
 
   const onClickCancel = () => {
     navigate("/ManagerMenu");
@@ -326,7 +328,8 @@ const EditMenuPage: React.FC = () => {
       parseInt(addAdditionPriceData) != NaN &&
       Number(addAdditionPriceData) >= 0 &&
       /^[a-zA-Zก-๏0-9\s]+$/.test(addChoiceData) &&
-      choiceList.length <= 15
+      choiceList.length <= 15 &&
+      Number.isInteger(Number(addAdditionPriceData))
     ) {
       const number = numberOfChoice + 1;
       const addChoice = {
@@ -347,7 +350,8 @@ const EditMenuPage: React.FC = () => {
       editChoiceData.length > 0 &&
       parseInt(editAdditionPriceData) != NaN &&
       Number(editAdditionPriceData) >= 0 &&
-      /^[a-zA-Zก-๏0-9\s]+$/.test(editChoiceData)
+      /^[a-zA-Zก-๏0-9\s]+$/.test(editChoiceData) &&
+      Number.isInteger(Number(editAdditionPriceData))
     ) {
       const editChoice = {
         id: Number(editChoiceID),
@@ -384,6 +388,7 @@ const EditMenuPage: React.FC = () => {
   const handleAddOptionConfirm = () => {
     if (
       optionName.length > 0 &&
+      optionName.length <= 15 &&
       addChoiceData.length === 0 &&
       editChoiceID === 0 &&
       /^[a-zA-Zก-๏\s]+$/.test(optionName) &&
@@ -421,7 +426,7 @@ const EditMenuPage: React.FC = () => {
 
   return (
     <div>
-      <HeaderBar name="แก้ไขเมนูอาหาร"></HeaderBar>
+      <HeaderBar name="แก้ไขเมนูอาหาร" pathback=""></HeaderBar>
       <form className="flex flex-col w-full h-auto" onSubmit={onClickConfirm}>
         <div className="flex flex-row flex-wrap w-full h-auto">
           {/*image input*/}
@@ -654,6 +659,7 @@ const EditMenuPage: React.FC = () => {
                                             type="text"
                                             className="block w-[45%] px-3 py-1.5 text-sm font-normal text-black bg-gray-100
                                            rounded focus:outline-none"
+                                            maxLength={15}
                                             onChange={handleEditChoiceChange}
                                             value={editChoiceData}
                                           />
@@ -751,7 +757,7 @@ const EditMenuPage: React.FC = () => {
                               </div>
                               <label className="text-xs text-red-500 inline-block text-gray-800">
                                 กรอกตัวเลือกได้เฉพาะภาษาไทย หรือภาษาอังกฤษ
-                                และกรอกเพิ่มราคาเป็นตัวเลข
+                                และกรอกช่องเพิ่มราคาเป็นจำนวนเต็ม
                               </label>
                             </div>
                           </div>

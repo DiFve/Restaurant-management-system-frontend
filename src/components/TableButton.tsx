@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
@@ -6,12 +6,15 @@ interface Tablename {
   id: string;
   tablenumber: number;
   status: string;
+  callEmployee: boolean;
 }
 
 const TableButton: React.FC<Tablename> = (props) => {
   const navigate = useNavigate();
 
-  const { id, tablenumber, status } = props;
+  const { id, tablenumber, status, callEmployee } = props;
+
+  
 
   const onClickOrderListPage = () => {
     if (status == "available") {
@@ -25,15 +28,28 @@ const TableButton: React.FC<Tablename> = (props) => {
 
   if (props.status == "available") {
     colorStatus =
-      "bg-green-500 hover:bg-green-400 p-10 shadow-md text-center text-2xl rounded-3xl text-white";
+      "bg-green-500 hover:bg-green-400 p-10 text-center text-2xl rounded-3xl text-white w-full h-auto";
   } else if (props.status == "busy") {
     colorStatus =
-      "bg-slate-500 hover:bg-slate-400 p-10 shadow-md text-white text-center text-2xl rounded-3xl";
+      "bg-slate-500 hover:bg-slate-400 p-10 text-white text-center text-2xl rounded-3xl w-full h-auto";
   }
   return (
-    <button onClick={onClickOrderListPage} className={colorStatus}>
-      <div>{props.tablenumber}</div>
-    </button>
+    <div>
+      {callEmployee ? (
+        <div className="relative">
+          <button onClick={onClickOrderListPage} className={colorStatus}>
+            <div>{props.tablenumber}</div>
+            <span className="absolute -top-2 -right-2 bg-red-500 h-7 w-7 rounded-full animate-ping"/>
+          </button>
+        </div>
+      ) : (
+        <div>
+          <button onClick={onClickOrderListPage} className={colorStatus}>
+            <div>{props.tablenumber}</div>
+          </button>
+        </div>
+      )}
+    </div>
   );
 };
 
