@@ -58,7 +58,7 @@ const CartPageComponents: React.FC = () => {
     }, []);
 
     getAllItem.map((priceMenu: any) => {
-        totalPrice = totalPrice + (priceMenu.price * priceMenu.quantity)
+        totalPrice = totalPrice + (priceMenu.price)
     })
     //console.log(totalPrice)
     //console.log(userTableNumber)
@@ -136,7 +136,7 @@ const CartPageComponents: React.FC = () => {
                 <div className="h-[95%] w-[95%] flex flex-col justify-center items-center mb-[5%] max-h-[450px] max-w-[650px] "  >
                     <img src={DontHaveOrder} alt="" className="max-h-[450px]" />
                     <label className="text-2xl flex justify-center ">โอ๊ ! คุณยังไม่มี</label>
-                    <label className="text-2xl flex justify-center">อะไรในตระก้าเลย</label>
+                    <label className="text-2xl flex justify-center">อะไรในตะกร้าเลย</label>
                     <div className='bg-headerRed h-[25%] w-[40%] max-h-[45px] max-w-[200 px] min-w-[150px] text-center border-[2px] border-black mt-[20%]'>
                         <button className=' ' onClick={onClickBack}>
                             <label className='text-3xl text-white '> ดูออเดอร์ </label>
