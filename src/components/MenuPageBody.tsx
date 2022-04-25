@@ -26,6 +26,9 @@ const MenuPageBody: React.FC<menuType> = (props) => {
     const gotocart = (event:any) =>{
         navigate('/cart')
     }
+    const gotoOrderList = (event:any)=>{
+        navigate('/orderlist')
+    }
     useEffect(() => {
         const getMenu = async () => {
             console.log(menuType)
@@ -130,7 +133,7 @@ const MenuPageBody: React.FC<menuType> = (props) => {
             </div>
             <div className='flex h-[16%] w-[100%] justify-center items-center'>
                 <div className='bg-headerRed h-[42px] w-[186px] text-center border-[2px] border-black rounded-md'>
-                    <button className='' onClick={gotocart}>
+                    <button className='' onClick={gotoOrderList}>
                         <label className='text-3xl text-white'> ตะกร้าสินค้า </label>
                     </button>
                 </div>
