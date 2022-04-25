@@ -107,6 +107,7 @@ const AddMenuPage: React.FC = () => {
         (foodTypeSelected === "อื่น ๆ" &&
           newFoodType.length > 0 &&
           /^[a-zA-Zก-๏\s]+$/.test(newFoodType))) &&
+          /^[a-zA-Zก-๏0-9\s]+$/.test(description) &&
       Number.isInteger(Number(price))
     ) {
       const inputFoodName: string = foodName;
