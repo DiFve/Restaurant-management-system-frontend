@@ -5,7 +5,6 @@ import loginIcon from "../components/img/login_icon.png";
 import { register } from "../services/authServices";
 import { getEmployeeInfo } from "../api/employee";
 import React, { useEffect, useState } from "react";
-import backIcon from "../components/img/back_icon.png";
 import { useNavigate } from "react-router-dom";
 const EmployeeListPage: React.FC = () => {
   const [showPopUp, setShowPopUp] = useState(false);
@@ -17,7 +16,6 @@ const EmployeeListPage: React.FC = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [employeeList, setEmplyeeList] = useState<any>([]);
   const [Error, setError] = useState(false);
-  const navigate = useNavigate();
   useEffect(() => {
     const getEmployeeData = async () => {
       const res = await getEmployeeInfo();
@@ -27,9 +25,6 @@ const EmployeeListPage: React.FC = () => {
     getEmployeeData();
   }, [employeeList]);
 
-  const backHandle = () => {
-    navigate("/home");
-  };
 
   const inputNickName = (event: React.FormEvent<HTMLInputElement>) => {
     setNickName(event.currentTarget.value);
@@ -86,7 +81,7 @@ const EmployeeListPage: React.FC = () => {
 
   return (
     <div>
-      <HeaderBar name="รายชื่อพนักงาน"></HeaderBar>
+      <HeaderBar name="รายชื่อพนักงาน" pathback="/home"></HeaderBar>
       <div className="flex flex-col items-center overflow-y-scroll w-full h-[70vh] mt-16">
         <button
           className="flex w-[90%] h-[10%] border border-black justify-center items-center"
@@ -106,9 +101,6 @@ const EmployeeListPage: React.FC = () => {
             ></Employee>
           );
         })}
-        <button className="mt-5 w-full" onClick={backHandle}>
-          <img className="ml-5 w-[50px] h-[50px] object-cover" src={backIcon} />
-        </button>
       </div>
       {showPopUp ? (
         <form onSubmit={onClickConfirmAddEmployee}>

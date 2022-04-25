@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import config from "../config.json";
+import emptyPic from "./img/menu_placeholder.png";
 interface menu {
   id: string;
   name: string;
@@ -27,10 +28,15 @@ const MenuComponent: React.FC<menu> = (props) => {
       className="flex flex-row sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4 w-full h-[160px] p-[10px] mb-[10px]"
     >
       <div className="flex flex-row h-full w-full rounded-lg border-2 p-[3px] shadow-md cursor-pointer">
-        <img
-          className="w-5/12 h-full object-contain"
-          src={config.imageURL + pic}
-        />
+        {pic !== "" ? (
+          <img
+            className="w-5/12 h-full object-contain"
+            src={config.imageURL + pic}
+          />
+        ) : (
+          <img className="w-5/12 h-full object-contain" src={emptyPic} />
+        )}
+
         <div className="flex flex-col bg-white w-7/12 h-full">
           <span className="w-full h-full text-center text-2xl pt-[20px]">
             {name}

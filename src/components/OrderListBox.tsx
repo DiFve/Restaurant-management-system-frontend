@@ -11,18 +11,7 @@ interface Order {
 }
 
 const OrderListBox: React.FC<Order> = (props) => {
-  var obj = {
-    menu: {
-      description: "",
-      detail: [],
-      foodName: "",
-      foodType: "",
-      image: "",
-      price: 0,
-      type: [],
-      _id: "",
-    },
-  };
+
 
   const { tableNumber, orderNumber, orderStatus, orderID } = props;
 
@@ -38,7 +27,7 @@ const OrderListBox: React.FC<Order> = (props) => {
   const defaultBox = "grid grid-cols border-2 h-28 ";
 
   const goToOrderPage = () => {
-    navigate(`/EmployeeMain/OrderList/${tableNumber}/${orderID}`);
+    navigate(`/EmployeeMain/Table/${tableNumber}/${orderID}`);
   };
 
   return (
