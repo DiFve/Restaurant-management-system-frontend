@@ -62,7 +62,6 @@ const OrderListPage: React.FC = (props) => {
           <button className="flex  w-[20%] bg-red-500 justify-center text-2xl rounded-md hover:bg-red-400 text-white">
             CHECK BILL
           </button>
-
         </div>
       </div>
     </div>

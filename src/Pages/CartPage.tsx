@@ -1,12 +1,12 @@
 import HeaderBar from "../components/HeaderBar"
-import MenuPageBody from "../components/MenuPageBody"
-import CartComponents from "../components/CartComponents"
+import CartPageComponents from "../components/CartComponents"
 
-const CartPage : React.FC = () => {
+
+const CartPage: React.FC = () => {
     return (
         <div className="flex flex-col h-screen">
-            <HeaderBar name='Cart'/>
-            <CartComponents/>
+            <HeaderBar name='ตะกร้ารถเข็น' />
+            <CartPageComponents />
         </div>
     )
 }
