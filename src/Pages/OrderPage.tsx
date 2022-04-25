@@ -1,62 +1,63 @@
-import jwtDecode from "jwt-decode";
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { getCartOrder } from "../api/cart";
-import HeaderBar from "../components/HeaderBar"
-import OrderListComponents from "../components/OrderListComponents"
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { getItemsByOrder } from "../api/table";
+import FoodCard from "../components/FoodCard";
 
 const OrderPage: React.FC = () => {
+  const { tableNumber, id } = useParams();
 
-    const decodedJWT: any = jwtDecode(localStorage.getItem('token') || '')
-    const typeFood = decodedJWT.foodType
-    const userTableNumber = decodedJWT.table
-    //console.log(decodedJWT)
-    const [getCartOreder, setCartOreder] = useState<any>([])
-    const goBackMenu = useNavigate();
+  const example = [
+    {
+      detail: [],
+      foodID: "6265b1cf778c31da876be873",
+      foodName: "tork",
+      foodStatus: "cooking",
+      price: 0,
+      quantity: 2,
+      time: "2022-04-24T21:21:31.888Z",
+      _id: "6265bf5b778c31da876befdd",
+    },
+  ];
 
-    const onClickBack = () => {
-        goBackMenu(`/menu/${typeFood}`);
+  const [allFoodInfo, setAllFoodInfo] = useState([]);
+
+  useEffect(() => {
+    const getAllFoodInfo = async () => {
+      var res = await getItemsByOrder(id);
+      console.log(res?.data[0]);
+      setAllFoodInfo(res?.data[0]);
     };
-    useEffect(() => {
-        const getCOrder = async () => {
-            const res = await getCartOrder((userTableNumber).toString())
-            setCartOreder(res?.data.order)
-            //console.log(res?.data.order)
-            //console.log(res?.data.order)
-        }
-        getCOrder()
+    getAllFoodInfo();
+  }, []);
 
-    }, []);
-
-    console.log(getCartOreder)
-
-    return (
-        <div className="flex flex-col h-screen ">
-            <HeaderBar name='Order' />
-            <div className="flex h-screen w-full items-center overflow-y-hidden justify-center bg-white">
-                <div className="h-[95%] w-[95%] bg-white" >
-                    <div className="h-[90%]">
-                        <div className="w-[93.5%] h-[95%] m-[3%] bg-lightYellow overflow-y-scroll">
-                            {getCartOreder.map((element: any, index: number) => {
-                                var time = element.time.substr(11, 8) // "2013-03-10"
-                                //console.log(time)
-                                return <OrderListComponents order={"Order " + (index + 1)} timeOrder={time} status={element.orderStatus} id={element._id} />
-
-                            })}
-
-                        </div>
-                    </div>
-                    <div className="flex justify-center ">
-                        <button className="flex justify-center bg-headerRed h-[25%] w-[25%] max-w-[140px] max-h-[45px] max-w-[300 px] min-w-[100px] text-center border-[2px] border-black" onClick={onClickBack}>
-                            <label className="text-3xl text-white"> Back </label>
-                        </button>
-                    </div>
-
-
-                </div>
-            </div>
+  return (
+    <div className="h-screen w-screen">
+      {/* Header */}
+      <div className="flex flex-col bg-[#dc2626] w-full h-1/6">
+        <div className="flex text-center text-white text-4xl font-normal justify-center items-center w-full h-full">
+          <label>{tableNumber}</label>
         </div>
-    )
-}
+      </div>
+      <div className="flex flex-col w-screen h-5/6">
+        <div className="grid grid-cols-3 h-auto w-auto gap-3 m-3">
+          {allFoodInfo.map((element: any) => {
+            return (
+              <FoodCard
+                detail={element.detail}
+                foodID={element.foodID}
+                foodName={element.foodName}
+                foodStatus={element.foodStatus}
+                price={element.price}
+                quantity={element.quantity}
+                time={element.time}
+                _id={element._id}
+              />
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+};
 
-export default OrderPage
+export default OrderPage;

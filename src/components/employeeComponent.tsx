@@ -57,14 +57,14 @@ const EmployeeComponent: React.FC<menu> = (props) => {
                         setshowDeletePopUp(false);
                       }}
                     >
-                      Cancel
+                      ยกเลิก
                     </button>
                     <button
                       className="bg-rose-500 text-white active:bg-rose-600 font-semibold text-sm px-6 py-3 rounded shadow hover:shadow-lg mr-1 mb-1 ease-linear transition-all duration-150"
                       type="button"
                       onClick={onClickDeleteConfirm}
                     >
-                      Confirm
+                      ยืนยัน
                     </button>
                   </div>
                 </div>

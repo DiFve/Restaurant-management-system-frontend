@@ -12,7 +12,14 @@ const TableLayout: React.FC = () => {
       console.log(res?.data);
     };
     getAllTable();
+
+    const cycleGetTable = setInterval(()=>{
+      getAllTable();
+      
+    },10000)
+    return ()=>clearInterval(cycleGetTable)
   }, []);
+
 
   const example = [
     { id: "", tablenumber: 1, eating: true },
@@ -27,13 +34,14 @@ const TableLayout: React.FC = () => {
   ];
 
   return (
-    <div className="grid grid-cols-2 gap-3 m-3 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 ">
-      {tableInfo.map((element) => {
+    <div className="grid grid-cols-2 gap-3 m-3 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 h-auto w-auto">
+      {tableInfo.map((element:any) => {
         return (
           <TableButton
-            id={element["_id"]}
-            tablenumber={element["tableNumber"]}
-            status={element["status"]}
+            id={element._id}
+            tablenumber={element.tableNumber}
+            status={element.status}
+            callEmployee={element.callEmployee}
           />
         );
       })}
