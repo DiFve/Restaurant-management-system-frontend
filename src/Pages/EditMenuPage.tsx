@@ -654,6 +654,7 @@ const EditMenuPage: React.FC = () => {
                                             type="text"
                                             className="block w-[45%] px-3 py-1.5 text-sm font-normal text-black bg-gray-100
                                            rounded focus:outline-none"
+                                           maxLength={15}
                                             onChange={handleEditChoiceChange}
                                             value={editChoiceData}
                                           />
