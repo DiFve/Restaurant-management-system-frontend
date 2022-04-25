@@ -105,7 +105,7 @@ const ManagerMenuPage: React.FC = () => {
             />
           </div>
         </div>
-        <div className="flex flex-row flex-wrap p-[10px] w-full h-auto justify-start overflow-y-scroll h-[60%]">
+        <div className="flex flex-row flex-wrap p-[10px] w-full h-auto justify-start h-[60%]">
           <div className="sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4 w-full h-[160px] p-[10px] mb-[10px]">
             <div
               onClick={onClickAddMenu}
