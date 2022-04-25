@@ -1,5 +1,5 @@
 import HeaderBar from "../components/RestaurantManagerBar";
-import Employee from "../components/employeeComponent";
+import Employee from "../components/EmployeeComponent";
 import addIcon from "../components/img/add_icon.jpg";
 import loginIcon from "../components/img/login_icon.png";
 import { register } from "../services/authServices";
@@ -24,7 +24,6 @@ const EmployeeListPage: React.FC = () => {
     };
     getEmployeeData();
   }, [employeeList]);
-
 
   const inputNickName = (event: React.FormEvent<HTMLInputElement>) => {
     setNickName(event.currentTarget.value);
