@@ -1,0 +1,561 @@
+[33mcommit 274c8d8c96632933fafe99a73576ce82dc468aa1[m[33m ([m[1;36mHEAD -> [m[1;32mfocus[m[33m, [m[1;31morigin/focus[m[33m)[m
+Author: Suratan63011017 <folnw2545@gmail.com>
+Date:   Wed Apr 27 05:23:33 2022 +0700
+
+    fix bug
+
+[33mcommit 9f668e9488e57b3d443d778ffb1780edcfdde606[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Merge: e0fda80 807ba70
+Author: SroLyQ <69116082+SroLyQ@users.noreply.github.com>
+Date:   Wed Apr 27 05:12:56 2022 +0700
+
+    Merge pull request #81 from DiFve/KJ
+    
+    *addition price buffet bug fixed
+
+[33mcommit 807ba70e196a6b5dd8fcb405507c4ec8fa2b382f[m
+Author: kawjaw66 <kawjaw66@gmail.com>
+Date:   Wed Apr 27 05:12:33 2022 +0700
+
+    *addition price buffet bug fixed
+
+[33mcommit e0fda80f8ecb70ad7b4a9b6ac875ffabfeee0ac6[m
+Merge: 6d1aef4 3737317
+Author: SroLyQ <69116082+SroLyQ@users.noreply.github.com>
+Date:   Wed Apr 27 00:41:31 2022 +0700
+
+    Merge pull request #80 from DiFve/KJ
+    
+    +added QR code button in table page
+
+[33mcommit 37373174498801cf5c4628be13049df9e68a98e1[m
+Author: kawjaw66 <kawjaw66@gmail.com>
+Date:   Wed Apr 27 00:40:58 2022 +0700
+
+    +added QR code button in table page
+
+[33mcommit 6d1aef43ba5077e2ee00da2fd92a6247dc90be8a[m
+Merge: 5628a19 59a772c
+Author: SroLyQ <69116082+SroLyQ@users.noreply.github.com>
+Date:   Wed Apr 27 00:23:03 2022 +0700
+
+    Merge pull request #79 from DiFve/SONN
+    
+    Sonn
+
+[33mcommit 59a772ca5e46e45a2e7941415ba97f209e2d38e7[m
+Merge: 191f23b 5628a19
+Author: phurits <phurits@hotmail.com>
+Date:   Wed Apr 27 00:21:19 2022 +0700
+
+    Merge branch 'main' of https://github.com/DiFve/Restaurant-management-system-frontend into SONN
+
+[33mcommit 191f23b442e3452bc9edbe554f85010e9790a121[m
+Author: phurits <phurits@hotmail.com>
+Date:   Wed Apr 27 00:21:09 2022 +0700
+
+    change color employeemain table
+
+[33mcommit 5628a19365dcd742ffb6577b47004bde63a7373f[m
+Author: DiFve <69078506+DiFve@users.noreply.github.com>
+Date:   Tue Apr 26 23:17:21 2022 +0700
+
+    Rename employeeComponent.tsx to EmployeeComponent.tsx
+
+[33mcommit d336c779ce1dc3d7e5f8675bea9663be01e3a1aa[m
+Author: DiFve <jkblade6@gmail.com>
+Date:   Tue Apr 26 23:14:32 2022 +0700
+
+    remove test page
+
+[33mcommit 8411caaa19181c343747cb643691f3721ebbe0d5[m
+Merge: 3b4c395 4a7f05d
+Author: DiFve <jkblade6@gmail.com>
+Date:   Tue Apr 26 23:09:58 2022 +0700
+
+    add protected route
+
+[33mcommit 4a7f05dded5e8abc17d338c2996a0e687ff43ba6[m
+Merge: 6c67eaa bfdfc1b
+Author: DiFve <69078506+DiFve@users.noreply.github.com>
+Date:   Tue Apr 26 23:06:36 2022 +0700
+
+    Merge pull request #78 from DiFve/SONN
+    
+    Sonn
+
+[33mcommit 3b4c395e7bd05aef38f184b34d8c26387834770f[m
+Merge: 77c8fb9 6c67eaa
+Author: DiFve <jkblade6@gmail.com>
+Date:   Tue Apr 26 23:00:06 2022 +0700
+
+    Merge branch 'main' of https://github.com/DiFve/Restaurant-management-system-frontend
+
+[33mcommit bfdfc1b1cbc84998a8c03ed8ac36412a8eee5234[m
+Merge: a69f30e 6c67eaa
+Author: phurits <phurits@hotmail.com>
+Date:   Tue Apr 26 22:57:16 2022 +0700
+
+    finish EmployeeMain
+
+[33mcommit a69f30ed01af31e7f63cce7d93de0a5195a5c956[m
+Author: phurits <phurits@hotmail.com>
+Date:   Tue Apr 26 22:55:53 2022 +0700
+
+    finish Employeepage
+
+[33mcommit 6c67eaae32843140e568c7fead4a3c1ca470ee4a[m
+Merge: 98b1b70 e431160
+Author: SroLyQ <69116082+SroLyQ@users.noreply.github.com>
+Date:   Tue Apr 26 16:23:02 2022 +0700
+
+    Merge pull request #77 from DiFve/KJ
+    
+    +Orderlist no info no show fix
+
+[33mcommit e431160ab3dd8c0bf087d1a519547d5967c2421d[m
+Author: kawjaw66 <kawjaw66@gmail.com>
+Date:   Tue Apr 26 16:22:38 2022 +0700
+
+    +Orderlist no info no show fix
+
+[33mcommit 98b1b70c23630f7e61e87d335996ce9b7c539cb9[m
+Merge: 24af495 30e37e3
+Author: SroLyQ <69116082+SroLyQ@users.noreply.github.com>
+Date:   Tue Apr 26 16:19:11 2022 +0700
+
+    Merge pull request #75 from DiFve/SONN
+    
+    Sonn
+
+[33mcommit 24af4953793153c3a88de7b8e51283ef7ce98c83[m
+Merge: 2776df5 24520a5
+Author: SroLyQ <69116082+SroLyQ@users.noreply.github.com>
+Date:   Tue Apr 26 16:19:00 2022 +0700
+
+    Merge pull request #76 from DiFve/KJ
+    
+    Kj
+
+[33mcommit 24520a53d1d6dd10d7f660568902ebf20e96860e[m
+Author: kawjaw66 <kawjaw66@gmail.com>
+Date:   Tue Apr 26 16:18:38 2022 +0700
+
+    +minor fix
+
+[33mcommit 32fef3e17d896cedb3d091e8e16a98069835785a[m
+Merge: a519155 2776df5
+Author: kawjaw66 <kawjaw66@gmail.com>
+Date:   Tue Apr 26 06:14:56 2022 +0700
+
+    Merge branch 'main' of https://github.com/DiFve/Restaurant-management-system-frontend into KJ
+
+[33mcommit a51915590c275c6d156951a86d6f5bfa50ddcc08[m
+Author: kawjaw66 <kawjaw66@gmail.com>
+Date:   Tue Apr 26 06:14:48 2022 +0700
+
+    +change to Order
+
+[33mcommit 77c8fb95c46f3fc711c29c9f45fb1a1dd766e987[m
+Merge: bab72a0 2776df5
+Author: DiFve <jkblade6@gmail.com>
+Date:   Mon Apr 25 17:54:02 2022 +0700
+
+    Merge branch 'main' of https://github.com/DiFve/Restaurant-management-system-frontend
+
+[33mcommit bab72a0c0d41a9322675638377d12975594a248a[m
+Author: DiFve <jkblade6@gmail.com>
+Date:   Mon Apr 25 17:53:52 2022 +0700
+
+    chage header
+
+[33mcommit 30e37e35ebc9c5054df8944da8860131d9260b32[m
+Merge: c554b62 2776df5
+Author: phurits <phurits@hotmail.com>
+Date:   Mon Apr 25 13:38:56 2022 +0700
+
+    Merge branch 'main' of https://github.com/DiFve/Restaurant-management-system-frontend into SONN
+
+[33mcommit c554b626d3a094c2711afdaf44a1774a9517f62f[m
+Author: phurits <phurits@hotmail.com>
+Date:   Mon Apr 25 13:38:49 2022 +0700
+
+    Add Card in OrderPage
+
+[33mcommit 2776df59ddd989af8028a3b07a496dc4c22caaa3[m
+Merge: 472f5e8 25f0054
+Author: Suratan Boonpong <69116231+Suratan63011017@users.noreply.github.com>
+Date:   Mon Apr 25 08:29:46 2022 +0700
+
+    Merge pull request #74 from DiFve/focus
+    
+    fix description bug
+
+[33mcommit 25f0054787dc64bfefadf0043d5293c009328bc5[m
+Author: Suratan63011017 <folnw2545@gmail.com>
+Date:   Mon Apr 25 08:28:31 2022 +0700
+
+    fix description bug
+
+[33mcommit 472f5e84e530967e7b0cd75f00f87c63e3aaee6a[m
+Merge: dab189d 088429c
+Author: Suratan Boonpong <69116231+Suratan63011017@users.noreply.github.com>
+Date:   Mon Apr 25 07:49:16 2022 +0700
+
+    Merge pull request #73 from DiFve/focus
+    
+    fixed number bug
+
+[33mcommit 088429c7344764d900cd2011966a191c3e33e18d[m
+Author: Suratan63011017 <folnw2545@gmail.com>
+Date:   Mon Apr 25 07:45:49 2022 +0700
+
+    fixed number bug
+
+[33mcommit dab189d3c1cadd7f99d4e701a6d8cff95e58f0da[m
+Merge: 949f69a dd6c5bf
+Author: Suratan Boonpong <69116231+Suratan63011017@users.noreply.github.com>
+Date:   Mon Apr 25 07:21:18 2022 +0700
+
+    Merge pull request #72 from DiFve/focus
+    
+    fixed bug
+
+[33mcommit dd6c5bfb285b6533d2e1b461d42b3ea5d80c3adb[m
+Author: Suratan63011017 <folnw2545@gmail.com>
+Date:   Mon Apr 25 07:20:38 2022 +0700
+
+    fixed bug
+
+[33mcommit 949f69aed29e30e6398e51301b8c10b65b7db93f[m
+Merge: 88eca6b 3eeb702
+Author: Suratan Boonpong <69116231+Suratan63011017@users.noreply.github.com>
+Date:   Mon Apr 25 07:16:59 2022 +0700
+
+    Merge pull request #71 from DiFve/focus
+    
+    edit choice bug
+
+[33mcommit 3eeb70218fbbaa26dc5758a0b33c62c9444cef3e[m
+Author: Suratan63011017 <folnw2545@gmail.com>
+Date:   Mon Apr 25 07:15:47 2022 +0700
+
+    edit choice bug
+
+[33mcommit 4c3621ab86199da4f52937982687b4e544564fa4[m
+Merge: 5d03205 88eca6b
+Author: DiFve <jkblade6@gmail.com>
+Date:   Mon Apr 25 07:08:50 2022 +0700
+
+    Merge branch 'main' of https://github.com/DiFve/Restaurant-management-system-frontend
+
+[33mcommit 88eca6bb3cbf6ca754e46ec78c1cab702e413e51[m
+Merge: aecb9f0 5fc9044
+Author: DiFve <69078506+DiFve@users.noreply.github.com>
+Date:   Mon Apr 25 07:08:33 2022 +0700
+
+    Merge pull request #70 from DiFve/SONN
+    
+    Sonn
+
+[33mcommit 5fc90445faa97fb19fca70c8be9b8bfdb7698222[m
+Merge: df13179 aecb9f0
+Author: phurits <phurits@hotmail.com>
+Date:   Mon Apr 25 07:05:11 2022 +0700
+
+    update
+
+[33mcommit df13179f925503789a59fbdb08b0df9ca88b9f57[m
+Author: phurits <phurits@hotmail.com>
+Date:   Mon Apr 25 07:01:38 2022 +0700
+
+    add check bill in orderlistPage
+
+[33mcommit aecb9f00efcb0481f381b713b84fb20fbdf8a93d[m
+Merge: a0b5dd2 41ead71
+Author: Suratan Boonpong <69116231+Suratan63011017@users.noreply.github.com>
+Date:   Mon Apr 25 06:57:20 2022 +0700
+
+    Merge pull request #68 from DiFve/focus
+    
+    empty pic
+
+[33mcommit 41ead71e0fba6c90cce1e8fe2dffc4817d2b45a4[m
+Author: Suratan63011017 <folnw2545@gmail.com>
+Date:   Mon Apr 25 06:56:31 2022 +0700
+
+    empty pic
+
+[33mcommit a0b5dd279c94ec190ac1ac89c764672682745cad[m
+Merge: 1e83d2c 346324c
+Author: Suratan Boonpong <69116231+Suratan63011017@users.noreply.github.com>
+Date:   Mon Apr 25 06:43:40 2022 +0700
+
+    Merge pull request #67 from DiFve/focus
+    
+    change back button
+
+[33mcommit 346324c38982fbe79a2a4148fc973a4f324b0d68[m
+Merge: e0bd8aa 1e83d2c
+Author: Suratan63011017 <folnw2545@gmail.com>
+Date:   Mon Apr 25 06:42:46 2022 +0700
+
+    change back button
+
+[33mcommit e0bd8aa72925c876007d9d8e947cd915533a8ac2[m
+Author: Suratan63011017 <folnw2545@gmail.com>
+Date:   Mon Apr 25 06:39:35 2022 +0700
+
+    change back button
+
+[33mcommit 5d03205af357b2cddc930d2061edef9d8bb22a5e[m
+Merge: 170004d 1e83d2c
+Author: DiFve <jkblade6@gmail.com>
+Date:   Mon Apr 25 05:29:08 2022 +0700
+
+    update
+
+[33mcommit 170004dc61b839e67ad4f48462ad53011a477a87[m
+Author: DiFve <jkblade6@gmail.com>
+Date:   Mon Apr 25 05:27:41 2022 +0700
+
+    update
+
+[33mcommit 1e83d2ca9862d7f19287bfb7bdfd1f5c9c5da0cb[m
+Merge: 81b0eb6 e91e5e1
+Author: Makasan <69116202+Makasan@users.noreply.github.com>
+Date:   Mon Apr 25 05:02:03 2022 +0700
+
+    Merge pull request #60 from DiFve/Mark
+    
+    Mark
+
+[33mcommit e91e5e13220932abc7c4872d260c7440a24d36a0[m
+Merge: fd30261 81b0eb6
+Author: Makasan <63010791@KMITL.AC.TH>
+Date:   Mon Apr 25 04:59:06 2022 +0700
+
+    Merge branch 'main' of https://github.com/DiFve/Restaurant-management-system-frontend into Mark
+
+[33mcommit fd302613057868b28b99ab956e77ffb1ac55a7f9[m
+Author: Makasan <63010791@KMITL.AC.TH>
+Date:   Mon Apr 25 04:58:56 2022 +0700
+
+    last update
+
+[33mcommit 81b0eb6fc3b1e9c9273f2ce8ba94061c581e767a[m
+Merge: a924537 15c2005
+Author: Suratan Boonpong <69116231+Suratan63011017@users.noreply.github.com>
+Date:   Mon Apr 25 04:54:13 2022 +0700
+
+    Merge pull request #66 from DiFve/focus
+    
+    thai language manager side
+
+[33mcommit 15c2005805d8360fabd0483640f044a7b0a68cd4[m
+Author: Suratan63011017 <folnw2545@gmail.com>
+Date:   Mon Apr 25 04:53:03 2022 +0700
+
+    thai language manager side
+
+[33mcommit a92453794c4879d43b99ae650aacb0cfd3130b7e[m
+Merge: e12d13f 0a168a4
+Author: SroLyQ <69116082+SroLyQ@users.noreply.github.com>
+Date:   Mon Apr 25 04:13:33 2022 +0700
+
+    Merge pull request #65 from DiFve/KJ
+    
+    Kj
+
+[33mcommit 0a168a412935101c9d795d39a90eab333c4f6768[m
+Merge: 21c447f e12d13f
+Author: kawjaw66 <kawjaw66@gmail.com>
+Date:   Mon Apr 25 04:12:55 2022 +0700
+
+    Merge branch 'main' of https://github.com/DiFve/Restaurant-management-system-frontend into KJ
+
+[33mcommit 21c447f88854d0df3ce755a6143ef9527b661c1d[m
+Author: kawjaw66 <kawjaw66@gmail.com>
+Date:   Mon Apr 25 04:12:49 2022 +0700
+
+    +additional price for radio
+
+[33mcommit caac830c1e5034ccca4e01dd5987d236666e60e5[m
+Merge: 7f43019 e12d13f
+Author: Makasan <63010791@KMITL.AC.TH>
+Date:   Mon Apr 25 03:56:14 2022 +0700
+
+    Merge branch 'main' of https://github.com/DiFve/Restaurant-management-system-frontend into Mark
+
+[33mcommit 7f43019c06ca24f21e488990effc1675dba1bcff[m
+Author: Makasan <63010791@KMITL.AC.TH>
+Date:   Mon Apr 25 03:56:05 2022 +0700
+
+    updatePullOrder
+
+[33mcommit e12d13f1cfb263fbf47d052ddfb3b7e5eb4eb959[m
+Merge: 6193d7e 37f678a
+Author: SroLyQ <69116082+SroLyQ@users.noreply.github.com>
+Date:   Mon Apr 25 03:51:42 2022 +0700
+
+    Merge pull request #64 from DiFve/KJ
+    
+    Kj
+
+[33mcommit 37f678a4a7d8ef17352b2c3d4111c9df90e7b502[m
+Merge: 331dd7c 6193d7e
+Author: kawjaw66 <kawjaw66@gmail.com>
+Date:   Mon Apr 25 03:50:38 2022 +0700
+
+    Merge branch 'main' of https://github.com/DiFve/Restaurant-management-system-frontend into KJ
+
+[33mcommit 331dd7c18f3b98d070ecbc3a2d3bc2e337004fc2[m
+Author: kawjaw66 <kawjaw66@gmail.com>
+Date:   Mon Apr 25 03:50:28 2022 +0700
+
+    fixed req number
+
+[33mcommit 6193d7efa6d2dda6e9e5df5b2aeadff83463f6e4[m
+Merge: 3f52468 c409dca
+Author: SroLyQ <69116082+SroLyQ@users.noreply.github.com>
+Date:   Mon Apr 25 03:17:33 2022 +0700
+
+    Merge pull request #63 from DiFve/KJ
+    
+    Kj
+
+[33mcommit c409dca58f69abf587cf0b0fcf9e2655c9bff0c0[m
+Merge: 17b76ea 3f52468
+Author: kawjaw66 <kawjaw66@gmail.com>
+Date:   Mon Apr 25 03:15:42 2022 +0700
+
+    Merge branch 'main' of https://github.com/DiFve/Restaurant-management-system-frontend into KJ
+
+[33mcommit 17b76eaffd4fc55bc200ffe0718e5a3d9688ab61[m
+Author: kawjaw66 <kawjaw66@gmail.com>
+Date:   Mon Apr 25 03:15:33 2022 +0700
+
+    change lang to Thai
+
+[33mcommit 3f52468d5f34f104ec104f82e8df63166e0aecf4[m
+Merge: a0bba40 96a95ec
+Author: Suratan Boonpong <69116231+Suratan63011017@users.noreply.github.com>
+Date:   Mon Apr 25 03:12:05 2022 +0700
+
+    Merge pull request #62 from DiFve/focus
+    
+    Focus
+
+[33mcommit 96a95eca3d4432b1bb88619745728f3b2fef6857[m
+Merge: d9a3d61 a0bba40
+Author: Suratan63011017 <folnw2545@gmail.com>
+Date:   Mon Apr 25 03:09:15 2022 +0700
+
+    Merge branch 'main' of https://github.com/DiFve/Restaurant-management-system-frontend into focus
+
+[33mcommit d9a3d6107d549d77533de308a48cd5c8ea2d4f23[m
+Author: Suratan63011017 <folnw2545@gmail.com>
+Date:   Mon Apr 25 03:09:03 2022 +0700
+
+    complete manager side
+
+[33mcommit a0bba400ff7ef99ae3a9f4701ea69ed89c513f50[m
+Merge: df92ff8 a41e953
+Author: SroLyQ <69116082+SroLyQ@users.noreply.github.com>
+Date:   Mon Apr 25 03:06:10 2022 +0700
+
+    Merge pull request #61 from DiFve/KJ
+    
+    Kj
+
+[33mcommit a41e953baa77538006a061efb5000ff5c495ca7a[m
+Merge: acc16a9 df92ff8
+Author: kawjaw66 <kawjaw66@gmail.com>
+Date:   Mon Apr 25 03:05:34 2022 +0700
+
+    Merge branch 'main' of https://github.com/DiFve/Restaurant-management-system-frontend into KJ
+
+[33mcommit acc16a983eb37e453f6af2e3aa001520397c958a[m
+Author: kawjaw66 <kawjaw66@gmail.com>
+Date:   Mon Apr 25 03:05:26 2022 +0700
+
+    +fixed icon too large
+
+[33mcommit 14b1b3158fcfaedf0fe276aef28eac4d7a070e63[m
+Merge: 4127eed df92ff8
+Author: Makasan <63010791@KMITL.AC.TH>
+Date:   Mon Apr 25 02:31:51 2022 +0700
+
+    Merge branch 'main' of https://github.com/DiFve/Restaurant-management-system-frontend into Mark
+
+[33mcommit 4127eed27c88f1481008c8d70cba1204d3100f91[m
+Author: Makasan <63010791@KMITL.AC.TH>
+Date:   Mon Apr 25 02:31:40 2022 +0700
+
+    add Total
+
+[33mcommit df92ff841234510f429d3bfbe90fe5fc07bd84e5[m
+Merge: 35d4e0e ad49046
+Author: SroLyQ <69116082+SroLyQ@users.noreply.github.com>
+Date:   Mon Apr 25 02:29:17 2022 +0700
+
+    Merge pull request #59 from DiFve/KJ
+    
+    Kj
+
+[33mcommit ad49046db832963368d8da3a4fc5187638727740[m
+Merge: 012a764 35d4e0e
+Author: kawjaw66 <kawjaw66@gmail.com>
+Date:   Mon Apr 25 02:28:31 2022 +0700
+
+    Merge branch 'main' of https://github.com/DiFve/Restaurant-management-system-frontend into KJ
+
+[33mcommit 012a764d95d00f192c29f139cc724c30bfaaf358[m
+Author: kawjaw66 <kawjaw66@gmail.com>
+Date:   Mon Apr 25 02:28:24 2022 +0700
+
+    fixed cross type bug
+
+[33mcommit 35d4e0e6b82097efa8aa19083cd19d32509847d2[m
+Merge: 30627ee 3c31999
+Author: SroLyQ <69116082+SroLyQ@users.noreply.github.com>
+Date:   Mon Apr 25 02:14:40 2022 +0700
+
+    Merge pull request #58 from DiFve/KJ
+    
+    Kj
+
+[33mcommit 3c3199968c337b10059ec8f031e92e78292bbf85[m
+Merge: ba5b2d8 30627ee
+Author: kawjaw66 <kawjaw66@gmail.com>
+Date:   Mon Apr 25 02:14:05 2022 +0700
+
+    Merge branch 'main' of https://github.com/DiFve/Restaurant-management-system-frontend into KJ
+
+[33mcommit ba5b2d8bf92f3a62118d8a2435bb4092d3b7251a[m
+Author: kawjaw66 <kawjaw66@gmail.com>
+Date:   Mon Apr 25 02:13:34 2022 +0700
+
+    last commit bug fix
+
+[33mcommit 30627ee6e349f0c75a4b3fd70d805a59bb88c6c4[m
+Merge: 58f2e48 c2cb379
+Author: SroLyQ <69116082+SroLyQ@users.noreply.github.com>
+Date:   Mon Apr 25 02:07:14 2022 +0700
+
+    Merge pull request #57 from DiFve/KJ
+    
+    Kj
+
+[33mcommit c2cb3795959c5eb166f883dea61d2df02300cefb[m
+Merge: 64d143e 58f2e48
+Author: kawjaw66 <kawjaw66@gmail.com>
+Date:   Mon Apr 25 02:06:24 2022 +0700
+
+    check user foodType == url
+
+[33mcommit 64d143e16ec370b78e8b380d2c2485b329370cb7[m
+Author: kawjaw66 <kawjaw66@gmail.com>
+Date:   Mon Apr 25 02:04:17 2022 +0700
+
+    check user foodtype == url

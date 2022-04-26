@@ -24,6 +24,7 @@ import CartPage from "./Pages/CartPage";
 import OrderReceiptOld from "./Pages/OrderReceiptOld";
 import NewOrderPage from "./Pages/NewOrderPage";
 import OrderPage from "./Pages/OrderPage";
+import EditMenuPage from "./Pages/EditMenuPage"
 function App() {
   return (
     <BrowserRouter>
@@ -66,6 +67,16 @@ function App() {
             <ProtectedRoutes
               authenticationPath="/login"
               outlet={<AddMenuPage />}
+              role="admin"
+            />
+          }
+        />
+        <Route
+          path="/editMenu/:id"
+          element={
+            <ProtectedRoutes
+              authenticationPath="/login"
+              outlet={<EditMenuPage />}
               role="admin"
             />
           }
