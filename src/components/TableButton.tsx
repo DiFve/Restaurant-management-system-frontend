@@ -14,8 +14,6 @@ const TableButton: React.FC<Tablename> = (props) => {
 
   const { id, tablenumber, status, callEmployee } = props;
 
-  
-
   const onClickOrderListPage = () => {
     if (status == "available") {
       navigate(`/EmployeeMain/NewOrder/${id}`);
@@ -28,10 +26,10 @@ const TableButton: React.FC<Tablename> = (props) => {
 
   if (props.status == "available") {
     colorStatus =
-      "bg-green-500 hover:bg-green-400 p-10 text-center text-2xl rounded-3xl text-white w-full h-auto";
+      "bg-[#cccccc] hover:border-4 hover:border-red-100 p-10 text-center text-2xl rounded-3xl text-white w-full h-auto";
   } else if (props.status == "busy") {
     colorStatus =
-      "bg-slate-500 hover:bg-slate-400 p-10 text-white text-center text-2xl rounded-3xl w-full h-auto";
+      " bg-[#4dd864] hover:border-4 p-10 hover:border-red-100 text-white text-center text-2xl rounded-3xl w-full h-auto";
   }
   return (
     <div>
@@ -39,7 +37,7 @@ const TableButton: React.FC<Tablename> = (props) => {
         <div className="relative">
           <button onClick={onClickOrderListPage} className={colorStatus}>
             <div>{props.tablenumber}</div>
-            <span className="absolute -top-2 -right-2 bg-red-500 h-7 w-7 rounded-full animate-ping"/>
+            <span className="absolute -top-2 -right-2 bg-red-500 h-7 w-7 rounded-full animate-ping" />
           </button>
         </div>
       ) : (
