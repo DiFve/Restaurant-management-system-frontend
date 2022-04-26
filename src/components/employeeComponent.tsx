@@ -15,6 +15,8 @@ const EmployeeComponent: React.FC<menu> = (props) => {
     await deleteEmployee(props.Email)
   };
 
+  
+
   return (
     <div className="flex flex-row w-[90%] h-[10%] border">
       <div className="xl:text-lg lg:text-md md:text-md sm:text-sm text-xs flex w-1/5 h-full bg-green-50 justify-center items-center">
