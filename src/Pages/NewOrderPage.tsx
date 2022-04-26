@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { makeQR } from "../api/qrcode";
 import { getTableByID } from "../api/table";
 import QRPopup from "../components/QRPopup";
@@ -15,8 +15,9 @@ const NewOrderPage: React.FC = (props) => {
   const [BSelect, setBSelect] = useState(false);
   const [BPrice, setBPrice] = useState(false);
   const [type, setType] = useState("");
-  const [amountPerson, setAmountPerson] = useState(0);
+  const [amountPerson, setAmountPerson] = useState(1);
   const [price, setPrice] = useState(0);
+  const [showQR, setShowQR] = useState(false);
 
   const addPerson = () => {
     setAmountPerson(amountPerson >= 10 ? 10 : amountPerson + 1);
@@ -29,6 +30,7 @@ const NewOrderPage: React.FC = (props) => {
   };
 
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getAllTableByID = async () => {
@@ -41,10 +43,12 @@ const NewOrderPage: React.FC = (props) => {
   }, []);
 
   const PopupA = () => {
-    setType("a-la-carte");
-    setASelect(!ASelect);
-    
-    console.log(type);
+    if (amountPerson > 0) {
+      setType("a-la-carte");
+      setASelect(!ASelect);
+
+      console.log(type);
+    }
   };
 
   const PopupB = () => {
@@ -53,12 +57,15 @@ const NewOrderPage: React.FC = (props) => {
       setBSelect(!BSelect);
       console.log(type);
       console.log("BSelect " + { BSelect });
+      setShowQR(!showQR);
     }
   };
 
   const PopupBuffetPrice = () => {
-    setBPrice(!BPrice);
-    console.log("BPrice " + { BPrice });
+    if (amountPerson > 0) {
+      setBPrice(!BPrice);
+      console.log("BPrice " + { BPrice });
+    }
   };
 
   const updatePrice = (e: any) => {
@@ -66,11 +73,21 @@ const NewOrderPage: React.FC = (props) => {
     console.log(price);
   };
 
+  const backToEmployeeMain = () => {
+    navigate(`/EmployeeMain`);
+  };
+
   return (
     <div className="w-screen h-screen">
       <div className="flex flex-col bg-[#dc2626] w-full h-1/6">
         <div className="flex text-center text-white text-4xl font-normal justify-center items-center w-full h-full">
           <label>{tableNumber}</label>
+          <button
+            onClick={backToEmployeeMain}
+            className="absolute left-5 text-[45px]"
+          >
+            <label>◄</label>
+          </button>
         </div>
       </div>
       <div className="flex flex-col h-5/6 w-full ">
@@ -103,14 +120,14 @@ const NewOrderPage: React.FC = (props) => {
             <div className="flex flex-row justify-center h-[60px]">
               <button
                 onClick={PopupA}
-                className="bg-green-400 hover:bg-green-300 rounded-3xl w-[20%]"
+                className="bg-green-400 h-10 hover:bg-green-300 rounded-3xl w-[20%]"
               >
                 <label className=" text-xl">A-LA-CARTE</label>
               </button>
               <div className="mx-3"></div>
               <button
                 onClick={PopupBuffetPrice}
-                className="bg-blue-400  hover:bg-blue-300 rounded-3xl w-[20%]"
+                className="bg-blue-400 h-10  hover:bg-blue-300 rounded-3xl w-[20%]"
               >
                 <label className=" text-xl">BUFFET</label>
               </button>
@@ -143,7 +160,7 @@ const NewOrderPage: React.FC = (props) => {
                                     tableType={type}
                                     personAmount={amountPerson}
                                     buffetPrice={price}
-                                  /> //<QRPopup tableNumber={tableNumber} type={type} />
+                                  />
                                 ) : (
                                   ""
                                 )}
@@ -151,12 +168,21 @@ const NewOrderPage: React.FC = (props) => {
                               <div className="flex"></div>
                             </div>
                             <div className="flex w-full justify-center">
-                              <button
-                                onClick={PopupB}
-                                className=" bg-green-300 rounded-full min-w-[30%] "
-                              >
-                                QRCODE
-                              </button>
+                              {showQR ? (
+                                <button
+                                  onClick={backToEmployeeMain}
+                                  className=" bg-red-500 hover:bg-red-400 text-white h-10 rounded-full min-w-[30%] "
+                                >
+                                  HOME
+                                </button>
+                              ) : (
+                                <button
+                                  onClick={PopupB}
+                                  className=" bg-green-500 h-10 rounded-full min-w-[30%] "
+                                >
+                                  QRCODE
+                                </button>
+                              )}
                             </div>
                           </div>
                           <div className="flex h-[10%] w-full"></div>
@@ -200,17 +226,17 @@ const NewOrderPage: React.FC = (props) => {
                             </div>
                             <div className="flex w-full justify-center">
                               <button
-                                onClick={PopupB}
-                                className=" bg-blue-300 rounded-full min-w-[30%] "
+                                onClick={backToEmployeeMain}
+                                className=" bg-blue-300 h-10 rounded-full min-w-[30%] "
                               >
-                                QRCODE
+                                HOME
                               </button>
                             </div>
                           </div>
                           <div className="flex h-[10%] w-full"></div>
                         </div>
                         <div
-                          onClick={PopupBuffetPrice}
+                          onClick={PopupA}
                           className="flex w-[20%] h-screen"
                         ></div>
                       </div>

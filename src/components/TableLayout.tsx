@@ -16,7 +16,7 @@ const TableLayout: React.FC = () => {
     const cycleGetTable = setInterval(()=>{
       getAllTable();
       
-    },10000)
+    },2000)
     return ()=>clearInterval(cycleGetTable)
   }, []);
 
