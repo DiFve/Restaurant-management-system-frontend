@@ -1,3 +1,4 @@
+import config from "../config.json";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getTableOrder } from "../api/table";
@@ -5,12 +6,13 @@ import BillPopup from "../components/BillPopup";
 import OrderListBox from "../components/OrderListBox";
 import HeaderBar from "../components/RestaurantManagerBar";
 
+
 const OrderListPage: React.FC = (props) => {
   const { tableNumber } = useParams();
 
   const [allTableOrder, setAllTableOrder] = useState([]);
   const [showBill, setShowBill] = useState(false);
-
+  const [showQR, setShowQR] = useState(false);
   console.log(allTableOrder);
 
   const navigate = useNavigate();
@@ -30,6 +32,10 @@ const OrderListPage: React.FC = (props) => {
   const openBill = () => {
     setShowBill(!showBill);
   };
+
+  const openQR = () =>{
+    setShowQR(!showQR)
+  }
 
   const example = [
     { foodID: "ไก่ทอด", quantity: 2, foodStatus: "cooking" },
@@ -74,10 +80,31 @@ const OrderListPage: React.FC = (props) => {
           </div>
         </div>
         <div className="flex flex-row h-[20%] w-screen justify-center items-center">
-          <div className="flex flex-col justify-center items-center h-full w-[20%]">
+          <div className="flex flex-row justify-center items-center h-full w-[20%]">
+            <button
+              onClick={openQR}
+              className="flex w-full h-[50px] bg-red-500 justify-center text-2xl rounded-md hover:bg-red-400 text-white"
+            >
+              <div className="flex flex-row h-full w-full justify-center items-center gap-3">
+                QR Code
+                <div className="flex w-[30px] h-[30px] justify-center items-center">
+                  <img
+                    src="https://i.dlpng.com/static/png/7042983_preview.png"
+                    className="object-contain overflow-hidden "
+                  />
+                </div>
+              </div>
+            </button>
+            {showQR && 
+              <div className="flex flex-col absolute top-0 left-0 w-screen h-screen bg-[#edededcc] justify-center items-center">
+                <label className="text-3xl mb-[2%]">Table QR</label>
+                <img src={config.imageURL+'/images/qrcode/table'+tableNumber?.toString()+'.png'} alt="" />
+                <button className="h-[50px] w-[120px] text-2xl text-white bg-headerRed mt-[2%] rounded-md" onClick={openQR}>Exit</button>
+              </div>
+            }
             <button
               onClick={openBill}
-              className="flex w-full h-[50px] bg-red-500 justify-center text-2xl rounded-md hover:bg-red-400 text-white"
+              className="flex w-full h-[50px] bg-red-500 justify-center text-2xl rounded-md hover:bg-red-400 text-white ml-[5%]"
             >
               <div className="flex flex-row h-full w-full justify-center items-center gap-3">
                 PAY BILL
@@ -90,6 +117,8 @@ const OrderListPage: React.FC = (props) => {
               </div>
             </button>
             {showBill ? <BillPopup tableNumber={tableNumber} /> : ""}
+            
+            
           </div>
         </div>
       </div>
