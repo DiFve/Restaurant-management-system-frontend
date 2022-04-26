@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { updateOrderStatus } from "../api/table";
+import { updateFoodStatus } from "../api/table";
 
 interface Food {
   detail: [];
@@ -19,32 +19,35 @@ const FoodCard: React.FC<Food> = (props) => {
   const [changeStatus, setChangeStatus] = useState(foodStatus);
 
   const onClickComplete = () => {
-    updateOrderStatus(_id, "complete");
+    console.log(_id)
+    updateFoodStatus(_id, "complete");
     setChangeStatus("complete");
+    console.log(changeStatus);
   };
 
   const onClickFail = () => {
-    updateOrderStatus(_id, "fail");
+    updateFoodStatus(_id, "fail");
     setChangeStatus("fail");
+    console.log(changeStatus);
   };
 
   var colorStatus = "";
   if (changeStatus == "complete") {
     colorStatus =
       "bg-green-400 w-[10%] rounded-tl-md rounded-bl-md text-transparent";
-  } else if (foodStatus == "cooking") {
-    colorStatus =
-      "bg-yellow-400 w-[10%] rounded-tl-md rounded-bl-md text-transparent";
-  } else if (foodStatus == "fail") {
+  } else if (changeStatus == "fail") {
     colorStatus =
       "bg-red-400 w-[10%] rounded-tl-md rounded-bl-md text-transparent";
+  } else if (changeStatus == "cooking") {
+    colorStatus =
+      "bg-yellow-400 w-[10%] rounded-tl-md rounded-bl-md text-transparent";
   } else {
     colorStatus = "bg-black";
   }
 
   return (
     <div>
-      <div className="relative">
+      <div className="relative h-full">
         <div className="flex flex-row bg-slate-200 text-black  border-r-1 text-xl rounded-xl ">
           <div className={colorStatus}>.</div>
           <div className="flex flex-col w-[90%] h-full indent-2">
@@ -58,21 +61,23 @@ const FoodCard: React.FC<Food> = (props) => {
             <div className="">เวลา : {time.substring(11, 19)} </div>
             <div className=" text-transparent text-xs">.</div>
           </div>
+          
           <div className="absolute right-2 bottom-4">{price} ฿</div>
           {changeStatus == "cooking" ? (
             <div className="absolute -bottom-2 w-full h-[20px] ">
               <div className="flex flex-row w-full h-full">
                 <div className="flex w-[10%] h-full"></div>
                 <div className="flex flex-row w-[80%] h-full gap-5">
+                  <div className="flex w-[10%] h-full"></div>
                   <button
                     onClick={onClickFail}
-                    className="flex w-[50%] h-full bg-red-300 rounded-sm justify-center text-[16px] items-center"
+                    className="flex w-[45%] h-full bg-red-300 rounded-sm justify-center text-[16px] items-center"
                   >
                     FAIL
                   </button>
                   <button
                     onClick={onClickComplete}
-                    className="flex w-[50%] h-full bg-green-300  rounded-sm justify-center text-[16px] items-center"
+                    className="flex w-[45%] h-full bg-green-300  rounded-sm justify-center text-[16px] items-center"
                   >
                     COMPLETE
                   </button>

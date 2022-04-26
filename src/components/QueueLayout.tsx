@@ -23,6 +23,12 @@ const QueueLayout: React.FC = () => {
       setComingOrder(res?.data);
     };
     incomingOrder();
+
+    const cycleGetTable = setInterval(()=>{
+      incomingOrder();
+      
+    },2000)
+    return ()=>clearInterval(cycleGetTable)
   }, []);
 
   return (

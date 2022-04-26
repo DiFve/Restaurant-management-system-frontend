@@ -5,7 +5,12 @@ import TableLayout from "../components/TableLayout";
 const EmployeeMainPage: React.FC = () => {
   return (
     <div className="h-screen w-screen overflow-y-hidden">
-      <HeaderBar name="EmployeeMain" pathback=""></HeaderBar>
+      <div className="flex flex-col bg-[#dc2626] w-full h-1/6">
+        <div className="flex text-center text-white text-4xl font-normal justify-center items-center w-full h-full">
+          <label>HOME</label>
+        
+        </div>
+      </div>
       <div className="bg-grey-100 flex flex-row ... h-full w-full">
         <div className="bg-orange-100 left-0 w-1/4 h-full  flex flex-col">
           <div className=" flex justify-center  my-3 bg-blue-200 text-center m-3 rounded-md ">

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getTableOrder } from "../api/table";
+import BillPopup from "../components/BillPopup";
 import OrderListBox from "../components/OrderListBox";
 import HeaderBar from "../components/RestaurantManagerBar";
 
@@ -8,15 +9,15 @@ const OrderListPage: React.FC = (props) => {
   const { tableNumber } = useParams();
 
   const [allTableOrder, setAllTableOrder] = useState([]);
+  const [showBill, setShowBill] = useState(false);
 
   console.log(allTableOrder);
 
-  const tablenumber = useEffect(() => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
     const getAllOrderInTable = async () => {
       var res = await getTableOrder(tableNumber);
-
-      // setTableByID(res?.data.tableNumber);
-      // setDetailInfo(res?.data.orderList.detail);
 
       setAllTableOrder(res?.data.order);
 
@@ -25,6 +26,10 @@ const OrderListPage: React.FC = (props) => {
     };
     getAllOrderInTable();
   }, []);
+
+  const openBill = () => {
+    setShowBill(!showBill);
+  };
 
   const example = [
     { foodID: "ไก่ทอด", quantity: 2, foodStatus: "cooking" },
@@ -35,16 +40,26 @@ const OrderListPage: React.FC = (props) => {
     { foodID: "ไก่ทอด", quantity: 2, foodStatus: "success" },
   ];
 
+  const backToEmployeeMain = () => {
+    navigate(`/EmployeeMain`);
+  };
+
   return (
     <div className="w-screen h-screen">
-      <div className="flex flex-col bg-[#dc2626] w-full h-1/6">
+      <div className="relative flex flex-col bg-[#dc2626] w-full h-1/6">
         <div className="flex text-center text-white text-4xl font-normal justify-center items-center w-full h-full">
-          <label>{tableNumber}</label>
+          <label>TABLE : {tableNumber}</label>
+          <button
+            onClick={backToEmployeeMain}
+            className="absolute left-5 text-[45px]"
+          >
+            <label>◄</label>
+          </button>
         </div>
       </div>
       <div className="flex flex-col h-5/6 w-full">
-        <div className="flex flex-col h-[80%]">
-          <div className="grid grid-cols-4 gap-2 m-2">
+        <div className="flex flex-col h-[80%] overflow-scroll">
+          <div className="grid grid-cols-3 gap-6 m-3">
             {allTableOrder &&
               allTableOrder.map((element: any, index: number) => {
                 return (
@@ -59,9 +74,23 @@ const OrderListPage: React.FC = (props) => {
           </div>
         </div>
         <div className="flex flex-row h-[20%] w-screen justify-center items-center">
-          <button className="flex  w-[20%] bg-red-500 justify-center text-2xl rounded-md hover:bg-red-400 text-white">
-            CHECK BILL
-          </button>
+          <div className="flex flex-col justify-center items-center h-full w-[20%]">
+            <button
+              onClick={openBill}
+              className="flex w-full h-[50px] bg-red-500 justify-center text-2xl rounded-md hover:bg-red-400 text-white"
+            >
+              <div className="flex flex-row h-full w-full justify-center items-center gap-3">
+                PAY BILL
+                <div className="flex w-[30px] h-[30px] justify-center items-center">
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/1611/1611154.png"
+                    className="object-contain overflow-hidden "
+                  />
+                </div>
+              </div>
+            </button>
+            {showBill ? <BillPopup tableNumber={tableNumber} /> : ""}
+          </div>
         </div>
       </div>
     </div>
