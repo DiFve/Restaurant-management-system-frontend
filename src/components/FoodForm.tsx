@@ -83,11 +83,21 @@ const FoodForm: React.FC<idProps> = (props) => {
         if (event.target.type == 'radio') {
             if (event.target.checked) {
                 newOption[Number(event.target.name)] = [event.target.value]
-                setFoodPrice(foodPrice + additionalPrice[Number(event.target.name)][Number(event.target.id)])
+                if(userFoodType !=  'buffet'){
+                    setFoodPrice(foodPrice + additionalPrice[Number(event.target.name)][Number(event.target.id)])
+                }
+                else{
+                    setFoodPrice(0)
+                }
             }
             else if (!event.target.checked) {
                 newOption[Number(event.target.name)] = ['']
-                setFoodPrice(foodPrice + additionalPrice[Number(event.target.name)][Number(event.target.id)])
+                if(userFoodType !=  'buffet'){
+                    setFoodPrice(foodPrice - additionalPrice[Number(event.target.name)][Number(event.target.id)])
+                }
+                else{
+                    setFoodPrice(0)
+                }
             }
         }
         else if (event.target.type == 'checkbox') {
@@ -95,13 +105,23 @@ const FoodForm: React.FC<idProps> = (props) => {
             console.log(newCheckBox)
             if (event.target.checked) {
                 newCheckBox.push(event.target.value)
-                setFoodPrice(foodPrice + additionalPrice[Number(event.target.name)][Number(event.target.id)])
+                if(userFoodType !=  'buffet'){
+                    setFoodPrice(foodPrice + additionalPrice[Number(event.target.name)][Number(event.target.id)])
+                }
+                else{
+                    setFoodPrice(0)
+                }
             }
             else {
                 newCheckBox = newCheckBox.filter((element: any) => {
                     return element != event.target.value
                 })
-                setFoodPrice(foodPrice - additionalPrice[Number(event.target.name)][Number(event.target.id)])
+                if(userFoodType !=  'buffet'){
+                    setFoodPrice(foodPrice - additionalPrice[Number(event.target.name)][Number(event.target.id)])
+                }
+                else{
+                    setFoodPrice(0)
+                }
             }
             newOption[Number(event.target.name)] = newCheckBox
             console.log(newOption)
