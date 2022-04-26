@@ -132,9 +132,9 @@ const MenuPageBody: React.FC<menuType> = (props) => {
                 </div>
             </div>
             <div className='flex h-[16%] w-[100%] justify-center items-center'>
-                <div className='bg-headerRed h-[42px] w-[186px] text-center border-[2px] border-black rounded-md'>
+                <div className='bg-headerRed h-[45px] w-[186px] text-center border-[2px] border-black rounded-md pt-[4px]'>
                     <button className='' onClick={gotoOrderList}>
-                        <label className='text-3xl text-white'> ตะกร้าสินค้า </label>
+                        <label className='text-3xl text-white'> ดูคำสั่งซื้อ </label>
                     </button>
                 </div>
             </div>
