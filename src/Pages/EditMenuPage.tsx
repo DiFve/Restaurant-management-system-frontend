@@ -122,7 +122,7 @@ const EditMenuPage: React.FC = () => {
   }, []);
 
   const inputPicture = async (event: any) => {
-    if (event.target.files[0] && event.target.files[0].size <= 10000000) {
+    if (event.target.files[0] && event.target.files[0].size <= (1024*1024)) {
       const reader = new FileReader();
       reader.addEventListener("load", () => {
         setImgData(reader.result);
@@ -183,7 +183,7 @@ const EditMenuPage: React.FC = () => {
         (foodTypeSelected === "อื่น ๆ" &&
           newFoodType.length > 0 &&
           /^[a-zA-Zก-๏\s]+$/.test(newFoodType))) &&
-          /^[a-zA-Zก-๏0-9\s]+$/.test(description) &&
+          ((description.length === 0) || (description.length!==0 &&/^[a-zA-Zก-๏0-9\s]+$/.test(description))) &&
           Number.isInteger(Number(price))
     ) {
       console.log("hello");
