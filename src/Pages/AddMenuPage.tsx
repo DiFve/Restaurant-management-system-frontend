@@ -46,7 +46,8 @@ const AddMenuPage: React.FC = () => {
   const navigate = useNavigate();
 
   const inputPicture = async (event: any) => {
-    if (event.target.files[0] && event.target.files[0].size <= (1024*1024)) {
+    console.log(event.target.files[0])
+    if (event.target.files[0] && event.target.files[0].size <= (1024*1024) && (event.target.files[0].type ==="image/jpeg"||event.target.files[0].type ==="image/png")) {
       const reader = new FileReader();
       reader.addEventListener("load", () => {
         setImgData(reader.result);
