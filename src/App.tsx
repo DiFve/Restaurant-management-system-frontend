@@ -23,6 +23,8 @@ import AuthPage from "./Pages/AuthPage";
 import CartPage from "./Pages/CartPage";
 import OrderReceiptOld from "./Pages/OrderReceiptOld";
 import NewOrderPage from "./Pages/NewOrderPage";
+import OrderPage from "./Pages/OrderPage";
+import EditMenuPage from "./Pages/EditMenuPage"
 import OrderPageCustomer from "./Pages/OrderPageCustomer";
 function App() {
   return (
@@ -71,6 +73,16 @@ function App() {
           }
         />
         <Route
+          path="/editMenu/:id"
+          element={
+            <ProtectedRoutes
+              authenticationPath="/login"
+              outlet={<EditMenuPage />}
+              role="admin"
+            />
+          }
+        />
+        <Route
           path="/EmployeeMain"
           element={
             <ProtectedRoutes
@@ -105,7 +117,7 @@ function App() {
           element={
             <ProtectedRoutes
               authenticationPath="/login"
-              outlet={<OrderPageCustomer />}
+              outlet={<OrderPage />}
               role="employee"
             />
           }
