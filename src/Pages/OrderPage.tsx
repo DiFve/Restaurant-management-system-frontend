@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { getItemsByOrder } from "../api/table";
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  getItemsByOrder,
+  getTableOrder,
+  updateOrderStatus,
+} from "../api/table";
 import FoodCard from "../components/FoodCard";
 
 const OrderPage: React.FC = () => {
@@ -30,18 +34,32 @@ const OrderPage: React.FC = () => {
     getAllFoodInfo();
   }, []);
 
+  const navigate = useNavigate();
+
+  const gotoOrderList = () => {
+    updateOrderStatus(id, "complete");
+    navigate(`/EmployeeMain/Table/${tableNumber}`);
+    getTableOrder(tableNumber);
+  };
+
+  const backToOrderList =()=>{
+    navigate(`/EmployeeMain/Table/${tableNumber}`)
+  }
+
   return (
     <div className="h-screen w-screen">
       {/* Header */}
-      <div className="flex flex-col bg-[#dc2626] w-full h-1/6">
+      <div className="relative bg-[#dc2626] w-full h-1/6">
         <div className="flex text-center text-white text-4xl font-normal justify-center items-center w-full h-full">
-          <label>{tableNumber}</label>
+          <label>TABLE : {tableNumber}</label>
+          <button onClick={backToOrderList} className="absolute left-5 text-[45px]">
+            <label>◄</label>
+          </button>
         </div>
       </div>
       <div className="flex flex-col w-screen h-5/6">
-
-        {allFoodInfo && 
-          <div className="grid grid-cols-3 h-auto w-auto gap-3 m-3">
+        <div className="h-[80%] w-full overflow-scroll">
+          <div className="grid grid-cols-3 h-auto w-auto gap-6 m-3">
             {allFoodInfo.map((element: any) => {
               return (
                 <FoodCard
@@ -57,7 +75,26 @@ const OrderPage: React.FC = () => {
               );
             })}
           </div>
-          }
+        </div>
+
+        <div className="flex flex-row h-[20%] w-screen justify-center items-center">
+          <div className="flex flex-col justify-center items-center h-full w-[20%]">
+            <button
+              onClick={gotoOrderList}
+              className="flex w-full h-[50px] bg-red-500 justify-center text-2xl rounded-md hover:bg-red-400 text-white"
+            >
+              <div className="flex flex-row h-full w-full justify-center items-center gap-3">
+                COMPLETE
+                <div className="flex w-[30px] h-[30px] justify-center items-center">
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/1828/1828743.png"
+                    className="object-contain overflow-hidden"
+                  />
+                </div>
+              </div>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
