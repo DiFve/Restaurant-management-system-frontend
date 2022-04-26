@@ -26,8 +26,6 @@ const ManagerMenuPage: React.FC = () => {
     navigate("/ManagerMenu/addMenu");
   };
 
-
-
   useEffect(() => {
     const getMenu = async () => {
       var res = await allMenu();

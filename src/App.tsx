@@ -11,7 +11,6 @@ import {
   useParams,
 } from "react-router-dom";
 //
-import OrderPage from "./Pages/OrderPage";
 import OrderListPage from "./Pages/OrderListPage";
 import EmployeeMainPage from "./Pages/EmployeeMainPage";
 import ProtectedRoutes from "./components/ProtectedRoutes";
@@ -20,7 +19,6 @@ import ManagerMenuPage from "./Pages/ManagerMenuPage";
 import EmployeeListPage from "./Pages/EmployeeListPage";
 import AddMenuPage from "./Pages/AddMenuPage";
 import FoodPage from "./Pages/FoodPage";
-import EditPage from "./Pages/EditMenuPage";
 import AuthPage from "./Pages/AuthPage";
 import CartPage from "./Pages/CartPage";
 import OrderReceiptOld from "./Pages/OrderReceiptOld";
@@ -42,15 +40,75 @@ function App() {
             />
           }
         />
-        <Route path="/ManagerMenu" element={<ManagerMenuPage />} />
-        <Route path="/EmployeeList" element={<EmployeeListPage />} />
-        <Route path="/ManagerMenu/addMenu" element={<AddMenuPage />} />
-        <Route path="/EmployeeMain" element={<EmployeeMainPage />} />
-        <Route path="/EmployeeMain/NewOrder/:id" element={<NewOrderPage />} />
-        <Route path="/EmployeeMain/Table/:tableNumber" element={<OrderListPage />} />
+        <Route
+          path="/ManagerMenu"
+          element={
+            <ProtectedRoutes
+              authenticationPath="/login"
+              outlet={<ManagerMenuPage />}
+              role="admin"
+            />
+          }
+        />
+        <Route
+          path="/EmployeeList"
+          element={
+            <ProtectedRoutes
+              authenticationPath="/login"
+              outlet={<EmployeeListPage />}
+              role="admin"
+            />
+          }
+        />
+        <Route
+          path="/ManagerMenu/addMenu"
+          element={
+            <ProtectedRoutes
+              authenticationPath="/login"
+              outlet={<AddMenuPage />}
+              role="admin"
+            />
+          }
+        />
+        <Route
+          path="/EmployeeMain"
+          element={
+            <ProtectedRoutes
+              authenticationPath="/login"
+              outlet={<EmployeeMainPage />}
+              role="employee"
+            />
+          }
+        />
+        <Route
+          path="/EmployeeMain/NewOrder/:id"
+          element={
+            <ProtectedRoutes
+              authenticationPath="/login"
+              outlet={<NewOrderPage />}
+              role="employee"
+            />
+          }
+        />
+        <Route
+          path="/EmployeeMain/Table/:tableNumber"
+          element={
+            <ProtectedRoutes
+              authenticationPath="/login"
+              outlet={<OrderListPage />}
+              role="employee"
+            />
+          }
+        />
         <Route
           path="/EmployeeMain/Table/:tableNumber/:id"
-          element={<OrderPage />}
+          element={
+            <ProtectedRoutes
+              authenticationPath="/login"
+              outlet={<OrderPageCustomer />}
+              role="employee"
+            />
+          }
         />
         <Route
           path="/menu/:type"
@@ -99,16 +157,6 @@ function App() {
               authenticationPath="/login"
               outlet={<FoodPage />}
               role="customer"
-            />
-          }
-        />
-        <Route
-          path="/editMenu/:id"
-          element={
-            <ProtectedRoutes
-              authenticationPath="/login"
-              outlet={<EditPage />}
-              role="employee"
             />
           }
         />

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import deleteIcon from "./img/delete_icon.png";
-import {deleteEmployee} from "../api/employee";
+import { deleteEmployee } from "../api/employee";
 interface menu {
   Email: string;
   nickname: string;
@@ -9,10 +9,10 @@ interface menu {
 }
 const EmployeeComponent: React.FC<menu> = (props) => {
   const [showDeletePopUp, setshowDeletePopUp] = useState(false);
-
+  ////
   const onClickDeleteConfirm = async () => {
     setshowDeletePopUp(false);
-    await deleteEmployee(props.Email)
+    await deleteEmployee(props.Email);
   };
 
   return (

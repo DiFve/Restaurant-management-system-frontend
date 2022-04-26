@@ -99,3 +99,59 @@ export const getItemsByOrder = async (id: string | undefined) => {
     console.log("getItemsByOrder by API seeItembyOrderID");
   }
 };
+
+export const updateFoodStatus = async (_id:string | undefined,status:string | undefined) => {
+  try {
+    const res = await api(`${config.apiURL}updateFoodStatus/`, {
+      headers: {},
+      data: {_id:_id , foodStatus:status},
+      method: "PUT",
+    });
+    console.log(res);
+    return res;
+  } catch (error) {
+    console.log("updateFoodStatus by API seeItembyOrderID");
+  }
+};
+
+export const updateOrderStatus = async (_id:string | undefined,status:string | undefined) => {
+  try {
+    const res = await api(`${config.apiURL}updateOrderStatus/`, {
+      headers: {},
+      data: {_id:_id , orderStatus:status},
+      method: "PUT",
+    });
+    console.log(res);
+    return res;
+  } catch (error) {
+    console.log("getItemsByOrder by API seeItembyOrderID");
+  }
+};
+
+export const getBill = async (tablenumber: string | undefined) => {
+  try {
+    const res = await api(`${config.apiURL}cashOutTable/${tablenumber}`, {
+      headers: {},
+      data: {},
+      method: "GET",
+    });
+    console.log(res);
+    return res;
+  } catch (error) {
+    console.log("getBill by API cashOutTable");
+  }
+};
+
+export const confirmBill = async (tablenumber: string | undefined) => {
+  try {
+    const res = await api(`${config.apiURL}confirmCashOut/${tablenumber}`, {
+      headers: {},
+      data: {},
+      method: "GET",
+    });
+    console.log(res);
+    return res;
+  } catch (error) {
+    console.log("getBill by API confirmCashOut");
+  }
+};
