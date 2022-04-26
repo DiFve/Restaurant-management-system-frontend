@@ -43,7 +43,7 @@ const CartPageComponents: React.FC = () => {
     const decodedJWT: any = jwtDecode(localStorage.getItem('token') || '')
     const userTableNumber = decodedJWT.table
     const menuType = decodedJWT.foodType
-
+    console.log(userTableNumber)
 
     useEffect(() => {
         const getItemCart = async () => {

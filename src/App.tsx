@@ -25,6 +25,7 @@ import AuthPage from "./Pages/AuthPage";
 import CartPage from "./Pages/CartPage";
 import OrderReceiptOld from "./Pages/OrderReceiptOld";
 import NewOrderPage from "./Pages/NewOrderPage";
+import OrderPageCustomer from "./Pages/OrderPageCustomer";
 function App() {
   return (
     <BrowserRouter>
@@ -76,7 +77,7 @@ function App() {
           element={
             <ProtectedRoutes
               authenticationPath="/login"
-              outlet={<OrderPage />}
+              outlet={<OrderPageCustomer />}
               role="customer"
             />
           }
