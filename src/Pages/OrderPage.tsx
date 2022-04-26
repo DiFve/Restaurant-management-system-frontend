@@ -39,22 +39,25 @@ const OrderPage: React.FC = () => {
         </div>
       </div>
       <div className="flex flex-col w-screen h-5/6">
-        <div className="grid grid-cols-3 h-auto w-auto gap-3 m-3">
-          {allFoodInfo.map((element: any) => {
-            return (
-              <FoodCard
-                detail={element.detail}
-                foodID={element.foodID}
-                foodName={element.foodName}
-                foodStatus={element.foodStatus}
-                price={element.price}
-                quantity={element.quantity}
-                time={element.time}
-                _id={element._id}
-              />
-            );
-          })}
-        </div>
+
+        {allFoodInfo && 
+          <div className="grid grid-cols-3 h-auto w-auto gap-3 m-3">
+            {allFoodInfo.map((element: any) => {
+              return (
+                <FoodCard
+                  detail={element.detail}
+                  foodID={element.foodID}
+                  foodName={element.foodName}
+                  foodStatus={element.foodStatus}
+                  price={element.price}
+                  quantity={element.quantity}
+                  time={element.time}
+                  _id={element._id}
+                />
+              );
+            })}
+          </div>
+          }
       </div>
     </div>
   );

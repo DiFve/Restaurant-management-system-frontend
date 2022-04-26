@@ -99,3 +99,18 @@ export const getItemsByOrder = async (id: string | undefined) => {
     console.log("getItemsByOrder by API seeItembyOrderID");
   }
 };
+
+export const updateOrderStatus = async (_id:string | undefined,status:string | undefined) => {
+  try {
+    const res = await api(`${config.apiURL}updateOrderStatus/`, {
+      headers: {},
+      data: {_id:_id , status:status},
+      method: "PUT",
+    });
+    console.log(res);
+    return res;
+  } catch (error) {
+    console.log("getItemsByOrder by API seeItembyOrderID");
+  }
+};
+
