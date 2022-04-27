@@ -129,7 +129,7 @@ const AddMenuPage: React.FC = () => {
       } else if (isAlacarte === false && isBuffet === true) {
         foodType = "buffet";
       } else {
-        foodType = "a-la-carte buffet";
+        foodType = "buffet a-la-carte";
       }
 
       const descript: string = description;
