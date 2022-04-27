@@ -185,6 +185,7 @@ const EditMenuPage: React.FC = () => {
           newFoodType.length > 0 &&
           /^[a-zA-Zก-๏\s]+$/.test(newFoodType))) &&
           ((description.length === 0) || (description.length!==0 &&/^[a-zA-Zก-๏0-9\s]+$/.test(description))) &&
+          (Number(price) <= 1000000) &&
           Number.isInteger(Number(price))
     ) {
       console.log("hello");
@@ -330,6 +331,7 @@ const EditMenuPage: React.FC = () => {
       Number(addAdditionPriceData) >= 0 &&
       /^[a-zA-Zก-๏0-9\s]+$/.test(addChoiceData) &&
       choiceList.length <= 15 &&
+      (Number(addAdditionPriceData) <= 1000000) &&
       Number.isInteger(Number(addAdditionPriceData))
     ) {
       const number = numberOfChoice + 1;
@@ -352,6 +354,7 @@ const EditMenuPage: React.FC = () => {
       parseInt(editAdditionPriceData) != NaN &&
       Number(editAdditionPriceData) >= 0 &&
       /^[a-zA-Zก-๏0-9\s]+$/.test(editChoiceData) &&
+      (Number(editAdditionPriceData) <= 1000000) &&
       Number.isInteger(Number(editAdditionPriceData))
     ) {
       const editChoice = {
