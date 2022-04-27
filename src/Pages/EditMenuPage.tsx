@@ -117,6 +117,7 @@ const EditMenuPage: React.FC = () => {
       setNumberOfOption(optionNumberID);
       setDescription(foodData.menu.description);
       setPrice(foodData.menu.price);
+      setStatus(foodData.menu.status);
     };
     getFood();
   }, []);
