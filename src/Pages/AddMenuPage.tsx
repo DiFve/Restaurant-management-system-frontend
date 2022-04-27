@@ -250,7 +250,7 @@ const AddMenuPage: React.FC = () => {
       parseInt(addAdditionPriceData) != NaN &&
       Number(addAdditionPriceData) >= 0 &&
       /^[a-zA-Zก-๏0-9\s]+$/.test(addChoiceData) &&
-      choiceList.length <= 15 &&
+      choiceList.length < 15 &&
       (Number(addAdditionPriceData) <= 1000000) &&
       Number.isInteger(Number(addAdditionPriceData)) 
     ) {
@@ -316,7 +316,7 @@ const AddMenuPage: React.FC = () => {
       addChoiceData.length === 0 &&
       editChoiceID === 0 &&
       /^[a-zA-Zก-๏\s]+$/.test(optionName) &&
-      optionList.length <= 15 && choiceList.length > 0
+      optionList.length < 15 && choiceList.length > 0
     ) {
       const number = numberOfOption + 1;
       const addOption = {
