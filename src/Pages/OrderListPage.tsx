@@ -6,7 +6,6 @@ import BillPopup from "../components/BillPopup";
 import OrderListBox from "../components/OrderListBox";
 import HeaderBar from "../components/RestaurantManagerBar";
 
-
 const OrderListPage: React.FC = (props) => {
   const { tableNumber } = useParams();
 
@@ -33,9 +32,9 @@ const OrderListPage: React.FC = (props) => {
     setShowBill(!showBill);
   };
 
-  const openQR = () =>{
-    setShowQR(!showQR)
-  }
+  const openQR = () => {
+    setShowQR(!showQR);
+  };
 
   const example = [
     { foodID: "ไก่ทอด", quantity: 2, foodStatus: "cooking" },
@@ -95,13 +94,26 @@ const OrderListPage: React.FC = (props) => {
                 </div>
               </div>
             </button>
-            {showQR && 
+            {showQR && (
               <div className="flex flex-col absolute top-0 left-0 w-screen h-screen bg-[#edededcc] justify-center items-center">
                 <label className="text-3xl mb-[2%]">Table QR</label>
-                <img src={config.imageURL+'/images/qrcode/table'+tableNumber?.toString()+'.png'} alt="" />
-                <button className="h-[50px] w-[120px] text-2xl text-white bg-headerRed mt-[2%] rounded-md" onClick={openQR}>Exit</button>
+                <img
+                  src={
+                    config.imageURL +
+                    "images/qrcode/table" +
+                    tableNumber?.toString() +
+                    ".png"
+                  }
+                  alt=""
+                />
+                <button
+                  className="h-[50px] w-[120px] text-2xl text-white bg-headerRed mt-[2%] rounded-md"
+                  onClick={openQR}
+                >
+                  Exit
+                </button>
               </div>
-            }
+            )}
             <button
               onClick={openBill}
               className="flex w-full h-[50px] bg-red-500 justify-center text-2xl rounded-md hover:bg-red-400 text-white ml-[5%]"
@@ -117,8 +129,6 @@ const OrderListPage: React.FC = (props) => {
               </div>
             </button>
             {showBill ? <BillPopup tableNumber={tableNumber} /> : ""}
-            
-            
           </div>
         </div>
       </div>
