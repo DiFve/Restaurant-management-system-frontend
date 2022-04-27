@@ -313,7 +313,7 @@ const AddMenuPage: React.FC = () => {
       addChoiceData.length === 0 &&
       editChoiceID === 0 &&
       /^[a-zA-Zก-๏\s]+$/.test(optionName) &&
-      optionList.length <= 15
+      optionList.length <= 15 && choiceList.length > 0
     ) {
       const number = numberOfOption + 1;
       const addOption = {
