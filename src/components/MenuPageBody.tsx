@@ -91,7 +91,7 @@ const MenuPageBody: React.FC<menuType> = (props) => {
             }
         }
         filterChange()
-    }, [filter, search])
+    }, [filter, search, menu])
     return (
         <div className="flex flex-col w-full h-full">
             <div className="flex flex-row h-[55px] w-full mt-[3%] items-center justify-center">
