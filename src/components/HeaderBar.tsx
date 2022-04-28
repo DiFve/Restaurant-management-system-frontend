@@ -20,6 +20,7 @@ const HeaderBar: React.FC<HeaderName> = (props) => {
   const bellClickHandler= async (event:any)=>{
     setWaitingPage(!waitingPage)
     if(waitingPage!=true){
+      console.log('no')
       const res = callEmployee(userTableNumber)
     }
     else{
